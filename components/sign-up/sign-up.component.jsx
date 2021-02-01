@@ -23,7 +23,7 @@ const SignUp = () => {
       .min(4, "名前は4文字以上で入力してください"),
     email: Yup.string()
       .required("emailを入力してください")
-      .matches(/@/, "@が含まれていません"),
+      .matches(/.{1}@.{1}/, "正式なメールアドレスではありません"),
     password: Yup.string()
       .required("passwordを入力してください")
       .min(4, "passwordは4文字以上で入力してください"),
