@@ -15,6 +15,5 @@ export const SignUpStart = styled.input`
 `;
 
 export const SignUpContainer = styled.div`
-  ${tw`text-center bg-gray-500 overflow-auto py-5`}
-  height: calc(100vh - 4rem)
+  ${tw`text-center bg-gray-500 overflow-auto py-5 w-full h-full`}
 `;
