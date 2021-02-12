@@ -7,6 +7,8 @@ const { userTypes } = require("./types");
 const User = require("./models/User");
 //GraphQL resolvers
 const { userMutation } = require("./resolvers");
+//context
+const { buildAuthContext } = require('./context');
 
 exports.createApolloServer = () => {
   //Schema
@@ -18,7 +20,9 @@ exports.createApolloServer = () => {
     }
 
     type Mutation {
-      signUp(input: SignUpInput): String
+      signUp(input: SignUpInput): User
+      signIn(input: SignInInput): User
+      signOut: Boolean
     }
   `;
   //resolver
@@ -33,6 +37,7 @@ exports.createApolloServer = () => {
     typeDefs,
     resolvers,
     context: ({ req }) => ({
+      ...buildAuthContext(req),
       models: {
         User: new User(mongoose.model("User")),
       },
