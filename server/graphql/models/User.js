@@ -14,6 +14,23 @@ class User {
       return null;
     }
   }
+  async signIn(signInData, ctx){
+    try{
+      const user = await ctx.authenticate(signInData);//ここ
+      return user;
+    }catch(error){
+      return error;
+    }
+  }
+  signOut(ctx) {
+    try {
+      ctx.logout();
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
 
 module.exports = User;

@@ -13,6 +13,9 @@ db.connect();
 app.prepare().then(() => {
   //server取得
   const server = express();
+
+  require('./middleware').init(server, db);
+
   //apolloServerの生成
   const apolloServer = require("./graphql").createApolloServer();
   apolloServer.applyMiddleware({ app: server });
