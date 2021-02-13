@@ -6,7 +6,7 @@ exports.init = (server, db) => {
   require("./passport").init(passport);
 
   const sess = {
-    name: "portfolio-session",
+    name: "post-shop-session",
     secret: config.SESSION_SECRET,
     cookie: { maxAge: 2 * 60 * 60 * 1000 },
     resave: false,
@@ -16,4 +16,5 @@ exports.init = (server, db) => {
 
   server.use(session(sess));
   server.use(passport.initialize());
+  server.use(passport.session());
 };

@@ -25,7 +25,6 @@ class User {
   signOut(ctx) {
     try {
       ctx.logout();
-
       return true;
     } catch (e) {
       return false;
