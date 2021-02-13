@@ -3,9 +3,10 @@ import { SignUpContainer, SignUpMessage } from "./sign-up.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SignUpForm from "../sign-up-form/sign-up-form.component";
-import withApollo from "../withApollo/withApollo";
+import withApollo from "../../hoc/withApollo";
 import { userSignUp } from "../../apollo/actions";
 import Redirect from "../redirect";
+import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 
 const SignUp = () => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -60,4 +61,4 @@ const SignUp = () => {
   );
 };
 
-export default withApollo(SignUp);
+export default withApollo(WithUnAuthenticated(SignUp));
