@@ -10,6 +10,9 @@ const authenticateUser = (req, options) => {
 
       if (user) {
         req.login(user, (error) => {
+          if (error) {
+            return reject(new Error(error));
+          }
           return resolve(user);
         });
       } else {
@@ -18,7 +21,7 @@ const authenticateUser = (req, options) => {
     };
 
     const authFn = passport.authenticate("graphql", options, done);
-    authFn(); 
+    authFn();
   });
 };
 

@@ -17,8 +17,6 @@ class GraphqlStrategy extends Strategy {
   }
 
   authenticate(_, options) {
-    console.log("Calling authenticate in strategy!");
-
     // in done we will receive "error", "user", "info"
     const done = (error, user, info) => {
       if (error) {
