@@ -3,7 +3,7 @@ import FormInput from "../form-input/form-input.component";
 
 import { SignUpFormContainer, SignUpStart } from "./sign-up-form.styles";
 
-const SignUpForm = ({ formik, loading }) => (
+const SignUpForm = ({ formik }) => (
   <SignUpFormContainer onSubmit={formik.handleSubmit}>
     <FormInput
       type="text"
@@ -43,7 +43,7 @@ const SignUpForm = ({ formik, loading }) => (
       autoComplete="off"
       required
     />
-    <SignUpStart type="submit" value="SUBMIT" disabled={loading}/>
+    <SignUpStart type="submit" value="SUBMIT" />
   </SignUpFormContainer>
 );
 

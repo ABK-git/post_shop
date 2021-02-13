@@ -54,7 +54,7 @@ const SignUp = () => {
   return (
     <SignUpContainer>
       <SignUpMessage>Register</SignUpMessage>
-      <SignUpForm formik={formik} loading={loading} />
+      <SignUpForm formik={formik} />
       {data && data.signUp && <Redirect to="/" />}
     </SignUpContainer>
   );
