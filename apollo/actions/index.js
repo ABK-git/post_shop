@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { SIGN_IN, SIGN_UP, GET_USER } from "../queries";
 
 //User認証
@@ -12,3 +12,4 @@ export const userSignIn = () =>
       });
     },
   });
+export const getAuthUser = () => useQuery(GET_USER)
