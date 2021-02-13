@@ -10,7 +10,7 @@ export const FormInputLabel = styled.div`
 `;
 
 export const FormInputContainer = styled.input`
-  ${tw`w-full text-purple-400 font-bold w-1/2 text-center hover:border-8 border-green-600 rounded-md`};
+  ${tw`w-full text-purple-400 font-bold w-1/2 text-center rounded-md`};
 `;
 
 export const ErrorMessages = styled.span`

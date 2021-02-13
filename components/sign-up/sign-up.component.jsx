@@ -1,24 +1,24 @@
 import React from "react";
-import {
-  SignUpContainer,
-  SignUpMessage,
-  SignUpForm,
-  SignUpStart,
-} from "./sign-up.styles";
-import FormInput from "../form-input/form-input.component";
+import { SignUpContainer, SignUpMessage } from "./sign-up.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import SignUpForm from "../sign-up-form/sign-up-form.component";
+import withApollo from "../withApollo/withApollo";
+import { userSignUp } from "../../apollo/actions";
+import Redirect from "../redirect";
 
 const SignUp = () => {
+  const [signUp, { data, loading, error }] = userSignUp();
+
   const initialValues = {
-    name: "",
+    username: "",
     email: "",
     password: "",
-    confirm_password: "",
+    password_confirm: "",
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string()
+    username: Yup.string()
       .required("名前を入力してください")
       .min(4, "名前は4文字以上で入力してください"),
     email: Yup.string()
@@ -30,13 +30,13 @@ const SignUp = () => {
     password: Yup.string()
       .required("passwordを入力してください")
       .min(4, "passwordは4文字以上で入力してください"),
-    confirm_password: Yup.string()
+      password_confirm: Yup.string()
       .required("パスワードを確認してください")
       .oneOf([Yup.ref("password")], "passwordが一致しません"),
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    signUp({ variables: values });
   };
 
   const formik = useFormik({
@@ -44,57 +44,20 @@ const SignUp = () => {
     validationSchema,
     onSubmit,
   });
+  
+  //User登録に成功した場合
+  const user = (data && data.signUp) || null;
+  if(user != null){
+    console.log(user);
+  }
 
   return (
     <SignUpContainer>
       <SignUpMessage>Register</SignUpMessage>
-      <SignUpForm onSubmit={formik.handleSubmit}>
-        <FormInput
-          type="text"
-          name="name"
-          label="NAME"
-          value={formik.values.name}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.name}
-          onBlur={formik.handleBlur}
-          required
-        />
-        <FormInput
-          type="email"
-          name="email"
-          label="E-MAIL"
-          value={formik.values.email}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.email}
-          onBlur={formik.handleBlur}
-          required
-        />
-        <FormInput
-          type="password"
-          name="password"
-          label="PASSWORD"
-          value={formik.values.password}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.password}
-          onBlur={formik.handleBlur}
-          autoComplete="off"
-          required
-        />
-        <FormInput
-          type="password"
-          name="confirm_password"
-          label="CONFIRM-PASSWORD"
-          value={formik.values.confirm_password}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.confirm_password}
-          onBlur={formik.handleBlur}
-          autoComplete="off"
-          required
-        />
-        <SignUpStart type="submit" value="SUBMIT" />
-      </SignUpForm>
+      <SignUpForm formik={formik} loading={loading} />
+      {data && data.signUp && <Redirect to="/" />}
     </SignUpContainer>
   );
 };
 
-export default SignUp;
+export default withApollo(SignUp);
