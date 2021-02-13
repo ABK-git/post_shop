@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const { ApolloServer, gql } = require("apollo-server-express");
 
 //GraphQL types
-const { userTypes } = require("./types");
+const { userTypes} = require("./types");
 //GraphQL Model
 const User = require("./models/User");
 //GraphQL resolvers
-const { userMutation } = require("./resolvers");
+const { userMutation , userQueries } = require("./resolvers");
 //context
 const { buildAuthContext } = require('./context');
 
@@ -27,6 +27,9 @@ exports.createApolloServer = () => {
   `;
   //resolver
   const resolvers = {
+    Query: {
+      ...userQueries
+    },
     Mutation: {
       ...userMutation,
     },
