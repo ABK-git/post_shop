@@ -16,6 +16,7 @@ const SignUp = () => {
     signIn,
     { data: authUser, loading: signInLoading, error: signInError },
   ] = userSignIn();
+  const [alreadySignIn, setAlreadySignIn] = useState(false);
 
   const initialValues = {
     username: "",
@@ -53,15 +54,11 @@ const SignUp = () => {
     onSubmit,
   });
   //User登録が完了し、認証が終わっていない場合
-  if (data && data.signUp && !authUser) {
+  if (data && data.signUp && !alreadySignIn) {
+    setAlreadySignIn(true);
     const { email, password } = createdUser;
-    console.log("after signUp")
-    console.log(`${email}と${password}`)
+    
     signIn({ variables: { email, password } });
-  }
-  if(authUser){
-    console.log("authUser");
-    console.log(authUser);
   }
 
   return (
