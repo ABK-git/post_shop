@@ -1,7 +1,7 @@
 exports.userTypes = `
   type User {
-    _id: ID,
-    avatar: String,
+    _id: ID
+    avatar: String
     username: String
     email: String
     password: String

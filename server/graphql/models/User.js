@@ -22,8 +22,7 @@ class User {
   }
   async signIn(signInData, ctx){
     try{
-      const user = await ctx.authenticate(signInData);//ここ
-      return user;
+      return await ctx.authenticate(signInData);//ここ
     }catch(error){
       return error;
     }

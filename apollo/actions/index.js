@@ -5,11 +5,11 @@ import { SIGN_IN, SIGN_UP, GET_USER } from "../queries";
 export const userSignUp = () => useMutation(SIGN_UP);
 export const userSignIn = () =>
   useMutation(SIGN_IN, {
-    update(cache, { data: signIn }) {
+    update(cache, data) {
       cache.writeQuery({
         query: GET_USER,
-        data: { user: signIn },
+        data,
       });
     },
   });
-export const getAuthUser = () => useQuery(GET_USER)
+export const getAuthUser = () => useQuery(GET_USER);
