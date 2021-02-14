@@ -7,6 +7,7 @@ import withApollo from "../../hoc/withApollo";
 import { userSignUp } from "../../apollo/actions";
 import Redirect from "../redirect";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
+import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 
 const SignUp = () => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -45,18 +46,13 @@ const SignUp = () => {
     validationSchema,
     onSubmit,
   });
-  
-  //User登録に成功した場合
-  const user = (data && data.signUp) || null;
-  if(user != null){
-    console.log(user);
-  }
 
   return (
     <SignUpContainer>
       <SignUpMessage>Register</SignUpMessage>
       <SignUpForm formik={formik} />
       {data && data.signUp && <Redirect to="/" />}
+      {error && <GraphQLErrorMessages error={error}/>}
     </SignUpContainer>
   );
 };

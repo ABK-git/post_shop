@@ -16,8 +16,8 @@ class User {
     }
     try {
       return await this.Model.create(signUpData);
-    } catch (e) {
-      return null;
+    } catch (error) {
+      return new Error("User登録に失敗しました");
     }
   }
   async signIn(signInData, ctx){
