@@ -39,11 +39,6 @@ const SignIn = () => {
     onSubmit,
   });
 
-  if(data){
-    console.log("authUser");
-    console.log(data);
-  }
-
   return (
     <SignInContainer>
       <SignInMessage>Login</SignInMessage>
