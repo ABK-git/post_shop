@@ -1,5 +1,5 @@
 import React from "react";
-import { SignInContainer, SignInMessage } from "./sign-in.styles";
+import { SignInContainer, SignInMessage, ErrorMessage } from "./sign-in.styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SignInForm from "../sign-in-form/sign-in-form.component";
@@ -7,7 +7,7 @@ import withApollo from "../../hoc/withApollo";
 import { userSignIn } from "../../apollo/actions";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import Redirect from "../redirect";
-import ErrorMessagesContainer from "../form-input/error-messages.container";
+import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 
 const SignIn = () => {
   const [signIn, { data, loading, error }] = userSignIn();
@@ -39,18 +39,12 @@ const SignIn = () => {
     onSubmit,
   });
 
-  //User登録に成功した場合
-  const user = (data && data.signIn) || null;
-  if (user != null) {
-    console.log(user);
-  }
-
   return (
     <SignInContainer>
       <SignInMessage>Login</SignInMessage>
       <SignInForm formik={formik} />
       {data && data.signIn && <Redirect to="/" />}
-      {error && <ErrorMessagesContainer errorMessage={error} />}
+      {error && <GraphQLErrorMessages error={error}/>}
     </SignInContainer>
   );
 };
