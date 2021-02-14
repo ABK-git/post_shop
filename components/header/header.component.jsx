@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getLazyAuthUser } from "../../apollo/actions";
+import { getLazyAuthUser, userSignOut } from "../../apollo/actions";
 import withApollo from "../../hoc/withApollo";
 import {
   HeaderContainer,
@@ -8,10 +8,13 @@ import {
   OptionsLink,
 } from "./header.styles";
 import MyLink from "../my-link/my-link.component";
+import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({ apollo }) => {
   const [getUser, { data, error }] = getLazyAuthUser();
   const [user, setUser] = useState(null);
+  const [signOut] = userSignOut();
+  const router = useRouter();
 
   useEffect(() => {
     getUser();
@@ -19,12 +22,20 @@ const Header = () => {
 
   if (data) {
     if (data.user && !user) {
+      console.log("login")
       setUser(data.user);
     }
     if (!data.user && user) {
+      console.log("logout");
       setUser(null);
     }
   }
+
+  const handleLogout = () => {
+    signOut().then(() => {
+      apollo.resetStore().then(() => router.push("/"));
+    });
+  };
 
   return (
     <HeaderContainer>
@@ -35,7 +46,7 @@ const Header = () => {
       </HeaderOptionsLeft>
       {user ? (
         <HeaderOptionsRight>
-          <OptionsLink>ddd</OptionsLink>
+          <OptionsLink onClick={handleLogout}>Logout</OptionsLink>
         </HeaderOptionsRight>
       ) : (
         <HeaderOptionsRight>

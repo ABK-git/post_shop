@@ -48,3 +48,8 @@ export const GET_USER = gql`
     }
   }
 `;
+export const SIGN_OUT = gql`
+  mutation SignOut {
+    signOut
+  }
+`;
