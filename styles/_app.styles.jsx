@@ -7,4 +7,5 @@ export const FullScreen = styled.div`
 
 export const ComponentsContainer = styled.div`
   height: calc(100vh - 4rem);
+  display: flex;
 `;

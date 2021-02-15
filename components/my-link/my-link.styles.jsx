@@ -1,4 +1,4 @@
-import styled, {css}  from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
 
 const headerLeft = css`
@@ -7,6 +7,9 @@ const headerLeft = css`
 const headerRight = css`
   ${tw`text-yellow-600`}
 `;
+const smMenu = css`
+  ${tw`w-full text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
+`;
 
 const getLinkStyles = ({ design }) => {
   switch (design) {
@@ -14,6 +17,8 @@ const getLinkStyles = ({ design }) => {
       return headerLeft;
     case "header-right":
       return headerRight;
+    case "sm-menu":
+      return smMenu;
     default:
       return "";
   }
