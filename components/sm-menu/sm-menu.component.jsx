@@ -34,6 +34,7 @@ const SmMenu = ({apollo}) => {
       apollo.resetStore().then(() => router.push("/"));
     });
   };
+  
   return (
     displayMenu &&
     (user ? (

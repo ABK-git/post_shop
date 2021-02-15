@@ -8,6 +8,7 @@ import { userSignIn } from "../../apollo/actions";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import Redirect from "../redirect";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
+import Spinner from "../spinner/spinner.component";
 
 const SignIn = () => {
   const [signIn, { data, loading, error }] = userSignIn();
@@ -39,12 +40,14 @@ const SignIn = () => {
     onSubmit,
   });
 
+  if (loading) return <Spinner />;
+
   return (
     <SignInContainer>
       <SignInMessage>Login</SignInMessage>
       <SignInForm formik={formik} />
       {data && data.signIn && <Redirect to="/" />}
-      {error && <GraphQLErrorMessages error={error}/>}
+      {error && <GraphQLErrorMessages error={error} />}
     </SignInContainer>
   );
 };
