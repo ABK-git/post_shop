@@ -8,6 +8,7 @@ import { userSignUp, userSignIn } from "../../apollo/actions";
 import Redirect from "../redirect";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
+import Spinner from "../spinner/spinner.component";
 
 const SignUp = () => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -60,6 +61,8 @@ const SignUp = () => {
     
     signIn({ variables: { email, password } });
   }
+
+  if(loading || signInLoading) return <Spinner/>
 
   return (
     <SignUpContainer>
