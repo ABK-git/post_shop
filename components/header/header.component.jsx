@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getLazyAuthUser, userSignOut } from "../../apollo/actions";
 import withApollo from "../../hoc/withApollo";
 import {
@@ -6,27 +6,31 @@ import {
   HeaderOptionsLeft,
   HeaderOptionsRight,
   OptionsLink,
+  MenuIcon,
 } from "./header.styles";
 import MyLink from "../my-link/my-link.component";
 import { useRouter } from "next/router";
+import MyContext from "../../context/index";
 
 const Header = ({ apollo }) => {
+  //graphql
   const [getUser, { data, error }] = getLazyAuthUser();
   const [user, setUser] = useState(null);
   const [signOut] = userSignOut();
   const router = useRouter();
-
+  //context
+  const my_context = useContext(MyContext);
+  const { displayMenu, changeDisplayMenu } = my_context;
+  
   useEffect(() => {
     getUser();
   }, []);
 
   if (data) {
     if (data.user && !user) {
-      console.log("login")
       setUser(data.user);
     }
     if (!data.user && user) {
-      console.log("logout");
       setUser(null);
     }
   }
@@ -58,6 +62,10 @@ const Header = ({ apollo }) => {
           </MyLink>
         </HeaderOptionsRight>
       )}
+      <MenuIcon
+        onClick={changeDisplayMenu}
+        src={displayMenu ? "/images/menu-off.png" : "/images/menu-on.png"}
+      />
     </HeaderContainer>
   );
 };
