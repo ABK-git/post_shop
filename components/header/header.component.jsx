@@ -21,7 +21,7 @@ const Header = ({ apollo }) => {
   //context
   const my_context = useContext(MyContext);
   const { displayMenu, changeDisplayMenu } = my_context;
-  
+
   useEffect(() => {
     getUser();
   }, []);
@@ -50,6 +50,9 @@ const Header = ({ apollo }) => {
       </HeaderOptionsLeft>
       {user ? (
         <HeaderOptionsRight>
+          <MyLink href="/exhibit" design="header-right">
+            exhibit
+          </MyLink>
           <OptionsLink onClick={handleLogout}>Logout</OptionsLink>
         </HeaderOptionsRight>
       ) : (
