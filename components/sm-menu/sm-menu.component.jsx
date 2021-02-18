@@ -34,12 +34,15 @@ const SmMenu = ({apollo}) => {
       apollo.resetStore().then(() => router.push("/"));
     });
   };
-  
+
   return (
     displayMenu &&
     (user ? (
       <SmMenuContainer>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+        <MyLink href="/exhibit" design="sm-menu">
+          exhibit
+        </MyLink>
       </SmMenuContainer>
     ) : (
       <SmMenuContainer>

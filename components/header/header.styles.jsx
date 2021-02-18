@@ -18,6 +18,6 @@ export const OptionsLink = styled.button`
 `;
 
 export const MenuIcon = styled.img`
-  ${tw`h-full w-8 h-8 mt-4 mr-4 ml-auto cursor-pointer
+  ${tw`h-full w-8 h-8 mt-4 mr-4 ml-auto cursor-pointer hover:opacity-75
   sm:hidden`}
 `;
