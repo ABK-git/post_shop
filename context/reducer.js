@@ -1,5 +1,3 @@
-import React, { useReducer } from "react";
-import MyContext from "./index";
 import ContextTypes from "./types";
 
 const Reducer = (state, action) => {

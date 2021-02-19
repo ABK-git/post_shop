@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import MyContext from "./index";
 import ContextTypes from "./types";
 import Reducer from "./reducer";
+import { useMediaQuery } from "react-responsive";
 
 const MyState = ({ children }) => {
   const initialState = {
@@ -16,9 +17,12 @@ const MyState = ({ children }) => {
     });
   };
 
+  const smBreakPoint = useMediaQuery({ minWidth: 640 });
+
+  const { displayMenu } = state;
   return (
     <MyContext.Provider
-      value={{ displayMenu: state.displayMenu, changeDisplayMenu }}>
+      value={{ displayMenu, smBreakPoint, changeDisplayMenu }}>
       {children}
     </MyContext.Provider>
   );
