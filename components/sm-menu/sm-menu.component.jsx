@@ -40,7 +40,7 @@ const SmMenu = ({apollo}) => {
     (user ? (
       <SmMenuContainer>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
-        <MyLink href="/exhibit" design="sm-menu">
+        <MyLink href="/product/exhibit" design="sm-menu">
           exhibit
         </MyLink>
       </SmMenuContainer>

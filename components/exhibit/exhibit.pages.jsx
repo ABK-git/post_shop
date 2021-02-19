@@ -3,6 +3,7 @@ import withApollo from "../../hoc/withApollo";
 import WithAuthenticated from "../../hoc/withAuthenticated";
 import { useDropzone } from "react-dropzone";
 import { ContainerDropzone, DropzoneInput, DropzoneP, ExhibitContainer } from "./exhibit.styles";
+import DisplayProductImages from "../display-product-images/product-images.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -40,7 +41,7 @@ const Exhibit = () => {
         <DropzoneInput {...getInputProps()} />
         <DropzoneP>UPLOAD</DropzoneP>
       </ContainerDropzone>
-      {(images.length != 0) && <div>Upload Image</div>}
+      {(images.length != 0) && <DisplayProductImages images={images}/>}
     </ExhibitContainer>
   );
 };
