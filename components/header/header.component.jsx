@@ -50,7 +50,7 @@ const Header = ({ apollo }) => {
       </HeaderOptionsLeft>
       {user ? (
         <HeaderOptionsRight>
-          <MyLink href="/exhibit" design="header-right">
+          <MyLink href="/product/exhibit" design="header-right">
             exhibit
           </MyLink>
           <OptionsLink onClick={handleLogout}>Logout</OptionsLink>
