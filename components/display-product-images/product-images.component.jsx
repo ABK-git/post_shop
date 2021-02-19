@@ -21,7 +21,7 @@ const DisplayProductImages = ({ images }) => {
       <Image
         src={URL.createObjectURL(images[index])}
         width={smBreakPoint ? 250 : 160}
-        height={200}
+        height={smBreakPoint ? 200 : 130}
       />
       <ChevronRightButton />
     </ProductImagesContainer>
