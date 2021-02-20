@@ -35,3 +35,7 @@ export const ChevronLeftButton = styled(ChevronLeftCircle)`
 
   ${setVisible}
 `;
+
+export const ImageIndex = styled.p`
+  ${tw`w-full text-center`}
+`;
