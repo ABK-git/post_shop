@@ -4,8 +4,10 @@ import {
   ChevronLeftButton,
   ChevronRightButton,
   ImageIndex,
+  ResizeImagesContainer,
+  RemoveImageButton,
+  ResizeImagesAndRemoveButton
 } from "./product-images.styles";
-import Image from "react-image-resizer";
 import MyContext from "../../context";
 
 const DisplayProductImages = ({ images }) => {
@@ -28,7 +30,7 @@ const DisplayProductImages = ({ images }) => {
     }
   };
   //画像の番号
-  const getImageIndex = (index+1) + "/"+ (images.length);
+  const getImageIndex = index + 1 + "/" + images.length;
 
   return (
     <div>
@@ -37,11 +39,15 @@ const DisplayProductImages = ({ images }) => {
           onClick={handleClickLeftButton}
           getVisibility={index === 0}
         />
-        <Image
-          src={URL.createObjectURL(images[index])}
-          width={smBreakPoint ? 250 : 160}
-          height={smBreakPoint ? 200 : 130}
-        />
+        <ResizeImagesAndRemoveButton>
+          <ResizeImagesContainer
+            src={URL.createObjectURL(images[index])}
+            width={smBreakPoint ? 250 : 160}
+            height={smBreakPoint ? 200 : 130}
+          />
+          <RemoveImageButton>Remove</RemoveImageButton>
+        </ResizeImagesAndRemoveButton>
+
         <ChevronRightButton
           onClick={handleClickRightButton}
           getVisibility={index === images.length - 1}
