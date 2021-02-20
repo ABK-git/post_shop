@@ -3,10 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      fontFamily:{
-        abir: ['Abril Fatface', "cursive"],
-        shoulders: ['Open Sans', "sans-serif"]
-      }
+      fontFamily: {
+        bigelow: ["Bigelow Rules", "cursive"],
+      },
     },
   },
   variants: {

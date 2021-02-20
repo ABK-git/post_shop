@@ -12,11 +12,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Big+Shoulders+Inline+Text:wght@500&family=Bigelow+Rules&family=Bowlby+One+SC&family=Open+Sans&family=Oswald&family=Raleway&family=Roboto&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Big+Shoulders+Inline+Text:wght@500&family=Bigelow+Rules&family=Bowlby+One+SC&family=Open+Sans&family=Oswald&family=Raleway&family=Roboto&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bigelow+Rules&display=swap"
             rel="stylesheet"
           />
         </Head>
