@@ -3,6 +3,7 @@ import {
   ProductImagesContainer,
   ChevronLeftButton,
   ChevronRightButton,
+  ImageIndex,
 } from "./product-images.styles";
 import Image from "react-image-resizer";
 import MyContext from "../../context";
@@ -26,23 +27,28 @@ const DisplayProductImages = ({ images }) => {
       setIndex(index + 1);
     }
   };
+  //画像の番号
+  const getImageIndex = (index+1) + "/"+ (images.length);
 
   return (
-    <ProductImagesContainer>
-      <ChevronLeftButton
-        onClick={handleClickLeftButton}
-        getVisibility={index === 0}
-      />
-      <Image
-        src={URL.createObjectURL(images[index])}
-        width={smBreakPoint ? 250 : 160}
-        height={smBreakPoint ? 200 : 130}
-      />
-      <ChevronRightButton
-        onClick={handleClickRightButton}
-        getVisibility={index === images.length - 1}
-      />
-    </ProductImagesContainer>
+    <div>
+      <ProductImagesContainer>
+        <ChevronLeftButton
+          onClick={handleClickLeftButton}
+          getVisibility={index === 0}
+        />
+        <Image
+          src={URL.createObjectURL(images[index])}
+          width={smBreakPoint ? 250 : 160}
+          height={smBreakPoint ? 200 : 130}
+        />
+        <ChevronRightButton
+          onClick={handleClickRightButton}
+          getVisibility={index === images.length - 1}
+        />
+      </ProductImagesContainer>
+      <ImageIndex>{getImageIndex}</ImageIndex>
+    </div>
   );
 };
 
