@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   ProductImagesContainer,
   ChevronLeftButton,
@@ -6,31 +6,21 @@ import {
   ImageIndex,
   ResizeImagesContainer,
   RemoveImageButton,
-  ResizeImagesAndRemoveButton
+  ResizeImagesAndRemoveButton,
 } from "./product-images.styles";
 import MyContext from "../../context";
 
-const DisplayProductImages = ({ images }) => {
-  //配列の何番目の画像を表示するか
-  const [index, setIndex] = useState(0);
-
+const DisplayProductImages = ({
+  images,
+  index,
+  handleClickLeftButton,
+  handleClickRightButton,
+  handleRemoveImage,
+  getImageIndex,
+}) => {
   //context
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
-
-  //表示画像の変更
-  const handleClickLeftButton = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  };
-  const handleClickRightButton = () => {
-    if (index < images.length - 1) {
-      setIndex(index + 1);
-    }
-  };
-  //画像の番号
-  const getImageIndex = index + 1 + "/" + images.length;
 
   return (
     <div>
@@ -45,7 +35,9 @@ const DisplayProductImages = ({ images }) => {
             width={smBreakPoint ? 250 : 160}
             height={smBreakPoint ? 200 : 130}
           />
-          <RemoveImageButton>Remove</RemoveImageButton>
+          <RemoveImageButton onClick={handleRemoveImage}>
+            Remove
+          </RemoveImageButton>
         </ResizeImagesAndRemoveButton>
 
         <ChevronRightButton
