@@ -15,5 +15,5 @@ export const DropzoneInput = styled.input`
   ${tw`h-full w-full`}
 `;
 export const DropzoneP = styled.p`
-  ${tw`h-1/2 w-full text-3xl sm:text-5xl font-bold text-red-800 font-abir`}
+  ${tw`h-1/2 w-full text-3xl sm:text-5xl font-bold text-red-800 font-bigelow`}
 `;
