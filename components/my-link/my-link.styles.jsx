@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
 
 const headerLeft = css`
-  ${tw`text-red-800`}
+  ${tw`font-shoulders text-red-800`}
 `;
 const headerRight = css`
   ${tw`text-yellow-600`}
