@@ -61,8 +61,6 @@ const Exhibit = () => {
       setIndex(index - 1);
     }
   };
-  //画像の番号
-  const getImageIndex = index + 1 + "/" + images.length;
 
   return (
     <ExhibitContainer>
@@ -78,7 +76,6 @@ const Exhibit = () => {
           handleClickLeftButton={handleClickLeftButton}
           handleClickRightButton={handleClickRightButton}
           handleRemoveImage={handleRemoveImage}
-          getImageIndex={getImageIndex}
         />
       )}
     </ExhibitContainer>

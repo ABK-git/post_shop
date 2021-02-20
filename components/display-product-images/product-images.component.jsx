@@ -16,11 +16,13 @@ const DisplayProductImages = ({
   handleClickLeftButton,
   handleClickRightButton,
   handleRemoveImage,
-  getImageIndex,
 }) => {
   //context
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
+
+  //画像の番号
+  const getImageIndex = index + 1 + "/" + images.length;
 
   return (
     <div>
