@@ -61,6 +61,7 @@ const ExhibitForm = ({ formik }) => (
       rows="5"
       value={formik.values.introduce}
       handleChange={formik.handleChange}
+      errorMessage={formik.errors.introduce}
     />
     <RegisterProductButton type="submit">Submit</RegisterProductButton>
   </ExhibitFormContainer>
