@@ -35,7 +35,8 @@ export const ProductImagesContainer = styled.div`
 `;
 
 export const RemoveImageButton = styled.button`
-  ${tw`m-auto hidden flex-col justify-center items-center absolute
+  ${tw`
+  m-auto hidden flex-col justify-center items-center absolute
   font-bold text-xl sm:font-black sm:text-4xl bg-red-500 rounded-lg
   hover:bg-black hover:text-red-500
   `}
