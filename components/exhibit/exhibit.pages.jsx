@@ -7,8 +7,10 @@ import {
   DropzoneInput,
   DropzoneP,
   ExhibitContainer,
+  RegisterProductButton,
 } from "./exhibit.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
+import axios from "axios";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -62,6 +64,35 @@ const Exhibit = () => {
     }
   };
 
+  //画像のUPLoad構成
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+    onUploadProgress: (event) => {
+      console.log(
+        `Current progress:`,
+        Math.round((event.loaded * 100) / event.total)
+      );
+    },
+  };
+
+  const RegisterProductImages = async () => {
+    if (images.length != 0) {
+      const formData = new FormData();
+      for (let i = 0; i < images.length; i++) {
+        formData.append("files", images[i]);
+      }
+      const data = await axios
+        .post("/api/product-images-upload", formData, config)
+        .then(({ data: res }) => {
+          return res.data;
+        })
+        .catch(() => {
+          return null;
+        });
+      console.log(data);
+    }
+  };
+
   return (
     <ExhibitContainer>
       <ContainerDropzone
@@ -78,6 +109,9 @@ const Exhibit = () => {
           handleRemoveImage={handleRemoveImage}
         />
       )}
+      <RegisterProductButton onClick={RegisterProductImages}>
+        Submit
+      </RegisterProductButton>
     </ExhibitContainer>
   );
 };

@@ -67,7 +67,11 @@ const Header = ({ apollo }) => {
       )}
       <MenuIcon
         onClick={changeDisplayMenu}
-        src={displayMenu ? "/images/menu-off.png" : "/images/menu-on.png"}
+        src={
+          displayMenu
+            ? "/images/header/menu-off.png"
+            : "/images/header/menu-on.png"
+        }
       />
     </HeaderContainer>
   );
