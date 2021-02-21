@@ -75,13 +75,16 @@ const Exhibit = () => {
     },
   };
 
+  //登録したファイルのpathを保管するstate
+  const [imagesPass, setImagesPass] = useState([]);
+  //ファイル登録
   const RegisterProductImages = async () => {
     if (images.length != 0) {
       const formData = new FormData();
       for (let i = 0; i < images.length; i++) {
         formData.append("files", images[i]);
       }
-      const data = await axios
+      const registerFiles = await axios
         .post("/api/product-images-upload", formData, config)
         .then(({ data: res }) => {
           return res.data;
@@ -89,7 +92,10 @@ const Exhibit = () => {
         .catch(() => {
           return null;
         });
-      console.log(data);
+      const getImagesPass = Object.values(registerFiles).map((registerFile) => {
+        return registerFile.path.replaceAll("\\","/").replace("public","");
+      })
+      setImagesPass(getImagesPass);
     }
   };
 
