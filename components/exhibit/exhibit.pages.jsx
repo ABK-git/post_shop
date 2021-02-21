@@ -26,7 +26,7 @@ const Exhibit = () => {
     accept: "image/*",
     getFilesFromEvent: (event) => handleDrop(event),
   });
-  
+
   //fileオブジェクトをstateに格納
   const handleDrop = (event) => {
     const files = [];
@@ -125,8 +125,9 @@ const Exhibit = () => {
       .min(1, "値段を入力してください"),
     quantity: Yup.number().required("出品数を入力してください"),
     introduce: Yup.string()
-      .required("商品の紹介文を入力してください")
-      .max(150, "商品の紹介文は150文字以内にまとめてください"),
+      .required("商品の説明文を入力してください")
+      .min(10, "商品の説明文は最低10文字以上入力してください")
+      .max(150, "商品の説明文は150文字以内にまとめてください"),
   });
   const onSubmit = async (values) => {
     await registerProductImages();

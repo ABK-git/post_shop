@@ -7,5 +7,5 @@ export const RegisterProductButton = styled.button`
 `;
 
 export const ExhibitFormContainer = styled.form`
-  ${tw`pt-5 text-center w-full`}
+  ${tw`pt-2 text-center w-full`}
 `;

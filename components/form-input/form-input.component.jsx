@@ -15,13 +15,13 @@ const FormInput = ({
   ...otherProps
 }) => (
   <GroupContainer>
-    {label ? <FormInputLabel>{label}</FormInputLabel> : ""}
+    {label && <FormInputLabel>{label}</FormInputLabel>}
     <FormInputContainer
       onChange={handleChange}
       value={value ? value : ""}
       {...otherProps}
     />
-    {errorMessage ? <ErrorMessagesContainer errorMessage={errorMessage} /> : ""}
+    {errorMessage && <ErrorMessagesContainer errorMessage={errorMessage} />}
   </GroupContainer>
 );
 
