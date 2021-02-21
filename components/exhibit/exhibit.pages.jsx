@@ -7,10 +7,12 @@ import {
   DropzoneInput,
   DropzoneP,
   ExhibitContainer,
-  RegisterProductButton,
 } from "./exhibit.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
 import axios from "axios";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import ExhibitForm from "../exhibit-form/exhibit-form.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -24,7 +26,8 @@ const Exhibit = () => {
     accept: "image/*",
     getFilesFromEvent: (event) => handleDrop(event),
   });
-
+  
+  //fileオブジェクトをstateに格納
   const handleDrop = (event) => {
     const files = [];
     const fileList = event.dataTransfer
@@ -40,6 +43,7 @@ const Exhibit = () => {
     }
     return files;
   };
+
   //配列の何番目の画像を表示するか
   const [index, setIndex] = useState(0);
   //表示画像の変更
@@ -53,6 +57,7 @@ const Exhibit = () => {
       setIndex(index + 1);
     }
   };
+
   //preview画像の削除機能
   const handleRemoveImage = () => {
     const newImages = images.filter((image) => {
@@ -75,10 +80,8 @@ const Exhibit = () => {
     },
   };
 
-  //登録したファイルのpathを保管するstate
-  const [imagesPass, setImagesPass] = useState([]);
   //ファイル登録
-  const RegisterProductImages = async () => {
+  const registerProductImages = async () => {
     if (images.length != 0) {
       const formData = new FormData();
       for (let i = 0; i < images.length; i++) {
@@ -93,11 +96,47 @@ const Exhibit = () => {
           return null;
         });
       const getImagesPass = Object.values(registerFiles).map((registerFile) => {
-        return registerFile.path.replaceAll("\\","/").replace("public","");
-      })
-      setImagesPass(getImagesPass);
+        return registerFile.path.replaceAll("\\", "/").replace("public", "");
+      });
+      formik.values.imagePasses = getImagesPass;
     }
   };
+
+  /**
+   * formik設定
+   */
+  const initialValues = {
+    name: "",
+    category: "",
+    price: 1000,
+    quantity: 1,
+    introduce: "",
+    imagePasses: new Array(),
+  };
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .required("商品名を入力してください")
+      .max(30, "商品名は30字以内で入力してください"),
+    category: Yup.string()
+      .required("カテゴリを入力してください")
+      .max(10, "カテゴリの入力は10文字以内でお願いします。"),
+    price: Yup.number()
+      .required("値段を入力してください")
+      .min(1, "値段を入力してください"),
+    quantity: Yup.number().required("出品数を入力してください"),
+    introduce: Yup.string()
+      .required("商品の紹介文を入力してください")
+      .max(150, "商品の紹介文は150文字以内にまとめてください"),
+  });
+  const onSubmit = async (values) => {
+    await registerProductImages();
+    console.log(values);
+  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
 
   return (
     <ExhibitContainer>
@@ -115,9 +154,7 @@ const Exhibit = () => {
           handleRemoveImage={handleRemoveImage}
         />
       )}
-      <RegisterProductButton onClick={RegisterProductImages}>
-        Submit
-      </RegisterProductButton>
+      <ExhibitForm formik={formik} />
     </ExhibitContainer>
   );
 };
