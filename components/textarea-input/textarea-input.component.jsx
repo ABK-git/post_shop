@@ -1,13 +1,14 @@
 import React from "react";
 import ErrorMessagesContainer from "../form-error-message/error-messages.component";
+
 //css
 import {
-  FormInputLabel,
+  TextareaInputLabel,
   GroupContainer,
-  FormInputContainer,
-} from "./form-input.styles";
+  TextareaInputContainer,
+} from "./textarea-input.styles";
 
-const FormInput = ({
+const TextareaInput = ({
   handleChange,
   label,
   value,
@@ -15,8 +16,8 @@ const FormInput = ({
   ...otherProps
 }) => (
   <GroupContainer>
-    {label ? <FormInputLabel>{label}</FormInputLabel> : ""}
-    <FormInputContainer
+    {label ? <TextareaInputLabel>{label}</TextareaInputLabel> : ""}
+    <TextareaInputContainer
       onChange={handleChange}
       value={value ? value : ""}
       {...otherProps}
@@ -25,4 +26,4 @@ const FormInput = ({
   </GroupContainer>
 );
 
-export default FormInput;
+export default TextareaInput;

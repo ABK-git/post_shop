@@ -1,6 +1,6 @@
 import React from "react";
 //style
-import { ErrorMessages } from "./form-input.styles";
+import { ErrorMessages } from "./error-messages.styles";
 
 const ErrorMessagesContainer = ({ errorMessage }) => (
   <div>
