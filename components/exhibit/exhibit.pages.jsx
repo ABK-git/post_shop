@@ -16,6 +16,10 @@ import ExhibitForm from "../exhibit-form/exhibit-form.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
+  const accept = "image/*";
+  const onDrop = (acceptedFiles) => {
+    setImages(acceptedFiles.concat(images));
+  };
   const {
     getRootProps,
     getInputProps,
@@ -23,26 +27,9 @@ const Exhibit = () => {
     isDragAccept,
     isDragReject,
   } = useDropzone({
-    accept: "image/*",
-    getFilesFromEvent: (event) => handleDrop(event),
+    accept,
+    onDrop,
   });
-
-  //fileオブジェクトをstateに格納
-  const handleDrop = (event) => {
-    const files = [];
-    const fileList = event.dataTransfer
-      ? event.dataTransfer.files
-      : event.target.files;
-
-    for (let i = 0; i < fileList.length; i++) {
-      const file = fileList.item(i);
-      files.push(file);
-    }
-    if (files.length != 0) {
-      setImages(files.concat(images));
-    }
-    return files;
-  };
 
   //配列の何番目の画像を表示するか
   const [index, setIndex] = useState(0);
@@ -144,7 +131,15 @@ const Exhibit = () => {
       <ContainerDropzone
         {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
         <DropzoneInput {...getInputProps()} />
-        <DropzoneP>UPLOAD</DropzoneP>
+        {isDragActive ? (
+          isDragAccept ? (
+            <DropzoneP>UPLOAD</DropzoneP>
+          ) : (
+            <DropzoneP>REJECT</DropzoneP>
+          )
+        ) : (
+          <DropzoneP>Drag Files</DropzoneP>
+        )}
       </ContainerDropzone>
       {images.length != 0 && (
         <DisplayProductImages

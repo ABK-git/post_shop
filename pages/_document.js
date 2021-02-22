@@ -15,6 +15,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Bigelow+Rules&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
