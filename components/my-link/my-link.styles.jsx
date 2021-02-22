@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
 
 const headerLeft = css`
-  ${tw`text-red-800`}
+  font-family: "Big Shoulders Stencil Text", cursive;
+  ${tw`text-red-800  text-2xl`}
 `;
 const headerRight = css`
   ${tw`text-yellow-600`}
