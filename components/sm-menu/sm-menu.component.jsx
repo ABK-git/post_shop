@@ -41,13 +41,13 @@ const SmMenu = ({apollo}) => {
       <SmMenuContainer>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
         <MyLink href="/product/exhibit" design="sm-menu">
-          exhibit
+          Exhibit
         </MyLink>
       </SmMenuContainer>
     ) : (
       <SmMenuContainer>
         <MyLink href="/login" design="sm-menu">
-          Login
+          Logout
         </MyLink>
         <MyLink href="/register" design="sm-menu">
           Register

@@ -14,7 +14,7 @@ export const HeaderOptionsRight = styled.div`
 `;
 
 export const OptionsLink = styled.button`
-  ${tw`font-bold text-xl text-yellow-600 m-2 cursor-pointer`}
+  ${tw`font-bold text-2xl text-yellow-600 m-2 cursor-pointer`}
 `;
 
 export const MenuIcon = styled.img`
