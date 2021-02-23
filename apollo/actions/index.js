@@ -31,7 +31,7 @@ export const useCreateProduct = () =>
       const { products } = cache.readQuery({ query: GET_PRODUCTS });
       cache.writeQuery({
         query: GET_PRODUCTS,
-        data: { products: [...products, createProduct] },
+        data: { products: [createProduct, ...products] },
       });
     },
   });
