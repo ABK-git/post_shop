@@ -12,7 +12,3 @@ export const HomeTitleMessage = styled.h1`
 export const ProductsLayout = styled.table`
   ${tw`table w-4/5 h-11/12 mx-auto`}
 `;
-
-export const ProductTr = styled.tr`
-  ${tw`text-left`}
-`;

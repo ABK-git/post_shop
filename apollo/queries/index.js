@@ -75,3 +75,38 @@ export const GET_PRODUCTS = gql`
     }
   }
 `;
+
+export const CREATE_PRODUCT = gql`
+  mutation CreateProduct(
+    $name: String!
+    $category: String!
+    $price: Int!
+    $imagePasses: [String]
+    $quantity: Int!
+    $introduce: String!
+  ) {
+    createProduct(
+      input: {
+        name: $name
+        category: $category
+        price: $price
+        imagePasses: $imagePasses
+        quantity: $quantity
+        introduce: $introduce
+      }
+    ) {
+      _id
+      name
+      category
+      price
+      quantity
+      introduce
+      imagePasses
+      createdAt
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
