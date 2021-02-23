@@ -65,6 +65,7 @@ export const GET_PRODUCTS = gql`
       category
       price
       quantity
+      imagePasses
       introduce
       createdAt
       user {

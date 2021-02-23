@@ -6,11 +6,15 @@ import {
 } from "@styled-icons/boxicons-regular";
 import Image from "react-image-resizer";
 
-const setVisible = ({ getVisibility }) => {
-  if (getVisibility) {
+const setVisible = ({ getVisibility, isExhibit }) => {
+  if (isExhibit) {
     return invisible;
   } else {
-    return visible;
+    if (getVisibility) {
+      return invisible;
+    } else {
+      return visible;
+    }
   }
 };
 const visible = css`

@@ -19,7 +19,7 @@ const DropzoneActions = ({ isDragAccept, isDragActive }) => {
 };
 
 export const ExhibitContainer = styled.div`
-  ${tw`h-full w-full py-8 flex flex-col items-center bg-gray-500 overflow-auto`}
+  ${tw`h-screen w-full py-8 flex flex-col items-center bg-gray-500 overflow-auto`}
 `;
 
 export const ContainerDropzone = styled.div`

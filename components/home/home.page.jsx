@@ -5,9 +5,10 @@ import {
   HomeContainer,
   HomeTitleMessage,
   ProductsLayout,
-  ProductCell,
+  ProductTr,
 } from "./home.styles";
 import withApollo from "../../hoc/withApollo";
+import ProductPreview from "../product-preview/product-preview.component";
 
 const HomePage = () => {
   const { data, loading } = getProducts();
@@ -16,17 +17,18 @@ const HomePage = () => {
   if (loading) {
     return <Spinner />;
   }
-  console.log(products);
+  
   return (
     <HomeContainer>
       <HomeTitleMessage>投稿商品一覧</HomeTitleMessage>
       <ProductsLayout>
-        {products.map((product) => (
-          <ProductCell key={product._id}>
-            <h1>{product.name}</h1>
-            <p>{product.price}</p>
-          </ProductCell>
-        ))}
+        <tbody>
+          <tr>
+            {products.map((product) => (
+              <ProductPreview key={product._id} product={product} />
+            ))}
+          </tr>
+        </tbody>
       </ProductsLayout>
     </HomeContainer>
   );
