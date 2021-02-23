@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import withApollo from "../../hoc/withApollo";
 import WithAuthenticated from "../../hoc/withAuthenticated";
 import { useDropzone } from "react-dropzone";
@@ -13,6 +13,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ExhibitForm from "../exhibit-form/exhibit-form.component";
+import { useCreateProduct } from "../../apollo/actions";
+import { useRouter } from "next/router";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -89,6 +91,9 @@ const Exhibit = () => {
     }
   };
 
+  //GraphQL
+  const [createProduct, { error }] = useCreateProduct();
+
   /**
    * formik設定
    */
@@ -116,9 +121,12 @@ const Exhibit = () => {
       .min(10, "商品の説明文は最低10文字以上入力してください")
       .max(150, "商品の説明文は150文字以内にまとめてください"),
   });
+  const router = useRouter();
   const onSubmit = async (values) => {
     await registerProductImages();
     console.log(values);
+    await createProduct({ variables: values });
+    router.push("/");
   };
   const formik = useFormik({
     initialValues,
