@@ -51,7 +51,7 @@ const Header = ({ apollo }) => {
       {user ? (
         <HeaderOptionsRight>
           <MyLink href="/product/exhibit" design="header-right">
-            exhibit
+            Exhibit
           </MyLink>
           <OptionsLink onClick={handleLogout}>Logout</OptionsLink>
         </HeaderOptionsRight>
