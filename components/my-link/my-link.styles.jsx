@@ -3,13 +3,13 @@ import tw from "tailwind.macro";
 
 const headerLeft = css`
   font-family: "Big Shoulders Stencil Text", cursive;
-  ${tw`text-red-800  text-2xl`}
+  ${tw`text-red-800  text-3xl`}
 `;
 const headerRight = css`
-  ${tw`text-yellow-600`}
+  ${tw`text-yellow-600 text-2xl`}
 `;
 const smMenu = css`
-  ${tw`w-full text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
+  ${tw`w-full text-2xl text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
 `;
 
 const getLinkStyles = ({ design }) => {

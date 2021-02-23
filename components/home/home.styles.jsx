@@ -27,3 +27,10 @@ export const SearchConditionInput = styled.div`
   ${tw`w-full text-center block bg-yellow-500`}
 `;
 
+export const SearchPriceDiv = styled.div`
+  ${tw`w-full flex text-center`}
+`;
+
+export const PriceFormInput = styled(FormInput)`
+  ${tw`w-4/5`}
+`;

@@ -6,5 +6,5 @@ export const SmMenuContainer = styled.div`
 `;
 
 export const LogoutButton = styled.button`
-  ${tw`font-bold text-xl m-2 cursor-pointer w-full text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
+  ${tw`font-bold text-2xl m-2 cursor-pointer w-full text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
 `;

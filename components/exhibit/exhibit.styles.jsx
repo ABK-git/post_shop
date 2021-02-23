@@ -2,10 +2,10 @@ import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
 
 const acceptSuccess = css`
-  ${tw`border-green-500 `}
+  ${tw`border-green-800 bg-blue-500`}
 `;
 const acceptReject = css`
-  ${tw`border-red-500 `}
+  ${tw`border-red-500 bg-purple-600`}
 `;
 
 const DropzoneActions = ({ isDragAccept, isDragActive }) => {
@@ -26,7 +26,7 @@ export const ContainerDropzone = styled.div`
   //ここだけheightのtailwindが効かない
   height: 20%;
   ${tw`w-1/2 h-1/5 border-8 border-indigo-600 border-dashed 
-  text-center flex items-center justify-center`}
+  text-center flex items-center justify-center bg-green-300`}
 
   ${DropzoneActions}
 `;
