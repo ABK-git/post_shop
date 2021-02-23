@@ -6,5 +6,5 @@ export const SignInMessage = styled.p`
 `;
 
 export const SignInContainer = styled.div`
-  ${tw`text-center bg-gray-500 overflow-auto py-5 w-full h-full`}
+  ${tw`text-center bg-gray-500 overflow-auto py-5 w-full h-screen`}
 `;
