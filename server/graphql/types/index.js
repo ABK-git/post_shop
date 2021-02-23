@@ -21,3 +21,24 @@ exports.userTypes = `
     password: String!
   }
 `;
+
+exports.productTypes = `
+  type Product{
+    _id: ID,
+    name: String,
+    category: String,
+    price: Int,
+    quantity: Int,
+    introduce: String,
+    user: User,
+    createdAt: String
+  }
+
+  input ProductCreateInput{
+    name: String!,
+    category: String!,
+    price: Int!,
+    quantity: Int!,
+    introduce: String!,
+  }
+`;
