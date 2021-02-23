@@ -7,7 +7,12 @@ const { userTypes, productTypes } = require("./types");
 const User = require("./models/User");
 const Product = require("./models/Product");
 //GraphQL resolvers
-const { userMutations, userQueries, productMutations } = require("./resolvers");
+const {
+  userMutations,
+  userQueries,
+  productMutations,
+  productQueries,
+} = require("./resolvers");
 //context
 const { buildAuthContext } = require("./context");
 
@@ -19,6 +24,9 @@ exports.createApolloServer = () => {
 
     type Query {
       user: User
+
+      product: Product
+      products: [Product]
     }
 
     type Mutation {
@@ -33,10 +41,11 @@ exports.createApolloServer = () => {
   const resolvers = {
     Query: {
       ...userQueries,
+      ...productQueries,
     },
     Mutation: {
       ...userMutations,
-      ...productMutations
+      ...productMutations,
     },
   };
 
