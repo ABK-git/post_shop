@@ -1,10 +1,6 @@
-import React from 'react';
-import {Box} from "./index.styles.jsx";
+import React from "react";
+import HomePage from "../components/home/home.page.jsx";
 
 export default function Home() {
-  return (
-    <Box>
-      Hello
-    </Box>
-  )
+  return <HomePage />;
 }
