@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 export const SmMenuContainer = styled.div`
-  ${tw`h-full w-32 sm:hidden bg-yellow-700`}
+  ${tw`h-screen w-32 sm:hidden bg-yellow-700 overflow-auto`}
 `;
 
 export const LogoutButton = styled.button`

@@ -53,3 +53,25 @@ export const SIGN_OUT = gql`
     signOut
   }
 `;
+
+/**
+ * Product
+ */
+export const GET_PRODUCTS = gql`
+  query Products {
+    products {
+      _id
+      name
+      category
+      price
+      quantity
+      imagePasses
+      introduce
+      createdAt
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
