@@ -26,3 +26,10 @@ exports.productMutations = {
     return createdProduct;
   },
 };
+
+//ProductのQuery
+exports.productQueries = {
+  products: (root, args, ctx) => {
+    return ctx.models.Product.getAll();
+  }
+}
