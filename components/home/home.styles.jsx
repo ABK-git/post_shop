@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 export const HomeContainer = styled.div`
-  ${tw`h-full w-full text-center py-5`}
+  ${tw`h-screen w-full text-center py-5 overflow-auto bg-gray-500`}
 `;
 
 export const HomeTitleMessage = styled.h1`
@@ -13,6 +13,6 @@ export const ProductsLayout = styled.table`
   ${tw`table w-4/5 h-11/12 mx-auto`}
 `;
 
-export const ProductCell = styled.td`
-  ${tw`table-cell inline-block`}
+export const ProductTr = styled.tr`
+  ${tw`text-left`}
 `;

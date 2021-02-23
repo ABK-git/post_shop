@@ -30,6 +30,7 @@ exports.productTypes = `
     price: Int,
     quantity: Int,
     introduce: String,
+    imagePasses: [String],
     user: User,
     createdAt: String
   }
@@ -39,6 +40,7 @@ exports.productTypes = `
     category: String!,
     price: Int!,
     quantity: Int!,
+    imagePasses: [String],
     introduce: String!,
   }
 `;
