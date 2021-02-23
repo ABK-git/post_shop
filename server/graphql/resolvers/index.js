@@ -1,5 +1,5 @@
 //UserのMutation
-exports.userMutation = {
+exports.userMutations = {
   signUp: async (root, { input }, ctx) => {
     //const registerdUser = await ctx.models.User.signUp(input);
     //return registerdUser._id;
@@ -16,5 +16,13 @@ exports.userMutation = {
 exports.userQueries = {
   user: (root, args, ctx) => {
     return ctx.models.User.getAuthUser(ctx);
+  },
+};
+
+//Productのmutation
+exports.productMutations = {
+  createProduct: async (root, { input }, ctx) => {
+    const createdProduct = await ctx.models.Product.create(input);
+    return createdProduct;
   },
 };

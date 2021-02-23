@@ -3,8 +3,9 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const config = require("../config/dev");
 
-//Userを使用することを宣言
-require("./models/User");
+//使用するmodelを宣言
+require("./models/user");
+require("./models/product");
 
 exports.connect = () => {
   mongoose.connect(
