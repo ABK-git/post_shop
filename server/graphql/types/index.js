@@ -5,6 +5,7 @@ exports.userTypes = `
     username: String
     email: String
     password: String
+    products: [Product]
     role: String
   }
 
