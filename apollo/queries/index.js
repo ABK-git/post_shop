@@ -34,6 +34,16 @@ export const SIGN_IN = gql`
       email
       password
       avatar
+      products {
+        _id
+        name
+        category
+        price
+        quantity
+        imagePasses
+        introduce
+        createdAt
+      }
     }
   }
 `;
@@ -45,6 +55,16 @@ export const GET_USER = gql`
       email
       password
       avatar
+      products {
+        _id
+        name
+        category
+        price
+        quantity
+        imagePasses
+        introduce
+        createdAt
+      }
     }
   }
 `;
