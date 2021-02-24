@@ -5,8 +5,7 @@ class User {
   getAuthUser(ctx) {
     if (ctx.isAuthenticated()) {
       const user_id = ctx.getUser();
-      
-      return this.Model.findById(user_id);
+      return this.Model.findById(user_id).populate("products");
     }
     return null;
   }
@@ -20,10 +19,10 @@ class User {
       return new Error("User登録に失敗しました");
     }
   }
-  async signIn(signInData, ctx){
-    try{
-      return await ctx.authenticate(signInData);//ここ
-    }catch(error){
+  async signIn(signInData, ctx) {
+    try {
+      return await ctx.authenticate(signInData); //ここ
+    } catch (error) {
       return error;
     }
   }
@@ -34,6 +33,14 @@ class User {
     } catch (e) {
       return false;
     }
+  }
+
+  async addProduct(ctx, product) {
+    const _id = ctx.getUser();
+    await this.Model.findOneAndUpdate(
+      { _id },
+      { $push: { products: [product] } }
+    );
   }
 }
 

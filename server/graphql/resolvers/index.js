@@ -22,7 +22,8 @@ exports.userQueries = {
 //Productのmutation
 exports.productMutations = {
   createProduct: async (root, { input }, ctx) => {
-    const createdProduct = await ctx.models.Product.create(input);
+    const createdProduct = await ctx.models.Product.create(input, ctx);
+    ctx.models.User.addProduct(ctx, createdProduct);
     return createdProduct;
   },
 };

@@ -33,7 +33,12 @@ const userSchema = new Schema({
     required: true,
     default: "guest",
   },
-  info: String,
+  products: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -57,12 +62,14 @@ userSchema.pre("save", function (next) {
   });
 });
 
-userSchema.methods.validatePassword = function(candidatePassword, done) {
-  bcrypt.compare(candidatePassword, this.password, function(error, isSuccess) {
-    if (error) { return done(error); }
+userSchema.methods.validatePassword = function (candidatePassword, done) {
+  bcrypt.compare(candidatePassword, this.password, function (error, isSuccess) {
+    if (error) {
+      return done(error);
+    }
 
     return done(null, isSuccess);
-  })
-}
+  });
+};
 
 module.exports = mongoose.model("User", userSchema);
