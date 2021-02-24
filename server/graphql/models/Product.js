@@ -8,7 +8,7 @@ class Product {
     return this.Model.find({}).populate("user");
   }
 
-  create(data) {
+  create(data, ctx) {
     data.user = this.user;
     return this.Model.create(data);
   }
