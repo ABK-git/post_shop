@@ -53,9 +53,16 @@ const HomePage = () => {
       );
     }
     if (category != "") {
-      newProducts = newProducts.filter((product) =>
-        product.category.toLowerCase().includes(category.toLowerCase())
-      );
+      newProducts = newProducts.filter((product) => {
+        if (product.category.includes("/")) {
+          const categories = product.category
+            .split("/")
+            .map((category) => category.toLowerCase());
+          return categories.indexOf(category.toLowerCase()) >= 0;
+        } else {
+          return product.category.toLowerCase().includes(category.toLowerCase());
+        }
+      });
     }
     if (lowestPrice != "" && highestPrice != "") {
       const parseLowestPrice = parseInt(lowestPrice);
