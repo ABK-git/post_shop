@@ -13,7 +13,7 @@ const WithAuthenticated = (WrappedComponent) => (props) => {
   if (loading) {
     return <Spinner/>
   }
-
+  
   return user ? <WrappedComponent {...props} /> : <Redirect to="/" />;
 };
 

@@ -1,11 +1,11 @@
-import withApollo from 'next-with-apollo';
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import withApollo from "next-with-apollo";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 export default withApollo(
   ({ initialState }) => {
     return new ApolloClient({
-      uri: 'http://localhost:3000/graphql',
+      uri: "http://localhost:3000/graphql",
       cache: new InMemoryCache().restore(initialState || {}),
     });
   },
@@ -16,6 +16,6 @@ export default withApollo(
           <Page {...props} />
         </ApolloProvider>
       );
-    }
+    },
   }
 );
