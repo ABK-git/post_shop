@@ -23,7 +23,7 @@ const ExhibitForm = ({ formik }) => (
       type="text"
       name="category"
       label="category"
-      placeholder="カテゴリ名"
+      placeholder="複数入力する場合は/で区切ってください"
       value={formik.values.category}
       handleChange={formik.handleChange}
       errorMessage={formik.errors.category}
