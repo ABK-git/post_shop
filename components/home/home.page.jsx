@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { getProducts, getLazyProducts } from "../../apollo/actions";
+import { getProducts } from "../../apollo/actions";
+import moment from "moment";
 import Spinner from "../spinner/spinner.component";
 import {
   HomeContainer,
@@ -10,6 +11,13 @@ import {
   SearchConditionInput,
   SearchPriceDiv,
   PriceFormInput,
+  GroupContainer,
+  FormInputButton,
+  OptionButton,
+  MaxTbody,
+  MaxTd,
+  MaxTable,
+  MaxTr
 } from "./home.styles";
 import withApollo from "../../hoc/withApollo";
 import ProductPreview from "../product-preview/product-preview.component";
@@ -57,7 +65,9 @@ const HomePage = () => {
             .map((category) => category.toLowerCase());
           return categories.indexOf(category.toLowerCase()) >= 0;
         } else {
-          return product.category.toLowerCase().includes(category.toLowerCase());
+          return product.category
+            .toLowerCase()
+            .includes(category.toLowerCase());
         }
       });
     }
@@ -74,20 +84,94 @@ const HomePage = () => {
     }
     return newProducts;
   };
+
+  //sort関連
+  const [selectOption, setSelectOption] = useState("出品日降順");
+  const [selectDisplay, setSelectDisplay] = useState(false);
+  const productsSort = (products) => {
+    let newProducts = products;
+    switch (selectOption) {
+      case "商品名降順":
+        newProducts = newProducts.sort((a, b) =>
+          b.name.localeCompare(a.name, "ja", { sensitivity: "base" })
+        );
+        break;
+
+      case "商品名昇順":
+        newProducts = newProducts.sort((a, b) =>
+          a.name.localeCompare(b.name, "ja", { sensitivity: "base" })
+        );
+        break;
+
+      case "出品日降順":
+        newProducts = newProducts.sort((a, b) =>
+          moment.unix(b.createdAt).diff(moment.unix(a.createdAt), "millisecond")
+        );
+        break;
+
+      case "出品日昇順":
+        newProducts = newProducts.sort((a, b) =>
+          moment.unix(a.createdAt).diff(moment.unix(b.createdAt), "millisecond")
+        );
+        break;
+
+      case "値段降順":
+        newProducts = newProducts.sort((a, b) => b.price - a.price);
+        break;
+
+      case "値段昇順":
+        newProducts = newProducts.sort((a, b) => a.price - b.price);
+        break;
+    }
+    return newProducts;
+  };
+  const changeSelectDisplay = () => {
+    setSelectDisplay(!selectDisplay);
+  };
   const options = [
-    { value: 'NAME_DESC', label: '商品名降順' },
-    { value: 'NAME_ASC', label: '商品名昇順' },
-    { value: 'PRICE_DESC', label: '値段降順' },
-    { value: 'PRICE_ASC', label: '値段昇順' },
-    { value: 'CREATED_DESC', label: '出品日降順' },
-    { value: 'CREATED_ASC', label: '出品日昇順' },
-  ]
+    {
+      label: "商品名降順",
+      onClick: () => {
+        setSelectOption("商品名降順");
+      },
+    },
+    {
+      label: "商品名昇順",
+      onClick: () => {
+        setSelectOption("商品名昇順");
+      },
+    },
+    {
+      label: "値段降順",
+      onClick: () => {
+        setSelectOption("値段降順");
+      },
+    },
+    {
+      label: "値段昇順",
+      onClick: () => {
+        setSelectOption("値段昇順");
+      },
+    },
+    {
+      label: "出品日降順",
+      onClick: () => {
+        setSelectOption("出品日降順");
+      },
+    },
+    {
+      label: "出品日昇順",
+      onClick: () => {
+        setSelectOption("出品日昇順");
+      },
+    },
+  ];
 
   if (loading) {
     return <Spinner />;
   }
 
-  if(products[0].imagePasses == null){
+  if (products[0].imagePasses == null) {
     Router.reload();
   }
 
@@ -129,6 +213,25 @@ const HomePage = () => {
               onChange={handleChange}
             />
           </SearchPriceDiv>
+          <GroupContainer>
+            <FormInputButton onClick={changeSelectDisplay}>
+              {selectOption}
+            </FormInputButton>
+          </GroupContainer>
+          <MaxTable>
+            <MaxTbody>
+              <MaxTr>
+                {selectDisplay &&
+                  options.map((option, index) => (
+                    <MaxTd key={index}>
+                      <OptionButton onClick={option.onClick}>
+                        {option.label}
+                      </OptionButton>
+                    </MaxTd>
+                  ))}
+              </MaxTr>
+            </MaxTbody>
+          </MaxTable>
         </SearchConditionInput>
       )}
       <DisplaySearchButton onClick={handleClick}>
@@ -136,13 +239,17 @@ const HomePage = () => {
       </DisplaySearchButton>
       <HomeTitleMessage>投稿商品一覧</HomeTitleMessage>
       <ProductsLayout>
-        <tbody>
+        <MaxTbody>
           <tr>
-            {productsFilter(products).map((product) => (
-              <ProductPreview key={product._id} product={product} />
+            {productsSort(productsFilter(products)).map((product) => (
+              <ProductPreview
+                key={product._id}
+                product={product}
+                selectDisplay={selectDisplay}
+              />
             ))}
           </tr>
-        </tbody>
+        </MaxTbody>
       </ProductsLayout>
     </HomeContainer>
   );

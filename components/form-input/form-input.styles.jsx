@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 export const GroupContainer = styled.div`
-  ${tw`flex flex-col items-center w-full text-2xl`};
+  ${tw`flex flex-col items-center w-full text-2xl`}; 
 `;
 
 export const FormInputLabel = styled.div`
