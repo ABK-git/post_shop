@@ -32,5 +32,8 @@ exports.productMutations = {
 exports.productQueries = {
   products: (root, args, ctx) => {
     return ctx.models.Product.getAll();
-  }
-}
+  },
+  product: (root, { id }, ctx) => {
+    return ctx.models.Product.getById(id);
+  },
+};

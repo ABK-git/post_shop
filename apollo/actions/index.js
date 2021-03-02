@@ -4,6 +4,7 @@ import {
   SIGN_UP,
   GET_USER,
   SIGN_OUT,
+  GET_PRODUCT,
   GET_PRODUCTS,
   CREATE_PRODUCT,
 } from "../queries";
@@ -25,6 +26,7 @@ export const userSignOut = () => useMutation(SIGN_OUT);
 
 //Product
 export const getProducts = () => useQuery(GET_PRODUCTS);
+export const getLazyProducts = () => useLazyQuery(GET_PRODUCTS);
 export const useCreateProduct = () =>
   useMutation(CREATE_PRODUCT, {
     update(cache, { data: { createProduct } }) {
