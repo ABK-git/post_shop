@@ -4,6 +4,10 @@ class Product {
     this.user = user;
   }
 
+  getById(id){
+    return this.Model.findById(id);
+  }
+
   getAll() {
     return this.Model.find({}).populate("user");
   }

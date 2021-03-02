@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getProducts } from "../../apollo/actions";
+import { getProducts, getLazyProducts } from "../../apollo/actions";
 import Spinner from "../spinner/spinner.component";
 import {
   HomeContainer,
@@ -14,6 +14,7 @@ import {
 import withApollo from "../../hoc/withApollo";
 import ProductPreview from "../product-preview/product-preview.component";
 import FormInput from "../form-input/form-input.component";
+import Router from "next/router";
 
 const HomePage = () => {
   const [displaySearchCondition, setDisplaySearchCondition] = useState(false);
@@ -26,10 +27,6 @@ const HomePage = () => {
 
   const { data, loading } = getProducts();
   const products = (data && data.products) || [];
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   const handleClick = () => {
     setDisplaySearchCondition(!displaySearchCondition);
@@ -75,9 +72,25 @@ const HomePage = () => {
         );
       }
     }
-
     return newProducts;
   };
+  const options = [
+    { value: 'NAME_DESC', label: '商品名降順' },
+    { value: 'NAME_ASC', label: '商品名昇順' },
+    { value: 'PRICE_DESC', label: '値段降順' },
+    { value: 'PRICE_ASC', label: '値段昇順' },
+    { value: 'CREATED_DESC', label: '出品日降順' },
+    { value: 'CREATED_ASC', label: '出品日昇順' },
+  ]
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if(products[0].imagePasses == null){
+    Router.reload();
+  }
+
   return (
     <HomeContainer>
       {displaySearchCondition && (

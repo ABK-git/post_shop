@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import { ProductCell } from "./product-preview.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
-import Image from "react-image-resizer";
 
 const ProductPreview = ({ product }) => {
   const [images, setImages] = useState(product.imagePasses);
+
   //配列の何番目の画像を表示するか
   const [index, setIndex] = useState(0);
   //表示画像の変更

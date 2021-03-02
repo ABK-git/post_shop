@@ -77,6 +77,24 @@ export const SIGN_OUT = gql`
 /**
  * Product
  */
+export const GET_PRODUCT = gql`
+  query Product($id: ID) {
+    product(id: $id) {
+      _id
+      name
+      category
+      price
+      quantity
+      introduce
+      imagePasses
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
 export const GET_PRODUCTS = gql`
   query Products {
     products {
