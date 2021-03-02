@@ -25,7 +25,7 @@ exports.createApolloServer = () => {
     type Query {
       user: User
 
-      product: Product
+      product(id: ID): Product
       products: [Product]
     }
 
