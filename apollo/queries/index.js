@@ -83,6 +83,7 @@ export const GET_PRODUCT = gql`
       _id
       name
       category
+      categories @client
       price
       quantity
       introduce
