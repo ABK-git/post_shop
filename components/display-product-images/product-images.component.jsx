@@ -16,6 +16,7 @@ const DisplayProductImages = ({
   handleClickLeftButton,
   handleClickRightButton,
   handleRemoveImage,
+  handleClickToProductDetails,
 }) => {
   //context
   const my_context = useContext(MyContext);
@@ -40,17 +41,22 @@ const DisplayProductImages = ({
               height={smBreakPoint ? 200 : 130}
             />
           ) : images.length != 0 ? (
-            <ResizeImagesContainer
-              src={images[index]}
-              width={160}
-              height={130}
-            />
+            <div onClick={handleClickToProductDetails}>
+              <ResizeImagesContainer
+                src={images[index]}
+                width={160}
+                height={130}
+              />
+            </div>
           ) : (
-            <ResizeImagesContainer
-              src={"/images/products/noimage.png"}
-              width={160}
-              height={130}
-            />
+            <div onClick={handleClickToProductDetails}>
+              <ResizeImagesContainer
+                onClick={handleClickToProductDetails}
+                src={"/images/products/noimage.png"}
+                width={160}
+                height={130}
+              />
+            </div>
           )}
 
           {handleRemoveImage && (

@@ -128,6 +128,7 @@ const HomePage = () => {
   const changeSelectDisplay = () => {
     setSelectDisplay(!selectDisplay);
   };
+  //optionsはこうしないと無限ループエラーが出るので注意
   const options = [
     {
       label: "商品名降順",
