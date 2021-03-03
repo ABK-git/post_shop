@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@apollo/react-ssr": "^4.0.0",
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/icomoon": "^10.18.0",
     "apollo-boost": "^0.4.9",
