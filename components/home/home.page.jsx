@@ -17,18 +17,21 @@ import {
   MaxTbody,
   MaxTd,
   MaxTable,
-  MaxTr
+  MaxTr,
 } from "./home.styles";
 import withApollo from "../../hoc/withApollo";
 import ProductPreview from "../product-preview/product-preview.component";
 import FormInput from "../form-input/form-input.component";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 const HomePage = () => {
   const [displaySearchCondition, setDisplaySearchCondition] = useState(false);
+  const router = useRouter();
+  const queryCategory = router.query.category;
+
   const [searchCondition, setSearchCondition] = useState({
     name: "",
-    category: "",
+    category: queryCategory ? queryCategory : "",
     lowestPrice: "",
     highestPrice: "",
   });
