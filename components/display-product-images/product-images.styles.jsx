@@ -65,3 +65,7 @@ export const ChevronLeftButton = styled(ChevronLeftCircle)`
 export const ImageIndex = styled.p`
   ${tw`w-full text-center`}
 `;
+
+export const ToDetails = styled.div`
+  ${tw`cursor-pointer`}
+`;

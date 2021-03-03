@@ -7,6 +7,7 @@ import {
   ResizeImagesContainer,
   RemoveImageButton,
   ResizeImagesAndRemoveButton,
+  ToDetails,
 } from "./product-images.styles";
 import MyContext from "../../context";
 
@@ -41,22 +42,22 @@ const DisplayProductImages = ({
               height={smBreakPoint ? 200 : 130}
             />
           ) : images.length != 0 ? (
-            <div onClick={handleClickToProductDetails}>
+            <ToDetails onClick={handleClickToProductDetails}>
               <ResizeImagesContainer
                 src={images[index]}
                 width={160}
                 height={130}
               />
-            </div>
+            </ToDetails>
           ) : (
-            <div onClick={handleClickToProductDetails}>
+            <ToDetails onClick={handleClickToProductDetails}>
               <ResizeImagesContainer
                 onClick={handleClickToProductDetails}
                 src={"/images/products/noimage.png"}
                 width={160}
                 height={130}
               />
-            </div>
+            </ToDetails>
           )}
 
           {handleRemoveImage && (

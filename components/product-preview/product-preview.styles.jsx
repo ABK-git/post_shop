@@ -6,5 +6,5 @@ export const ProductCell = styled.td`
 `;
 
 export const ProductIntroduce = styled.div`
-  ${tw`w-full h-full`}
+  ${tw`w-full h-full cursor-pointer`}
 `;

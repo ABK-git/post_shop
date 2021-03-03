@@ -1,6 +1,17 @@
 import React from "react";
 import ProductDetails from "../../../components/product-details/product-details.page";
+import withApollo from "../../../hoc/withApollo";
+import { getDataFromTree } from "@apollo/react-ssr";
+import { getProduct } from "../../../apollo/actions";
 
-const ProductDetailsPage = () => <ProductDetails />;
+const ProductDetailsPage = ({ query }) => {
+  const { data } = getProduct({ variables: { id: query.id } });
+  const product = (data && data.product) || {};
+  return <ProductDetails product={product} />;
+};
 
-export default ProductDetailsPage;
+ProductDetailsPage.getInitialProps = async ({ query }) => {
+  return { query };
+};
+
+export default withApollo(ProductDetailsPage, { getDataFromTree });
