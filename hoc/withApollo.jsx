@@ -7,6 +7,19 @@ export default withApollo(
     return new ApolloClient({
       uri: "http://localhost:3000/graphql",
       cache: new InMemoryCache().restore(initialState || {}),
+      resolvers: {
+        Product: {
+          categories({ category }, args, { cache }) {
+            let categories = [];
+            if (category.includes("/")) {
+              categories = category.split("/");
+            } else {
+              categories.push(category);
+            }
+            return categories;
+          },
+        },
+      },
     });
   },
   {
