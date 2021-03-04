@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   ProductImagesContainer,
   ChevronLeftButton,
@@ -8,6 +8,7 @@ import {
   RemoveImageButton,
   ResizeImagesAndRemoveButton,
   ToDetails,
+  GroupContainer
 } from "./product-images.styles";
 import MyContext from "../../context";
 
@@ -23,17 +24,39 @@ const DisplayProductImages = ({
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
 
-  //画像の番号
-  const getImageIndex = index + 1 + "/" + images.length;
+  const [imagesNumber, setImagesNumber] = useState(0);
+  const changeImageLeft = () => {
+    if (imagesNumber > 0) {
+      setImagesNumber(imagesNumber - 1);
+    }
+  };
+  const changeImageRight = () => {
+    if (imagesNumber < images.length - 1) {
+      setImagesNumber(imagesNumber + 1);
+    }
+  };
 
   return (
-    <div>
+    <GroupContainer>
       <ProductImagesContainer>
-        <ChevronLeftButton
-          onClick={handleClickLeftButton}
-          getVisibility={index === 0}
-          isExhibit={handleRemoveImage == undefined && images.length === 0}
-        />
+        {index !== undefined ? (
+          <ChevronLeftButton
+            onClick={handleClickLeftButton}
+            getVisibility={index === 0}
+            isExhibit={handleRemoveImage == undefined && images.length === 0}
+          />
+        ) : (
+          <ChevronLeftButton
+            onClick={changeImageLeft}
+            getVisibility={imagesNumber === 0}
+            isExhibit={
+              handleRemoveImage == undefined &&
+              images.length === 0 &&
+              index !== undefined
+            }
+          />
+        )}
+
         <ResizeImagesAndRemoveButton>
           {handleRemoveImage ? (
             <ResizeImagesContainer
@@ -42,14 +65,22 @@ const DisplayProductImages = ({
               height={smBreakPoint ? 200 : 130}
             />
           ) : images.length != 0 ? (
-            <ToDetails onClick={handleClickToProductDetails}>
+            handleClickToProductDetails != undefined ? (
+              <ToDetails onClick={handleClickToProductDetails}>
+                <ResizeImagesContainer
+                  src={images[imagesNumber]}
+                  width={160}
+                  height={130}
+                />
+              </ToDetails>
+            ) : (
               <ResizeImagesContainer
-                src={images[index]}
-                width={160}
-                height={130}
+                src={images[imagesNumber]}
+                width={smBreakPoint ? 250 : 160}
+                height={smBreakPoint ? 200 : 130}
               />
-            </ToDetails>
-          ) : (
+            )
+          ) : handleClickToProductDetails != undefined ? (
             <ToDetails onClick={handleClickToProductDetails}>
               <ResizeImagesContainer
                 onClick={handleClickToProductDetails}
@@ -58,23 +89,43 @@ const DisplayProductImages = ({
                 height={130}
               />
             </ToDetails>
+          ) : (
+            <ResizeImagesContainer
+              src={"/images/products/noimage.png"}
+              width={smBreakPoint ? 250 : 160}
+              height={smBreakPoint ? 200 : 130}
+            />
           )}
-
+          
           {handleRemoveImage && (
             <RemoveImageButton onClick={handleRemoveImage}>
               Remove
             </RemoveImageButton>
           )}
         </ResizeImagesAndRemoveButton>
-
-        <ChevronRightButton
-          onClick={handleClickRightButton}
-          getVisibility={index === images.length - 1}
-          isExhibit={handleRemoveImage == undefined && images.length === 0}
-        />
+        {index !== undefined ? (
+          <ChevronRightButton
+            onClick={handleClickRightButton}
+            getVisibility={index === images.length - 1}
+            isExhibit={handleRemoveImage == undefined && images.length === 0}
+          />
+        ) : (
+          <ChevronRightButton
+            onClick={changeImageRight}
+            getVisibility={imagesNumber === images.length - 1}
+            isExhibit={
+              handleRemoveImage == undefined &&
+              images.length === 0 &&
+              index !== undefined
+            }
+            style={{ visibility: images.length === 0 && "hidden" }}
+          />
+        )}
       </ProductImagesContainer>
-      {handleRemoveImage && <ImageIndex>{getImageIndex}</ImageIndex>}
-    </div>
+      {handleRemoveImage && (
+        <ImageIndex>{index + 1 + "/" + images.length}</ImageIndex>
+      )}
+    </GroupContainer>
   );
 };
 

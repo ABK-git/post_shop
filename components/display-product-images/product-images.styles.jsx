@@ -34,8 +34,12 @@ export const ResizeImagesAndRemoveButton = styled.div`
   }
 `;
 
+export const GroupContainer = styled.div`
+  ${tw`text-center`}
+`;
+
 export const ProductImagesContainer = styled.div`
-  ${tw`flex h-60`}
+  ${tw`flex`}
 `;
 
 export const RemoveImageButton = styled.button`
