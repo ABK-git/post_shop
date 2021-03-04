@@ -56,12 +56,12 @@ const HomePage = () => {
     let newProducts = products;
     const { name, category, lowestPrice, highestPrice } = searchCondition;
     if (name != "") {
-      newProducts = newProducts.filter((product) =>
+       newProducts.filter((product) =>
         product.name.toLowerCase().includes(name.toLowerCase())
       );
     }
     if (category != "") {
-      newProducts = newProducts.filter((product) => {
+      newProducts.filter((product) => {
         if (product.category.includes("/")) {
           const categories = product.category
             .split("/")
@@ -78,7 +78,7 @@ const HomePage = () => {
       const parseLowestPrice = parseInt(lowestPrice);
       const parseHighestPrice = parseInt(highestPrice);
       if (parseLowestPrice < parseHighestPrice) {
-        newProducts = newProducts.filter(
+        newProducts.filter(
           (product) =>
             product.price > parseLowestPrice &&
             product.price < parseHighestPrice

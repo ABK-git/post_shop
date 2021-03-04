@@ -1,13 +1,18 @@
 import React from "react";
-import { ProductDetailsContainer } from "./product-details.styles";
+import {
+  DisplayProductImagesContainer,
+  DetailsMain,
+  ProductDetailsContainer,
+} from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
+import DisplayProductImages from "../display-product-images/product-images.component";
 
-const ProductDetails = ({ product }) => {
-  return (
-    <ProductDetailsContainer>
-      <DisplayCategories categories={product.categories} />
-    </ProductDetailsContainer>
-  );
-};
-
+const ProductDetails = ({ product }) => (
+  <ProductDetailsContainer>
+    <DisplayCategories categories={product.categories} />
+    <DetailsMain>
+      <DisplayProductImages images={product.imagePasses} />
+    </DetailsMain>
+  </ProductDetailsContainer>
+);
 export default ProductDetails;
