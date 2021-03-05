@@ -5,7 +5,7 @@ class Product {
   }
 
   getById(id){
-    return this.Model.findById(id);
+    return this.Model.findById(id).populate("user");
   }
 
   getAll() {
