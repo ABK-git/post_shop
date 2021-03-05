@@ -6,8 +6,8 @@ const productSchema = new Schema({
   category: { type: String, required: true, maxLength: 30 },
   price: { type: Number, required: true, min: 1 },
   quantity: { type: Number, required: true, min: 1 },
-  introduce: { type: String, required: true, minLength: 10, maxLength: 150 },
-  imagePasses: [{ type: String}],
+  introduce: { type: String, required: true, minLength: 10, maxLength: 1000 },
+  imagePasses: [{ type: String }],
   user: { type: Schema.Types.ObjectId, ref: "User" },
   createdAt: { type: Date, default: Date.now },
 });

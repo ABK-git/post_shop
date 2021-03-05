@@ -88,6 +88,7 @@ export const GET_PRODUCT = gql`
       quantity
       introduce
       imagePasses
+      createdAt
       user {
         _id
         username
