@@ -13,10 +13,9 @@ export const CategoryContainer = styled.p`
 
 export const TitleMessage = styled.p`
   font-family: "Playfair Display", serif;
-  white-space: nowrap;
-  ${tw`text-3xl font-bold bg-red-700 mr-2 text-green-900`};
+  ${tw`text-3xl font-bold bg-red-700 mr-2 text-green-900 whitespace-no-wrap`};
 `;
 
 export const BorderCategory = styled.div`
-  ${tw`flex border-4 border-purple-800 overflow-y-auto`}
+  ${tw`flex border-4 border-purple-800 overflow-x-auto`}
 `;

@@ -57,7 +57,7 @@ const ExhibitForm = ({ formik }) => (
       label="introduce"
       name="introduce"
       placeholder="商品の紹介文"
-      maxLength="150"
+      maxLength="1000"
       rows="5"
       value={formik.values.introduce}
       handleChange={formik.handleChange}

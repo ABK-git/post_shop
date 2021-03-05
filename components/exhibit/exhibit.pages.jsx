@@ -119,7 +119,7 @@ const Exhibit = () => {
     introduce: Yup.string()
       .required("商品の説明文を入力してください")
       .min(10, "商品の説明文は最低10文字以上入力してください")
-      .max(150, "商品の説明文は150文字以内にまとめてください"),
+      .max(1000, "商品の説明文は1000文字以内にまとめてください"),
   });
   const router = useRouter();
   const onSubmit = async (values) => {
