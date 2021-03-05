@@ -8,9 +8,9 @@ import {
   RemoveImageButton,
   ResizeImagesAndRemoveButton,
   ToDetails,
-  GroupContainer
 } from "./product-images.styles";
 import MyContext from "../../context";
+import Image from 'next/image'
 
 const DisplayProductImages = ({
   images,
@@ -37,7 +37,7 @@ const DisplayProductImages = ({
   };
 
   return (
-    <GroupContainer>
+    <div>
       <ProductImagesContainer>
         {index !== undefined ? (
           <ChevronLeftButton
@@ -67,14 +67,14 @@ const DisplayProductImages = ({
           ) : images.length != 0 ? (
             handleClickToProductDetails != undefined ? (
               <ToDetails onClick={handleClickToProductDetails}>
-                <ResizeImagesContainer
+                <Image
                   src={images[imagesNumber]}
                   width={160}
                   height={130}
                 />
               </ToDetails>
             ) : (
-              <ResizeImagesContainer
+              <Image
                 src={images[imagesNumber]}
                 width={smBreakPoint ? 250 : 160}
                 height={smBreakPoint ? 200 : 130}
@@ -82,7 +82,7 @@ const DisplayProductImages = ({
             )
           ) : handleClickToProductDetails != undefined ? (
             <ToDetails onClick={handleClickToProductDetails}>
-              <ResizeImagesContainer
+              <Image
                 onClick={handleClickToProductDetails}
                 src={"/images/products/noimage.png"}
                 width={160}
@@ -90,13 +90,13 @@ const DisplayProductImages = ({
               />
             </ToDetails>
           ) : (
-            <ResizeImagesContainer
+            <Image
               src={"/images/products/noimage.png"}
               width={smBreakPoint ? 250 : 160}
               height={smBreakPoint ? 200 : 130}
             />
           )}
-          
+
           {handleRemoveImage && (
             <RemoveImageButton onClick={handleRemoveImage}>
               Remove
@@ -125,7 +125,7 @@ const DisplayProductImages = ({
       {handleRemoveImage && (
         <ImageIndex>{index + 1 + "/" + images.length}</ImageIndex>
       )}
-    </GroupContainer>
+    </div>
   );
 };
 
