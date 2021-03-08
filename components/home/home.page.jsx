@@ -39,6 +39,9 @@ const HomePage = () => {
         clearQuery();
       }, 100);
     }
+    return () => {
+      clearTimeout(ref.current);
+    };
   }, [queryCategory]);
 
   const [searchCondition, setSearchCondition] = useState({
@@ -65,7 +68,6 @@ const HomePage = () => {
 
   //検索条件によって商品を絞り込むメソッド
   const productsFilter = (products) => {
-
     let newProducts = products;
     const { name, category, lowestPrice, highestPrice } = searchCondition;
     if (name != "") {
