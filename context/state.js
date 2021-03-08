@@ -7,6 +7,12 @@ import { useMediaQuery } from "react-responsive";
 const MyState = ({ children }) => {
   const initialState = {
     displayMenu: false,
+    filterState: {
+      name: "",
+      category: "",
+      lowestPrice: "",
+      highestPrice: "",
+    },
   };
 
   const [state, dispatch] = useReducer(Reducer, initialState);
@@ -16,13 +22,32 @@ const MyState = ({ children }) => {
       type: ContextTypes.DISPLAY_MENU,
     });
   };
+  const changeFilter = (filterState) => {
+    dispatch({
+      type: ContextTypes.CHANGE_FILTER,
+      payload: filterState,
+    });
+  };
+  const setFilterFromQuery = (filterState) => {
+    dispatch({
+      type: ContextTypes.SET_FILTER_FROM_QUERY,
+      payload: filterState,
+    });
+  };
 
   const smBreakPoint = useMediaQuery({ minWidth: 640 });
 
-  const { displayMenu } = state;
+  const { displayMenu, filterState } = state;
   return (
     <MyContext.Provider
-      value={{ displayMenu, smBreakPoint, changeDisplayMenu }}>
+      value={{
+        displayMenu,
+        filterState,
+        smBreakPoint,
+        changeDisplayMenu,
+        changeFilter,
+        setFilterFromQuery,
+      }}>
       {children}
     </MyContext.Provider>
   );
