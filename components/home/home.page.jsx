@@ -76,9 +76,16 @@ const HomePage = () => {
           const categories = product.category
             .split("/")
             .map((category) => category.toLowerCase());
-          return categories.includes(category.toLowerCase());
+          for(let i = 0; i < categories.length; i++){
+            if(categories[i].indexOf(category.toLowerCase()) >= 0){
+              return true;
+            }
+          }
+          return false;
         } else {
-          return product.category.toLowerCase() === category.toLowerCase();
+          return (
+            product.category.toLowerCase().indexOf(category.toLowerCase()) >= 0
+          );
         }
       });
     }
