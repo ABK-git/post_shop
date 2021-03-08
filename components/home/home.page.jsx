@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { getProducts } from "../../apollo/actions";
 import moment from "moment";
 import Spinner from "../spinner/spinner.component";
@@ -23,18 +23,31 @@ import withApollo from "../../hoc/withApollo";
 import ProductPreview from "../product-preview/product-preview.component";
 import FormInput from "../form-input/form-input.component";
 import Router, { useRouter } from "next/router";
+import MyContext from "../../context";
 
 const HomePage = () => {
   const [displaySearchCondition, setDisplaySearchCondition] = useState(false);
   const router = useRouter();
-  const queryCategory = router.query.category;
+  const { category: queryCategory } = router.query;
 
-  const [searchCondition, setSearchCondition] = useState({
-    name: "",
-    category: queryCategory ? queryCategory : "",
-    lowestPrice: "",
-    highestPrice: "",
-  });
+  const clearQuery = () => {
+    router.replace("/", "/", { shallow: true });
+  };
+  const ref = useRef(null);
+  const my_context = useContext(MyContext);
+  const { changeFilter, setFilterFromQuery, filterState } = my_context;
+
+  useEffect(() => {
+    if (queryCategory) {
+      setFilterFromQuery({ name: "category", value: queryCategory });
+      ref.current = setTimeout(() => {
+        clearQuery();
+      }, 100);
+    }
+    return () => {
+      clearTimeout(ref.current);
+    };
+  }, [queryCategory]);
 
   const { data, loading } = getProducts();
   const products = (data && data.products) || [];
@@ -46,31 +59,26 @@ const HomePage = () => {
    * 検索条件設定
    */
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setSearchCondition({ ...searchCondition, [name]: value });
+    changeFilter(event);
   };
-  const { name, category, highestPrice, lowestPrice } = searchCondition;
-
+  const { name, category, highestPrice, lowestPrice } = filterState;
   //検索条件によって商品を絞り込むメソッド
   const productsFilter = (products) => {
     let newProducts = products;
-    const { name, category, lowestPrice, highestPrice } = searchCondition;
     if (name != "") {
-       newProducts.filter((product) =>
+      newProducts = newProducts.filter((product) =>
         product.name.toLowerCase().includes(name.toLowerCase())
       );
     }
     if (category != "") {
-      newProducts.filter((product) => {
+      newProducts = newProducts.filter((product) => {
         if (product.category.includes("/")) {
           const categories = product.category
             .split("/")
             .map((category) => category.toLowerCase());
-          return categories.indexOf(category.toLowerCase()) >= 0;
+          return categories.includes(category.toLowerCase());
         } else {
-          return product.category
-            .toLowerCase()
-            .includes(category.toLowerCase());
+          return product.category.toLowerCase() === category.toLowerCase();
         }
       });
     }
@@ -78,7 +86,7 @@ const HomePage = () => {
       const parseLowestPrice = parseInt(lowestPrice);
       const parseHighestPrice = parseInt(highestPrice);
       if (parseLowestPrice < parseHighestPrice) {
-        newProducts.filter(
+        newProducts = newProducts.filter(
           (product) =>
             product.price > parseLowestPrice &&
             product.price < parseHighestPrice
