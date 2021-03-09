@@ -12,7 +12,7 @@ export default withApollo(
           categories({ category }, args, { cache }) {
             let categories = [];
             if (category.includes("/")) {
-              categories = category.split("/");
+              categories = category.split("/").filter((category) => category);
             } else {
               categories.push(category);
             }
