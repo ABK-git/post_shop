@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import QuestionForm from "../question-form/question-form.component";
 import ProductContent from "../display-product-content/product-content.component";
 import { useCreateQuestion } from "../../apollo/actions";
+import QuestionPreview from "../question-preview/question-preview.component";
 
 const ProductDetails = ({ product }) => {
   const [displayQuestions, setDisplayQuestions] = useState(false);
@@ -27,7 +28,7 @@ const ProductDetails = ({ product }) => {
     setExhibitOrList(!exhibitOrList);
   };
 
-  const [createQuestion, { error, loading }] = useCreateQuestion();
+  const [createQuestion, { error }] = useCreateQuestion();
 
   /**
    * formik
@@ -74,6 +75,10 @@ const ProductDetails = ({ product }) => {
                 <DisplayQuestionsMessage>
                   この商品に対する質問一覧
                 </DisplayQuestionsMessage>
+                {product.questions &&
+                  product.questions.map((question) => (
+                    <QuestionPreview question={question} key={question._id} />
+                  ))}
                 <ToExhibitQuestion onClick={changeExhibitOrList}>
                   質問をする
                 </ToExhibitQuestion>
