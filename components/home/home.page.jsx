@@ -76,8 +76,8 @@ const HomePage = () => {
           const categories = product.category
             .split("/")
             .map((category) => category.toLowerCase());
-          for(let i = 0; i < categories.length; i++){
-            if(categories[i].indexOf(category.toLowerCase()) >= 0){
+          for (let i = 0; i < categories.length; i++) {
+            if (categories[i].indexOf(category.toLowerCase()) >= 0) {
               return true;
             }
           }
@@ -190,8 +190,10 @@ const HomePage = () => {
     return <Spinner />;
   }
 
-  if (products[0].imagePasses == null) {
-    Router.reload();
+  if (products.length !== 0) {
+    if (products[0].imagePasses == null) {
+      Router.reload();
+    }
   }
 
   return (

@@ -39,5 +39,5 @@ export const SetNameAndContentJustifyRight = styled.div`
 `;
 
 export const ExhibitDaysAndUserContainer = styled.div`
-  ${tw`w-1/3 ml-auto`}
+  ${tw`w-2/3 sm:w-1/4 ml-auto`}
 `;
