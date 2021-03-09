@@ -6,6 +6,9 @@ class Question {
 
   async create(data) {
     data.user = this.user;
+    if(data.user == null){
+      throw new Error("ログインしてください")
+    }
     return this.Model.create(data);
   }
 

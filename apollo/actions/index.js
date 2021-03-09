@@ -7,6 +7,7 @@ import {
   GET_PRODUCT,
   GET_PRODUCTS,
   CREATE_PRODUCT,
+  CREATE_QUESTION,
 } from "../queries";
 
 //User認証
@@ -42,3 +43,19 @@ export const useCreateProduct = () =>
     },
   });
 
+//Question
+export const useCreateQuestion = () =>
+  useMutation(CREATE_QUESTION, {
+    update(cache, { data: { createQuestion } }) {
+      debugger;
+      //1対多数の関係のProductを取得
+      const { _id } = createQuestion.product;
+      const { product } = cache.readQuery({
+        query: GET_PRODUCT,
+        variables: { id: _id },
+      });
+      delete createQuestion.product;
+      product.questions.push(createQuestion);
+      cache.writeQuery({ query: GET_PRODUCT, data: { product } });
+    },
+  });
