@@ -47,7 +47,6 @@ export const useCreateProduct = () =>
 export const useCreateQuestion = () =>
   useMutation(CREATE_QUESTION, {
     update(cache, { data: { createQuestion } }) {
-      debugger;
       //1対多数の関係のProductを取得
       const { _id } = createQuestion.product;
       const { product } = cache.readQuery({
