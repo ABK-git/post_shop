@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import QuestionForm from "../question-form/question-form.component";
 import ProductContent from "../display-product-content/product-content.component";
+import { useCreateQuestion } from "../../apollo/actions";
 
 const ProductDetails = ({ product }) => {
   const [displayQuestions, setDisplayQuestions] = useState(false);
@@ -25,6 +26,8 @@ const ProductDetails = ({ product }) => {
   const changeExhibitOrList = () => {
     setExhibitOrList(!exhibitOrList);
   };
+
+  const [createQuestion, { error, loading }] = useCreateQuestion();
 
   /**
    * formik
@@ -42,7 +45,8 @@ const ProductDetails = ({ product }) => {
       .max(1000, "質問内容は1000文字以内で入力してください"),
   });
   const onSubmit = (values) => {
-    console.log(values);
+    values.product = product._id;
+    createQuestion({ variables: values });
   };
   const formik = useFormik({
     initialValues,

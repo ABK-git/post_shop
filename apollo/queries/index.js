@@ -86,11 +86,18 @@ export const GET_PRODUCT = gql`
       categories @client
       price
       quantity
-      questions{
+      questions {
         _id
         title
         content
         createdAt
+        user {
+          _id
+          username
+        }
+        product {
+          _id
+        }
       }
       introduce
       imagePasses
@@ -111,12 +118,6 @@ export const GET_PRODUCTS = gql`
       category
       price
       quantity
-      questions{
-        _id
-        title
-        content
-        createdAt
-      }
       imagePasses
       introduce
       createdAt
@@ -152,11 +153,15 @@ export const CREATE_PRODUCT = gql`
       category
       price
       quantity
-      questions{
+      questions {
         _id
         title
         content
         createdAt
+        user {
+          _id
+          username
+        }
       }
       introduce
       imagePasses
@@ -164,6 +169,26 @@ export const CREATE_PRODUCT = gql`
       user {
         _id
         username
+      }
+    }
+  }
+`;
+
+export const CREATE_QUESTION = gql`
+  mutation CreateQuestion($title: String!, $content: String!, $product: ID!) {
+    createQuestion(
+      input: { title: $title, content: $content, product: $product }
+    ) {
+      _id
+      title
+      content
+      createdAt
+      user {
+        _id
+        username
+      }
+      product {
+        _id
       }
     }
   }
