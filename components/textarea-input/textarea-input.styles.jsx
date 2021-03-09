@@ -6,7 +6,7 @@ export const GroupContainer = styled.div`
 `;
 
 export const TextareaInputContainer = styled.textarea`
-  ${tw`w-1/2 font-bold text-purple-400 rounded-md`}
+  ${tw`w-1/2 font-bold text-purple-400 rounded-md mb-2`}
 `;
 
 export const TextareaInputLabel = styled.label`
