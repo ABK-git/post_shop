@@ -38,9 +38,18 @@ exports.productQueries = {
   },
 };
 
+//QuestionのQueries
+exports.questionQueries = {
+  question: (root, { id }, ctx) => {
+    return ctx.models.Question.getById(id);
+  },
+};
+
 //QuestionのMutation
 exports.questionMutations = {
   createQuestion: async (root, { input }, ctx) => {
-    return ctx.models.Question.create(input);
+    const createdQuestion = await ctx.models.Question.create(input);
+    ctx.models.Product.addQuestion(ctx, createdQuestion);
+    return createdQuestion;
   },
 };
