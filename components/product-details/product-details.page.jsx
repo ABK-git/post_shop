@@ -64,14 +64,16 @@ const ProductDetails = ({ product }) => {
       <DisplayQuestions>
         {displayQuestions && (
           <div>
-            <DisplayQuestionsMessage>
-              この商品に対する質問一覧
-            </DisplayQuestionsMessage>
             {!exhibitOrList && <QuestionForm formik={formik} />}
             {exhibitOrList ? (
-              <ToExhibitQuestion onClick={changeExhibitOrList}>
-                質問をする
-              </ToExhibitQuestion>
+              <div>
+                <DisplayQuestionsMessage>
+                  この商品に対する質問一覧
+                </DisplayQuestionsMessage>
+                <ToExhibitQuestion onClick={changeExhibitOrList}>
+                  質問をする
+                </ToExhibitQuestion>
+              </div>
             ) : (
               <LeftContainer>
                 <CustomButton design="to_list" onClick={changeExhibitOrList}>
