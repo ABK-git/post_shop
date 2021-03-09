@@ -37,3 +37,10 @@ exports.productQueries = {
     return ctx.models.Product.getById(id);
   },
 };
+
+//QuestionのMutation
+exports.questionMutations = {
+  createQuestion: async (root, { input }, ctx) => {
+    return ctx.models.Question.create(input);
+  },
+};

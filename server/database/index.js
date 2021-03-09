@@ -6,6 +6,7 @@ const config = require("../config/dev");
 //使用するmodelを宣言
 require("./models/user");
 require("./models/product");
+require("./models/question");
 
 exports.connect = () => {
   mongoose.connect(

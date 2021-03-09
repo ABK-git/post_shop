@@ -23,6 +23,22 @@ exports.userTypes = `
   }
 `;
 
+exports.questionTypes = `
+  type Question {
+    _id: ID,
+    title: String,
+    content: String,
+    product: Product,
+    user: User,
+    createdAt: String,
+  }
+
+  input QuestionCreateInput{
+    title: String,
+    content: String,
+  }
+`;
+
 exports.productTypes = `
   type Product{
     _id: ID,
