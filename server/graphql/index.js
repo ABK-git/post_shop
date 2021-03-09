@@ -14,6 +14,7 @@ const {
   productMutations,
   productQueries,
   questionMutations,
+  questionQueries,
 } = require("./resolvers");
 //context
 const { buildAuthContext } = require("./context");
@@ -30,6 +31,8 @@ exports.createApolloServer = () => {
 
       product(id: ID): Product
       products: [Product]
+
+      question(id: ID): Question
     }
 
     type Mutation {
@@ -38,7 +41,6 @@ exports.createApolloServer = () => {
       signOut: Boolean
 
       createProduct(input: ProductCreateInput): Product
-      
       createQuestion(input: QuestionCreateInput): Question
     }
   `;
@@ -47,6 +49,7 @@ exports.createApolloServer = () => {
     Query: {
       ...userQueries,
       ...productQueries,
+      ...questionQueries,
     },
     Mutation: {
       ...userMutations,

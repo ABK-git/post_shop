@@ -23,22 +23,6 @@ exports.userTypes = `
   }
 `;
 
-exports.questionTypes = `
-  type Question {
-    _id: ID,
-    title: String,
-    content: String,
-    product: Product,
-    user: User,
-    createdAt: String,
-  }
-
-  input QuestionCreateInput{
-    title: String,
-    content: String,
-  }
-`;
-
 exports.productTypes = `
   type Product{
     _id: ID,
@@ -46,6 +30,7 @@ exports.productTypes = `
     category: String,
     price: Int,
     quantity: Int,
+    questions: [Question],
     introduce: String,
     imagePasses: [String],
     user: User,
@@ -59,5 +44,22 @@ exports.productTypes = `
     quantity: Int!,
     imagePasses: [String],
     introduce: String!,
+  }
+`;
+
+exports.questionTypes = `
+  type Question {
+    _id: ID,
+    title: String,
+    content: String,
+    product: Product,
+    user: User,
+    createdAt: String,
+  }
+
+  input QuestionCreateInput{
+    title: String,
+    content: String,
+    product: ID
   }
 `;

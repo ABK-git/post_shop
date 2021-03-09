@@ -86,6 +86,12 @@ export const GET_PRODUCT = gql`
       categories @client
       price
       quantity
+      questions{
+        _id
+        title
+        content
+        createdAt
+      }
       introduce
       imagePasses
       createdAt
@@ -105,6 +111,12 @@ export const GET_PRODUCTS = gql`
       category
       price
       quantity
+      questions{
+        _id
+        title
+        content
+        createdAt
+      }
       imagePasses
       introduce
       createdAt
@@ -140,6 +152,12 @@ export const CREATE_PRODUCT = gql`
       category
       price
       quantity
+      questions{
+        _id
+        title
+        content
+        createdAt
+      }
       introduce
       imagePasses
       createdAt
