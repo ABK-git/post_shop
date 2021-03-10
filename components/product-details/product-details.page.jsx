@@ -70,8 +70,14 @@ const ProductDetails = ({ product }) => {
       <DisplayQuestions>
         {displayQuestions && (
           <div>
-            {!exhibitOrList && <QuestionForm formik={formik} />}
+            {exhibitOrList && <QuestionForm formik={formik} />}
             {exhibitOrList ? (
+              <LeftContainer>
+                <CustomButton design="to_list" onClick={changeExhibitOrList}>
+                  質問一覧へ戻る
+                </CustomButton>
+              </LeftContainer>
+            ) : (
               <div>
                 <DisplayQuestionsMessage>
                   この商品に対する質問一覧
@@ -84,12 +90,6 @@ const ProductDetails = ({ product }) => {
                   質問をする
                 </ToExhibitQuestion>
               </div>
-            ) : (
-              <LeftContainer>
-                <CustomButton design="to_list" onClick={changeExhibitOrList}>
-                  質問一覧へ戻る
-                </CustomButton>
-              </LeftContainer>
             )}
           </div>
         )}
