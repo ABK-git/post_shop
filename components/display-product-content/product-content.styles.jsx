@@ -34,10 +34,7 @@ export const InContent = styled.p`
   ${tw`text-lg ml-1 whitespace-pre-line`}
 `;
 
-export const SetNameAndContentJustifyRight = styled.div`
-  ${tw`flex justify-start mr-1 sm:w-1/3`}
-`;
 
 export const ExhibitDaysAndUserContainer = styled.div`
-  ${tw`w-2/3 sm:w-1/4 ml-auto`}
+  ${tw`flex justify-end`}
 `;
