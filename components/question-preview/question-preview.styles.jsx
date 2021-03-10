@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 export const QuestionContainer = styled.div`
-  ${tw`mt-2 w-full bg-white border-2 border-green-700 p-2`}
+  ${tw`mt-2 w-full bg-white border-2 border-green-700 p-2 cursor-pointer`}
 `;
 
 export const TitleContainer = styled.p`

@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
 
 const openQuestions = css`
-  ${tw`sm:w-1/5 bg-red-600 border-red-500 border-4
+  ${tw`md:w-1/5 bg-red-600 border-red-500 border-4
   hover:bg-yellow-400 hover:text-blue-800 `}
 `;
 
 const openReviews = css`
-  ${tw`sm:w-1/5 bg-green-600 border-green-500 border-4
+  ${tw`md:w-1/5 bg-green-600 border-green-500 border-4
   hover:bg-yellow-400 hover:text-blue-800 `}
 `;
 
