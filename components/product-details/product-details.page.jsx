@@ -25,7 +25,7 @@ const ProductDetails = ({ product }) => {
     openQuestions ? true : false
   );
   const [exhibitOrList, setExhibitOrList] = useState(
-    openQuestions ? false : true
+    openQuestions ? false : openQuestions === undefined ? false : true
   );
   const clearQuery = () => {
     router.replace(
