@@ -190,3 +190,21 @@ export const CREATE_QUESTION = gql`
     }
   }
 `;
+
+export const GET_QUESTION = gql`
+  query Question($id: ID) {
+    question(id: $id) {
+      _id
+      title
+      content
+      createdAt
+      product {
+        _id
+      }
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;

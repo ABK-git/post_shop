@@ -8,3 +8,7 @@ export const QuestionContainer = styled.div`
 export const TitleContainer = styled.p`
   ${tw`w-full text-left font-bold border-2 border-yellow-500 text-xl sm:text-3xl`}
 `;
+
+export const ExhibitUserContainer = styled.p`
+  ${tw`flex justify-end text-gray-600`}
+`;
