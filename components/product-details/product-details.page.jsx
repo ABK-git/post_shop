@@ -84,7 +84,11 @@ const ProductDetails = ({ product }) => {
                 </DisplayQuestionsMessage>
                 {product.questions &&
                   product.questions.map((question) => (
-                    <QuestionPreview question={question} key={question._id} />
+                    <QuestionPreview
+                      question={question}
+                      product_id={product._id}
+                      key={question._id}
+                    />
                   ))}
                 <ToExhibitQuestion onClick={changeExhibitOrList}>
                   質問をする

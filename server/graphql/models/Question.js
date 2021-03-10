@@ -6,14 +6,14 @@ class Question {
 
   async create(data) {
     data.user = this.user;
-    if(data.user == null){
-      throw new Error("ログインしてください")
+    if (data.user == null) {
+      throw new Error("ログインしてください");
     }
     return this.Model.create(data);
   }
 
   getById(id) {
-    return this.Model.findById(id).populate("product");
+    return this.Model.findById(id).populate("product").populate("user");
   }
 }
 

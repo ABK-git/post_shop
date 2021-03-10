@@ -8,6 +8,7 @@ import {
   GET_PRODUCTS,
   CREATE_PRODUCT,
   CREATE_QUESTION,
+  GET_QUESTION
 } from "../queries";
 
 //User認証
@@ -44,6 +45,7 @@ export const useCreateProduct = () =>
   });
 
 //Question
+export const getQuestion = (options) => useQuery(GET_QUESTION, options);
 export const useCreateQuestion = () =>
   useMutation(CREATE_QUESTION, {
     update(cache, { data: { createQuestion } }) {
