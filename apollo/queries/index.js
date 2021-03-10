@@ -95,9 +95,6 @@ export const GET_PRODUCT = gql`
           _id
           username
         }
-        product {
-          _id
-        }
       }
       introduce
       imagePasses

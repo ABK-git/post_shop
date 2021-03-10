@@ -7,7 +7,6 @@ import {
   SetNameAndContent,
   InName,
   InContent,
-  SetNameAndContentJustifyRight,
   ExhibitDaysAndUserContainer,
 } from "./product-content.styles";
 
@@ -35,16 +34,18 @@ const ProductContent = ({ product }) => (
         <InContent>{product.introduce}</InContent>
       </SetNameAndContent>
       <ExhibitDaysAndUserContainer>
-        <SetNameAndContentJustifyRight>
-          <InName>出品者:</InName>
-          <InContent>{product.user.username}</InContent>
-        </SetNameAndContentJustifyRight>
-        <SetNameAndContentJustifyRight>
-          <InName>出品日:</InName>
-          <InContent>
-            {moment(product.createdAt.parseInt).format("L")}
-          </InContent>
-        </SetNameAndContentJustifyRight>
+        <div>
+          <SetNameAndContent>
+            <InName>出品者:</InName>
+            <InContent>{product.user.username}</InContent>
+          </SetNameAndContent>
+          <SetNameAndContent>
+            <InName>出品日:</InName>
+            <InContent>
+              {moment(product.createdAt.parseInt).format("L")}
+            </InContent>
+          </SetNameAndContent>
+        </div>
       </ExhibitDaysAndUserContainer>
     </ProductIntroduceContainer>
   </DetailsMain>

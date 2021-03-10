@@ -28,7 +28,7 @@ const ProductDetails = ({ product }) => {
     setExhibitOrList(!exhibitOrList);
   };
 
-  const [createQuestion, { error }] = useCreateQuestion();
+  const [createQuestion] = useCreateQuestion();
 
   /**
    * formik
@@ -48,6 +48,7 @@ const ProductDetails = ({ product }) => {
   const onSubmit = (values) => {
     values.product = product._id;
     createQuestion({ variables: values });
+    setExhibitOrList(!exhibitOrList);
   };
   const formik = useFormik({
     initialValues,
