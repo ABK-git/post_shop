@@ -16,6 +16,11 @@ const toList = css`
   hover:text-black hover:border-black`}
 `;
 
+const toListAndMarginLeft = css`
+  ${tw`bg-white text-blue-500 border-2 border-blue-500 ml-4
+   hover:text-black hover:border-black`}
+`;
+
 const exhibitQuestion = css`
   ${tw`bg-red-600 hover:opacity-75 border-3 border-blue-700 w-full mt-2`}
 `;
@@ -33,6 +38,9 @@ const getButtonStyles = ({ design }) => {
 
     case "exhibit_question":
       return exhibitQuestion;
+
+    case "to_list_and_margin-left":
+      return toListAndMarginLeft;
 
     default:
       return "";

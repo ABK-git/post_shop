@@ -17,7 +17,7 @@ const QuestionDetails = ({ question }) => {
   };
   return (
     <QuestionDetailsContainer>
-      <CustomButton onClick={clickToProductDetails} design="to_list">
+      <CustomButton onClick={clickToProductDetails} design="to_list_and_margin-left">
         質問一覧に戻る
       </CustomButton>
       <MainContent>
