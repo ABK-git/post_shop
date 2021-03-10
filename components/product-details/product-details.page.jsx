@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ProductDetailsContainer,
   CategoriesLeftJustify,
@@ -17,10 +16,36 @@ import QuestionForm from "../question-form/question-form.component";
 import ProductContent from "../display-product-content/product-content.component";
 import { useCreateQuestion } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
+import { useRouter } from "next/router";
 
 const ProductDetails = ({ product }) => {
-  const [displayQuestions, setDisplayQuestions] = useState(false);
-  const [exhibitOrList, setExhibitOrList] = useState(false);
+  const router = useRouter();
+  const { openQuestions } = router.query;
+  const [displayQuestions, setDisplayQuestions] = useState(
+    openQuestions ? true : false
+  );
+  const [exhibitOrList, setExhibitOrList] = useState(
+    openQuestions ? false : true
+  );
+  const clearQuery = () => {
+    router.replace(
+      `/product/${product._id}/details`,
+      `/product/${product._id}/details`,
+      { shallow: true }
+    );
+  };
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (openQuestions) {
+      ref.current = setTimeout(() => {
+        clearQuery();
+      }, 100);
+    }
+    return () => {
+      clearTimeout(ref.current);
+    };
+  }, [openQuestions]);
   const changeDisplayQuestions = () => {
     setDisplayQuestions(!displayQuestions);
   };

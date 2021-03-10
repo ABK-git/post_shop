@@ -6,7 +6,7 @@ export const DisplayCategoriesContainer = styled.div`
 `;
 
 export const CategoryContainer = styled.p`
-  ${tw`text-2xl font-bold bg-yellow-600 mr-4 rounded-l 
+  ${tw`text-2xl font-bold bg-yellow-600 mr-4 rounded-l whitespace-no-wrap
   flex justify-center items-center cursor-pointer text-red-900
   hover:text-green-500 hover:bg-black hover:text-4xl`}
 `;
