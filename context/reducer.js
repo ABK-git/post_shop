@@ -18,6 +18,11 @@ const Reducer = (state, action) => {
         ...state,
         filterState: setFilterFromQuery(state.filterState, action.payload),
       };
+    case ContextTypes.SET_SORT_STATE:
+      return {
+        ...state,
+        sortState: action.payload,
+      };
     default:
       return state;
   }

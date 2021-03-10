@@ -35,7 +35,13 @@ const HomePage = () => {
   };
   const ref = useRef(null);
   const my_context = useContext(MyContext);
-  const { changeFilter, setFilterFromQuery, filterState } = my_context;
+  const {
+    changeFilter,
+    setFilterFromQuery,
+    setSortState,
+    filterState,
+    sortState,
+  } = my_context;
 
   useEffect(() => {
     if (queryCategory) {
@@ -104,11 +110,11 @@ const HomePage = () => {
   };
 
   //sort関連
-  const [selectOption, setSelectOption] = useState("出品日降順");
+  //const [selectOption, setSelectOption] = useState("出品日降順");
   const [selectDisplay, setSelectDisplay] = useState(false);
   const productsSort = (products) => {
     let newProducts = products;
-    switch (selectOption) {
+    switch (sortState) {
       case "商品名降順":
         newProducts = newProducts.sort((a, b) =>
           b.name.localeCompare(a.name, "ja", { sensitivity: "base" })
@@ -146,44 +152,14 @@ const HomePage = () => {
   const changeSelectDisplay = () => {
     setSelectDisplay(!selectDisplay);
   };
-  //optionsはこうしないと無限ループエラーが出るので注意
+
   const options = [
-    {
-      label: "商品名降順",
-      onClick: () => {
-        setSelectOption("商品名降順");
-      },
-    },
-    {
-      label: "商品名昇順",
-      onClick: () => {
-        setSelectOption("商品名昇順");
-      },
-    },
-    {
-      label: "値段降順",
-      onClick: () => {
-        setSelectOption("値段降順");
-      },
-    },
-    {
-      label: "値段昇順",
-      onClick: () => {
-        setSelectOption("値段昇順");
-      },
-    },
-    {
-      label: "出品日降順",
-      onClick: () => {
-        setSelectOption("出品日降順");
-      },
-    },
-    {
-      label: "出品日昇順",
-      onClick: () => {
-        setSelectOption("出品日昇順");
-      },
-    },
+    "商品名降順",
+    "商品名昇順",
+    "値段降順",
+    "値段昇順",
+    "出品日降順",
+    "出品日昇順",
   ];
 
   if (loading) {
@@ -236,7 +212,7 @@ const HomePage = () => {
           </SearchPriceDiv>
           <GroupContainer>
             <FormInputButton onClick={changeSelectDisplay}>
-              {selectOption}
+              {sortState}
             </FormInputButton>
           </GroupContainer>
           <MaxTable>
@@ -245,8 +221,8 @@ const HomePage = () => {
                 {selectDisplay &&
                   options.map((option, index) => (
                     <MaxTd key={index}>
-                      <OptionButton onClick={option.onClick}>
-                        {option.label}
+                      <OptionButton onClick={() => setSortState(option)}>
+                        {option}
                       </OptionButton>
                     </MaxTd>
                   ))}
