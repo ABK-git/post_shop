@@ -14,7 +14,7 @@ const SplitNewLine = ({ children }) => {
         if(line){
           return <p key={index}>{line}</p>
         }else{
-          return <br/>
+          return <br key={index}/>
         }
       })}
     </MtContainer>
