@@ -12,7 +12,7 @@ import {
   ReplyTextareaInput,
   RepliesLength,
 } from "./question-details.styles";
-import SplitNewLine from "../split-new-line/split-new.line.component";
+import SplitNewLine from "../split-new-line/split-new-line.component";
 import { useCreateReply } from "../../apollo/actions";
 import Spinner from "../spinner/spinner.component";
 
