@@ -12,6 +12,9 @@ import {
   ReplyTextareaInput,
   RepliesLength,
 } from "./question-details.styles";
+import SplitNewLine from "../split-new-line/split-new-line.component";
+import { useCreateReply } from "../../apollo/actions";
+import Spinner from "../spinner/spinner.component";
 
 const QuestionDetails = ({ question }) => {
   const router = useRouter();
@@ -30,14 +33,20 @@ const QuestionDetails = ({ question }) => {
   } else {
     new_content.push(question.content);
   }
-  const [reply, setReply] = useState("");
+
+  const [createReply, { loading }] = useCreateReply();
+  const [content, setContent] = useState("");
   const handleChange = (event) => {
-    setReply(event.target.value);
+    setContent(event.target.value);
   };
   const handleSubmit = () => {
-    console.log("handleSubmit");
-    console.log(reply);
+    const variables = { content, question: question._id };
+    createReply({ variables });
+    setContent("");
   };
+  if (loading) {
+    <Spinner />;
+  }
 
   return (
     <QuestionDetailsContainer>
@@ -59,21 +68,22 @@ const QuestionDetails = ({ question }) => {
       {question.replies &&
         question.replies.map((reply) => (
           <QuestionBody key={reply._id}>
-            <p>{reply.user.username}</p>
+            <QuestionUser>{reply.user.username}</QuestionUser>
             <p>{moment(parseInt(reply.createdAt)).fromNow()}</p>
+            <SplitNewLine>{reply.content}</SplitNewLine>
           </QuestionBody>
         ))}
-      <ReplyContainer onSubmit={handleSubmit}>
+      <ReplyContainer>
         <ReplyTextareaInput
           name="reply"
           placeholder="返信を追加"
           maxLength="1000"
           rows="3"
-          value={reply}
+          value={content}
           handleChange={handleChange}
         />
-        {reply && (
-          <CustomButton design="reply_to_question" type="submit">
+        {content && (
+          <CustomButton design="reply_to_question" onClick={handleSubmit}>
             公開
           </CustomButton>
         )}
