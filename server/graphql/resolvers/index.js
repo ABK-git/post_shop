@@ -54,6 +54,13 @@ exports.questionMutations = {
   },
 };
 
+//ReplyのQueries
+exports.replyQueries = {
+  reply: (root, { id }, ctx) => {
+    return ctx.models.Reply.getById(id);
+  },
+};
+
 //ReplyのMutation
 exports.replyMutations = {
   createReply: async (root, { input }, ctx) => {
