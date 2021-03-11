@@ -53,7 +53,7 @@ exports.questionTypes = `
     title: String,
     content: String,
     product: Product,
-    replyies: [Reply],
+    replies: [Reply],
     user: User,
     createdAt: String,
   }

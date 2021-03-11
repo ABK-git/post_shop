@@ -33,3 +33,7 @@ export const ReplyContainer = styled.form`
 export const ReplyTextareaInput = styled(TextareaInput)`
   ${tw`w-full border-2 border-gray-400 mt-3`}
 `;
+
+export const RepliesLength = styled.p`
+  ${tw`flex justify-center text-3xl text-gray-700`}
+`
