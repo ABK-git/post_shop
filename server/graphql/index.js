@@ -5,13 +5,14 @@ const {
   userTypes,
   productTypes,
   questionTypes,
-  replyTypes
+  replyTypes,
 } = require("./types");
 //GraphQL Model
-const Reply = require("./models/Reply");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Question = require("./models/Question");
+const Reply = require("./models/Reply");
+
 //GraphQL resolvers
 const {
   userMutations,

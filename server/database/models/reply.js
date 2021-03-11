@@ -8,4 +8,10 @@ const replySchema = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Reply", replySchema);
+let Reply;
+try {
+  mongoose.model("Reply");
+} catch (e) {
+  mongoose.model("Reply", replySchema);
+}
+module.exports = Reply;
