@@ -6,7 +6,7 @@ const questionSchema = new Schema({
   content: { type: String, required: true, maxLength: 1000 },
   product: { type: Schema.Types.ObjectId, ref: "Product" },
   user: { type: Schema.Types.ObjectId, ref: "User" },
-  replyies: [
+  replies: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Reply",

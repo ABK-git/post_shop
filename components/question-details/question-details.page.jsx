@@ -10,6 +10,7 @@ import {
   FlexDiv,
   ReplyContainer,
   ReplyTextareaInput,
+  RepliesLength,
 } from "./question-details.styles";
 
 const QuestionDetails = ({ question }) => {
@@ -51,9 +52,17 @@ const QuestionDetails = ({ question }) => {
           <QuestionUser>質問者:{question.user.username}</QuestionUser>・
           <p>{moment(parseInt(question.createdAt)).fromNow()}</p>
         </FlexDiv>
-        {new_content && new_content.map((content) => <p>{content}</p>)}
+        {new_content &&
+          new_content.map((content, index) => <p key={index}>{content}</p>)}
       </QuestionBody>
-
+      <RepliesLength>{question.replies.length}件の返信</RepliesLength>
+      {question.replies &&
+        question.replies.map((reply) => (
+          <QuestionBody key={reply._id}>
+            <p>{reply.user.username}</p>
+            <p>{moment(parseInt(reply.createdAt)).fromNow()}</p>
+          </QuestionBody>
+        ))}
       <ReplyContainer onSubmit={handleSubmit}>
         <ReplyTextareaInput
           name="reply"

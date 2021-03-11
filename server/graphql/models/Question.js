@@ -13,13 +13,16 @@ class Question {
   }
 
   getById(id) {
-    return this.Model.findById(id).populate("product").populate("user");
+    return this.Model.findById(id)
+      .populate("product")
+      .populate("user")
+      .populate("replies");
   }
 
   addReply(_id, reply) {
     return this.Model.findOneAndUpdate(
       { _id },
-      { $push: { replyies: [reply] } }
+      { $push: { replies: [reply] } }
     );
   }
 }
