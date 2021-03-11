@@ -8,7 +8,8 @@ import {
   GET_PRODUCTS,
   CREATE_PRODUCT,
   CREATE_QUESTION,
-  GET_QUESTION
+  GET_QUESTION,
+  CREATE_REPLY,
 } from "../queries";
 
 //User認証
@@ -58,5 +59,20 @@ export const useCreateQuestion = () =>
       delete createQuestion.product;
       product.questions.push(createQuestion);
       cache.writeQuery({ query: GET_PRODUCT, data: { product } });
+    },
+  });
+
+//Reply
+export const useCreateReply = () =>
+  useMutation(CREATE_REPLY, {
+    update(cache, { data: { createReply } }) {
+      const { question: id } = createReply;
+      const { question } = cache.readQuery({
+        query: GET_QUESTION,
+        variables: { id },
+      });
+      delete createReply.question;
+      question.replies.push(createReply);
+      cache.writeQuery({ query: GET_QUESTION, data: { question } });
     },
   });
