@@ -24,9 +24,7 @@ const ProductDetails = ({ product }) => {
   const [displayQuestions, setDisplayQuestions] = useState(
     openQuestions ? true : false
   );
-  const [exhibitOrList, setExhibitOrList] = useState(
-    openQuestions ? false : openQuestions === undefined ? false : true
-  );
+  const [exhibitOrList, setExhibitOrList] = useState(false);
   const clearQuery = () => {
     router.replace(
       `/product/${product._id}/details`,
@@ -64,16 +62,18 @@ const ProductDetails = ({ product }) => {
   };
   const validationSchema = Yup.object({
     title: Yup.string()
-      .required("titleを入力してください")
+      .required("質問のtitleを入力してください")
       .max(255, "titleは255文字以内で入力してください"),
     content: Yup.string()
-      .required("contentを入力してください")
+      .required("質問の内容を入力してください")
       .max(1000, "質問内容は1000文字以内で入力してください"),
   });
   const onSubmit = (values) => {
     values.product = product._id;
     createQuestion({ variables: values });
     setExhibitOrList(!exhibitOrList);
+    values.content = "";
+    values.title = "";
   };
   const formik = useFormik({
     initialValues,

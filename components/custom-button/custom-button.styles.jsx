@@ -25,6 +25,10 @@ const exhibitQuestion = css`
   ${tw`bg-red-600 hover:opacity-75 border-3 border-blue-700 w-full mt-2`}
 `;
 
+const replyQuestion = css`
+  ${tw`bg-red-600 hover:opacity-75 border-3 border-blue-700 w-full mt-0`}
+`;
+
 const getButtonStyles = ({ design }) => {
   switch (design) {
     case "open_questions":
@@ -41,6 +45,9 @@ const getButtonStyles = ({ design }) => {
 
     case "to_list_and_margin-left":
       return toListAndMarginLeft;
+
+    case "reply_to_question":
+      return replyQuestion;
 
     default:
       return "";
