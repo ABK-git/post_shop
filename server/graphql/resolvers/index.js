@@ -53,3 +53,13 @@ exports.questionMutations = {
     return createdQuestion;
   },
 };
+
+//ReplyのMutation
+exports.replyMutations = {
+  createReply: async (root, { input }, ctx) => {
+    const { question } = input;
+    const createdReply = await ctx.models.Reply.create(input);
+    await ctx.models.Question.addReply(question, createdReply);
+    return createdReply;
+  },
+};

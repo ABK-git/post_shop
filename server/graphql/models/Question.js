@@ -15,6 +15,13 @@ class Question {
   getById(id) {
     return this.Model.findById(id).populate("product").populate("user");
   }
+
+  addReply(_id, reply) {
+    return this.Model.findOneAndUpdate(
+      { _id },
+      { $push: { replyies: [reply] } }
+    );
+  }
 }
 
 module.exports = Question;
