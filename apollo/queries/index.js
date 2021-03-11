@@ -95,6 +95,15 @@ export const GET_PRODUCT = gql`
           _id
           username
         }
+        replies {
+          _id
+          content
+          createdAt
+          user {
+            _id
+            username
+          }
+        }
       }
       introduce
       imagePasses
@@ -159,6 +168,15 @@ export const CREATE_PRODUCT = gql`
           _id
           username
         }
+        replies {
+          _id
+          content
+          createdAt
+          user {
+            _id
+            username
+          }
+        }
       }
       introduce
       imagePasses
@@ -204,6 +222,15 @@ export const GET_QUESTION = gql`
       user {
         _id
         username
+      }
+      replies {
+        _id
+        content
+        createdAt
+        user {
+          _id
+          username
+        }
       }
     }
   }
