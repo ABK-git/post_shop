@@ -10,7 +10,13 @@ const SplitNewLine = ({ children }) => {
   }
   return (
     <MtContainer>
-      {lines.length && lines.map((line, index) => <p key={index}>{line}</p>)}
+      {lines.length && lines.map((line, index) => {
+        if(line){
+          return <p key={index}>{line}</p>
+        }else{
+          return <br/>
+        }
+      })}
     </MtContainer>
   );
 };

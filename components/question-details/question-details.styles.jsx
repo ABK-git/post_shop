@@ -26,7 +26,7 @@ export const FlexDiv = styled.div`
   ${tw`flex mb-3`}
 `;
 
-export const ReplyContainer = styled.form`
+export const ReplyContainer = styled.div`
   ${tw`w-4/5 mx-auto`};
 `;
 
