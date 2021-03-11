@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 const { ApolloServer, gql } = require("apollo-server-express");
-
 //GraphQL types
-const { userTypes, productTypes, questionTypes } = require("./types");
+const {
+  userTypes,
+  productTypes,
+  questionTypes,
+  replyTypes
+} = require("./types");
 //GraphQL Model
+const Reply = require("./models/Reply");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Question = require("./models/Question");
@@ -15,6 +20,7 @@ const {
   productQueries,
   questionMutations,
   questionQueries,
+  replyMutations,
 } = require("./resolvers");
 //context
 const { buildAuthContext } = require("./context");
@@ -25,6 +31,7 @@ exports.createApolloServer = () => {
     ${userTypes}
     ${productTypes}
     ${questionTypes}
+    ${replyTypes}
 
     type Query {
       user: User
@@ -33,6 +40,7 @@ exports.createApolloServer = () => {
       products: [Product]
 
       question(id: ID): Question
+      reply(id: ID): Reply
     }
 
     type Mutation {
@@ -42,6 +50,7 @@ exports.createApolloServer = () => {
 
       createProduct(input: ProductCreateInput): Product
       createQuestion(input: QuestionCreateInput): Question
+      createReply(input: ReplyCreateInput): Reply
     }
   `;
   //resolver
@@ -55,6 +64,7 @@ exports.createApolloServer = () => {
       ...userMutations,
       ...productMutations,
       ...questionMutations,
+      ...replyMutations,
     },
   };
 
@@ -68,6 +78,7 @@ exports.createApolloServer = () => {
         User: new User(mongoose.model("User")),
         Product: new Product(mongoose.model("Product"), req.user),
         Question: new Question(mongoose.model("Question"), req.user),
+        Reply: new Reply(mongoose.model("Reply"), req.user),
       },
     }),
   });

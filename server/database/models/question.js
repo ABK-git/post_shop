@@ -6,6 +6,12 @@ const questionSchema = new Schema({
   content: { type: String, required: true, maxLength: 1000 },
   product: { type: Schema.Types.ObjectId, ref: "Product" },
   user: { type: Schema.Types.ObjectId, ref: "User" },
+  replyies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reply",
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 });
 

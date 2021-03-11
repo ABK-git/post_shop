@@ -53,6 +53,7 @@ exports.questionTypes = `
     title: String,
     content: String,
     product: Product,
+    replyies: [Reply],
     user: User,
     createdAt: String,
   }
@@ -61,5 +62,20 @@ exports.questionTypes = `
     title: String,
     content: String,
     product: ID
+  }
+`;
+
+exports.replyTypes = `
+  type Reply {
+    _id: ID,
+    content: String,
+    user: User,
+    question: ID,
+    createdAt: String,
+  }
+
+  input ReplyCreateInput{
+    content: String!,
+    question: ID!,
   }
 `;
