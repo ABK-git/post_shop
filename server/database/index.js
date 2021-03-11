@@ -7,6 +7,7 @@ const config = require("../config/dev");
 require("./models/user");
 require("./models/product");
 require("./models/question");
+require("./models/reply");
 
 exports.connect = () => {
   mongoose.connect(
