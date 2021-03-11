@@ -235,3 +235,18 @@ export const GET_QUESTION = gql`
     }
   }
 `;
+
+export const CREATE_REPLY = gql`
+  mutation CreateReply($content: String!, $question: ID!) {
+    createReply(input: { content: $content, question: $question }) {
+      _id
+      content
+      createdAt
+      user {
+        _id
+        username
+      }
+      question
+    }
+  }
+`;
