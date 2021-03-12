@@ -14,9 +14,9 @@ class Question {
 
   getById(id) {
     return this.Model.findById(id)
-      .populate("product")
       .populate("user")
-      .populate("replies");
+      .populate("product")
+      .populate({ path: "replies", populate: "user" });
   }
 
   addReply(_id, reply) {
