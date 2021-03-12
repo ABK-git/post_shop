@@ -110,7 +110,6 @@ const HomePage = () => {
   };
 
   //sort関連
-  //const [selectOption, setSelectOption] = useState("出品日降順");
   const [selectDisplay, setSelectDisplay] = useState(false);
   const productsSort = (products) => {
     let newProducts = products;

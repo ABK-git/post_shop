@@ -6,7 +6,9 @@ class Product {
 
   getById(id) {
     try {
-      return this.Model.findById(id).populate("user").populate("questions");
+      return this.Model.findById(id)
+        .populate("user")
+        .populate({ path: "questions" , populate: "replies" });
     } catch (e) {
       throw new Error("商品が存在しません。");
     }
