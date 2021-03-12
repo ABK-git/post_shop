@@ -10,8 +10,8 @@ const replySchema = new Schema({
 
 let Reply;
 try {
-  mongoose.model("Reply");
+  Reply = mongoose.model("Reply");
 } catch (e) {
-  mongoose.model("Reply", replySchema);
+  Reply = mongoose.model("Reply", replySchema);
 }
 module.exports = Reply;
