@@ -4,6 +4,9 @@ import {
   QuestionContainer,
   TitleContainer,
   ExhibitUserContainer,
+  UserAndRepliesLength,
+  RepliesLength,
+  TextLeft,
 } from "./question-preview.styles";
 
 import Link from "next/link";
@@ -12,9 +15,18 @@ const QuestionPreview = ({ question, product_id }) => (
   <Link href={`/product/${product_id}/question/${question._id}`}>
     <QuestionContainer>
       <TitleContainer>{question.title}</TitleContainer>
-      <ExhibitUserContainer>
-        投稿者: {question.user.username}
-      </ExhibitUserContainer>
+      <UserAndRepliesLength>
+        <TextLeft>
+          <ExhibitUserContainer>
+            投稿者: {question.user.username}
+          </ExhibitUserContainer>
+          {question.replies !== undefined ? (
+            <RepliesLength>返信数: {question.replies.length}</RepliesLength>
+          ) : (
+            <RepliesLength>返信数: 0</RepliesLength>
+          )}
+        </TextLeft>
+      </UserAndRepliesLength>
       <h1>{moment(parseInt(question.createdAt)).fromNow()}</h1>
     </QuestionContainer>
   </Link>
