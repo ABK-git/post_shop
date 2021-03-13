@@ -8,6 +8,7 @@ import {
   InName,
   InContent,
   ExhibitDaysAndUserContainer,
+  IntroduceContainer,
 } from "./product-content.styles";
 
 import DisplayProductImages from "../display-product-images/product-images.component";
@@ -30,9 +31,9 @@ const ProductContent = ({ product }) => (
         <InContent>{product.quantity}</InContent>
       </SetNameAndContent>
       <SetNameAndContent>
-        <InName>説明:</InName>
-        <InContent>{product.introduce}</InContent>
+        <InName>説明</InName>
       </SetNameAndContent>
+      <IntroduceContainer>{product.introduce}</IntroduceContainer>
       <ExhibitDaysAndUserContainer>
         <div>
           <SetNameAndContent>

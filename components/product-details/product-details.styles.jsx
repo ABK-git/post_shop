@@ -17,7 +17,7 @@ export const CategoriesLeftJustify = styled.div`
 `;
 
 export const DisplayList = styled.div`
-  ${tw`w-4/5 mt-10 text-center`}
+  ${tw`w-4/5 mt-5 text-center`}
 `;
 
 export const DisplayMessage = styled.p`
