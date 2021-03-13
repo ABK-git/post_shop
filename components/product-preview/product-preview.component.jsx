@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ProductCell, ProductIntroduce } from "./product-preview.styles";
+import { Overhidden, ProductCell, ProductIntroduce } from "./product-preview.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
 import { useRouter } from "next/router";
 
@@ -14,14 +14,14 @@ const ProductPreview = ({ product }) => {
   }
 
   return (
-    <ProductCell key={product._id}>
+    <ProductCell>
       <DisplayProductImages
         images={images}
         handleClickToProductDetails={handleClickToProductDetails}
       />
       <ProductIntroduce onClick={handleClickToProductDetails}>
-        <h1>{product.name}</h1>
-        <p>{product.price}</p>
+        <Overhidden>{product.name}</Overhidden>
+        <Overhidden>{product.price}</Overhidden>
       </ProductIntroduce>
     </ProductCell>
   );

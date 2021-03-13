@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         bigelow: ["Bigelow Rules", "cursive"],
       },
+      width: {
+        '98/100': '98%'
+      }
     },
   },
   variants: {
