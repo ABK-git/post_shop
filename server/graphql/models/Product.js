@@ -8,6 +8,7 @@ class Product {
     try {
       return this.Model.findById(id)
         .populate("user")
+        .populate("reviews")
         .populate({ path: "questions", populate: "replies" });
     } catch (e) {
       throw new Error("商品が存在しません。");
@@ -15,7 +16,10 @@ class Product {
   }
 
   getAll() {
-    return this.Model.find({}).populate("user").populate("questions");
+    return this.Model.find({})
+      .populate("user")
+      .populate("questions")
+      .populate("reviews");
   }
 
   create(data, ctx) {
