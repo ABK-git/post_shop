@@ -16,7 +16,7 @@ const ReviewForm = ({ formik, onChange }) => {
   return (
     <ExhibitReviewForm>
       <ExhibitReviewFormLabel>タイトルまたは概要</ExhibitReviewFormLabel>
-      <form onSubmit={formik.onSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <ExhibitTitleContainer
           type="text"
           name="title"
@@ -36,37 +36,10 @@ const ReviewForm = ({ formik, onChange }) => {
         />
         <ReactStarsContainer
           onChange={onChange}
-          value={formik.values.value}
+          value={formik.values.stars}
           size={smBreakPoint ? 40 : 25}
+          isHalf={false}
         />
-        <CustomButton design="exhibit_question" type="submit">
-          公開
-        </CustomButton>
-      </form>
-    </ExhibitReviewForm>
-  );
-  return (
-    <ExhibitReviewForm>
-      <ExhibitReviewFormLabel>タイトルまたは概要</ExhibitReviewFormLabel>
-      <form onSubmit={formik.onSubmit}>
-        <ExhibitTitleContainer
-          type="text"
-          name="title"
-          value={formik.values.title}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.title}
-          required
-        />
-        <ExhibitReviewFormLabel>レビュー内容</ExhibitReviewFormLabel>
-        <ExhibitContentContainer
-          name="content"
-          maxLength="1000"
-          rows="8"
-          value={formik.values.content}
-          handleChange={formik.handleChange}
-          errorMessage={formik.errors.content}
-        />
-        <ReactStarsContainer onChange={onChange} value={formik.values.value} />
         <CustomButton design="exhibit_question" type="submit">
           公開
         </CustomButton>
