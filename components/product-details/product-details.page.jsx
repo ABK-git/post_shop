@@ -3,10 +3,10 @@ import {
   ProductDetailsContainer,
   CategoriesLeftJustify,
   OpenButtons,
-  DisplayQuestions,
-  DisplayQuestionsMessage,
-  ToExhibitQuestion,
+  DisplayMessage,
+  ToExhibit,
   LeftContainer,
+  DisplayList,
 } from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -17,6 +17,7 @@ import ProductContent from "../display-product-content/product-content.component
 import { useCreateQuestion } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import { useRouter } from "next/router";
+import ReviewForm from "../review-form/review-form.component";
 
 const ProductDetails = ({ product }) => {
   const router = useRouter();
@@ -24,7 +25,9 @@ const ProductDetails = ({ product }) => {
   const [displayQuestions, setDisplayQuestions] = useState(
     openQuestions ? true : false
   );
-  const [exhibitOrList, setExhibitOrList] = useState(false);
+  const [switchQuestion, setSwitchQuestion] = useState(false);
+  const [displayReviews, setDiplayReviews] = useState(false);
+  const [switchReview, setSwitchReview] = useState(false);
   const clearQuery = () => {
     router.replace(
       `/product/${product._id}/details`,
@@ -44,17 +47,26 @@ const ProductDetails = ({ product }) => {
       clearTimeout(ref.current);
     };
   }, [openQuestions]);
+
   const changeDisplayQuestions = () => {
+    setDiplayReviews(false);
     setDisplayQuestions(!displayQuestions);
   };
-  const changeExhibitOrList = () => {
-    setExhibitOrList(!exhibitOrList);
+  const changeDisplayReviews = () => {
+    setDisplayQuestions(false);
+    setDiplayReviews(!displayReviews);
+  };
+  const changeSwitchQuestion = () => {
+    setSwitchQuestion(!switchQuestion);
+  };
+  const chageSwitchReview = () => {
+    setSwitchReview(!switchReview);
   };
 
   const [createQuestion] = useCreateQuestion();
 
   /**
-   * formik
+   * formik(Question)
    */
   const initialValues = {
     title: "",
@@ -62,8 +74,8 @@ const ProductDetails = ({ product }) => {
   };
   const validationSchema = Yup.object({
     title: Yup.string()
-      .required("質問のtitleを入力してください")
-      .max(255, "titleは255文字以内で入力してください"),
+      .required("質問のタイトルを入力してください")
+      .max(255, "タイトルは255文字以内で入力してください"),
     content: Yup.string()
       .required("質問の内容を入力してください")
       .max(1000, "質問内容は1000文字以内で入力してください"),
@@ -71,7 +83,7 @@ const ProductDetails = ({ product }) => {
   const onSubmit = (values) => {
     values.product = product._id;
     createQuestion({ variables: values });
-    setExhibitOrList(!exhibitOrList);
+    setSwitchQuestion(!switchQuestion);
     values.content = "";
     values.title = "";
   };
@@ -80,6 +92,32 @@ const ProductDetails = ({ product }) => {
     validationSchema,
     onSubmit,
   });
+
+  /**
+   * formik(Review)
+   */
+  const initialReviewValues = {
+    title: "",
+    content: "",
+    value: 0,
+  };
+  const validationReviewSchema = Yup.object({
+    title: Yup.string()
+      .required("レビューのタイトルを入力してください")
+      .max(255, "タイトルは255文字以内で入力してください"),
+    content: Yup.string()
+      .required("レビューの内容を入力してください")
+      .max(1000, "レビュー内容は1000文字以内で入力してください"),
+  });
+  const onSubmitReview = (values) => {
+    console.log(values);
+  };
+  const formikReview = useFormik({
+    initialValues: initialReviewValues,
+    validationSchema: validationReviewSchema,
+    onSubmit: onSubmitReview,
+  });
+
   return (
     <ProductDetailsContainer>
       <CategoriesLeftJustify>
@@ -90,39 +128,62 @@ const ProductDetails = ({ product }) => {
         <CustomButton design="open_questions" onClick={changeDisplayQuestions}>
           Questions
         </CustomButton>
-        <CustomButton design="open_reviews">Reviews</CustomButton>
+        <CustomButton design="open_reviews" onClick={changeDisplayReviews}>
+          Reviews
+        </CustomButton>
       </OpenButtons>
-      <DisplayQuestions>
-        {displayQuestions && (
-          <div>
-            {exhibitOrList && <QuestionForm formik={formik} />}
-            {exhibitOrList ? (
-              <LeftContainer>
-                <CustomButton design="to_list" onClick={changeExhibitOrList}>
-                  質問一覧へ戻る
-                </CustomButton>
-              </LeftContainer>
-            ) : (
-              <div>
-                <DisplayQuestionsMessage>
-                  この商品に対する質問一覧
-                </DisplayQuestionsMessage>
-                {product.questions &&
-                  product.questions.map((question) => (
-                    <QuestionPreview
-                      question={question}
-                      product_id={product._id}
-                      key={question._id}
-                    />
-                  ))}
-                <ToExhibitQuestion onClick={changeExhibitOrList}>
-                  質問をする
-                </ToExhibitQuestion>
-              </div>
-            )}
-          </div>
-        )}
-      </DisplayQuestions>
+
+      {displayQuestions && (
+        <DisplayList>
+          {switchQuestion && <QuestionForm formik={formik} />}
+          {switchQuestion ? (
+            <LeftContainer>
+              <CustomButton design="to_list" onClick={changeSwitchQuestion}>
+                質問一覧へ戻る
+              </CustomButton>
+            </LeftContainer>
+          ) : (
+            <div>
+              <DisplayMessage>この商品に対する質問一覧</DisplayMessage>
+              {product.questions &&
+                product.questions.map((question) => (
+                  <QuestionPreview
+                    question={question}
+                    product_id={product._id}
+                    key={question._id}
+                  />
+                ))}
+              <ToExhibit onClick={changeSwitchQuestion}>質問をする</ToExhibit>
+            </div>
+          )}
+        </DisplayList>
+      )}
+
+      {displayReviews && (
+        <DisplayList>
+          {switchReview && <ReviewForm formik={formikReview}>form</ReviewForm>}
+          {switchReview ? (
+            <LeftContainer>
+              <CustomButton design="to_list" onClick={chageSwitchReview}>
+                レビュー一覧へ戻る
+              </CustomButton>
+            </LeftContainer>
+          ) : (
+            <div>
+              <DisplayMessage>この商品に対するレビュー一覧</DisplayMessage>
+              {product.reviews &&
+                product.reviews.map((question) => (
+                  <QuestionPreview
+                    question={question}
+                    product_id={product._id}
+                    key={question._id}
+                  />
+                ))}
+              <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
+            </div>
+          )}
+        </DisplayList>
+      )}
     </ProductDetailsContainer>
   );
 };

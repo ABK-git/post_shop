@@ -205,6 +205,15 @@ export const CREATE_QUESTION = gql`
       product {
         _id
       }
+      replies {
+        _id
+        content
+        createdAt
+        user {
+          _id
+          username
+        }
+      }
     }
   }
 `;
