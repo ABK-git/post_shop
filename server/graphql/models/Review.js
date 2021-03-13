@@ -5,12 +5,16 @@ class Review {
   }
 
   create(data) {
-    if(!this.user){
+    if (!this.user) {
       throw new Error("ログインしてください");
     }
     data.user = this.user;
     return this.Model.create(data);
   }
+
+  getById(id) {
+    return this.Model.findById(id);
+  }
 }
 
-module.exports = Review;  
+module.exports = Review;

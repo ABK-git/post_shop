@@ -57,7 +57,7 @@ const HomePage = () => {
 
   const { data, loading } = getProducts();
   const products = (data && data.products) || [];
-
+  
   const handleClick = () => {
     setDisplaySearchCondition(!displaySearchCondition);
   };

@@ -86,6 +86,17 @@ export const GET_PRODUCT = gql`
       categories @client
       price
       quantity
+      reviews {
+        _id
+        title
+        content
+        stars
+        createdAt
+        user {
+          _id
+          username
+        }
+      }
       questions {
         _id
         title
@@ -124,6 +135,17 @@ export const GET_PRODUCTS = gql`
       category
       price
       quantity
+      reviews {
+        _id
+        title
+        content
+        stars
+        createdAt
+        user {
+          _id
+          username
+        }
+      }
       imagePasses
       introduce
       createdAt
@@ -159,6 +181,17 @@ export const CREATE_PRODUCT = gql`
       category
       price
       quantity
+      reviews {
+        _id
+        title
+        content
+        stars
+        createdAt
+        user {
+          _id
+          username
+        }
+      }
       questions {
         _id
         title
@@ -256,6 +289,37 @@ export const CREATE_REPLY = gql`
         username
       }
       question
+    }
+  }
+`;
+
+export const CREATE_REVIEW = gql`
+  mutation CreateReview(
+    $title: String!
+    $content: String!
+    $stars: Int!
+    $product: ID!
+  ) {
+    createReview(
+      input: {
+        title: $title
+        content: $content
+        stars: $stars
+        product: $product
+      }
+    ) {
+      _id
+      title
+      content
+      stars
+      createdAt
+      user {
+        _id
+        username
+      }
+      product{
+        _id
+      }
     }
   }
 `;
