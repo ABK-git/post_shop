@@ -35,7 +35,7 @@ export const InContent = styled.p`
 `;
 
 export const IntroduceContainer = styled.div`
-  ${tw`w-full text-lg whitespace-pre-line border-2 border-purple-800 p-2 mx-auto`}
+  ${tw`w-98/100 text-lg whitespace-pre-line border-2 border-purple-800 p-1 mx-auto`}
 `;
 
 export const ExhibitDaysAndUserContainer = styled.div`

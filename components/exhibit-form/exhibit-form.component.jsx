@@ -34,7 +34,7 @@ const ExhibitForm = ({ formik }) => (
       name="price"
       label="price"
       step="100"
-      min="100"
+      min="0"
       placeholder="値段"
       value={formik.values.price}
       handleChange={formik.handleChange}

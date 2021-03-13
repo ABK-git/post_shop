@@ -6,6 +6,9 @@ export const ProductCell = styled.td`
 `;
 
 export const ProductIntroduce = styled.div`
-  ${tw`w-full h-full cursor-pointer`}
+  ${tw`h-full w-56 cursor-pointer `}
 `;
 
+export const Overhidden = styled.p`
+  ${tw`overflow-x-hidden`}
+`;

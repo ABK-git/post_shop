@@ -241,7 +241,6 @@ const HomePage = () => {
               <ProductPreview
                 key={product._id}
                 product={product}
-                selectDisplay={selectDisplay}
               />
             ))}
           </tr>
