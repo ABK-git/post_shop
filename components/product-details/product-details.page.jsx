@@ -14,7 +14,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import QuestionForm from "../question-form/question-form.component";
 import ProductContent from "../display-product-content/product-content.component";
-import { useCreateQuestion } from "../../apollo/actions";
+import { useCreateQuestion, useCreateReview } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import { useRouter } from "next/router";
 import ReviewForm from "../review-form/review-form.component";
@@ -64,6 +64,7 @@ const ProductDetails = ({ product }) => {
   };
 
   const [createQuestion] = useCreateQuestion();
+  const [createReview] = useCreateReview();
 
   /**
    * formik(Question)
@@ -71,6 +72,7 @@ const ProductDetails = ({ product }) => {
   const initialValues = {
     title: "",
     content: "",
+    product: product._id
   };
   const validationSchema = Yup.object({
     title: Yup.string()
@@ -81,7 +83,6 @@ const ProductDetails = ({ product }) => {
       .max(1000, "質問内容は1000文字以内で入力してください"),
   });
   const onSubmit = (values) => {
-    values.product = product._id;
     createQuestion({ variables: values });
     setSwitchQuestion(!switchQuestion);
     values.content = "";
@@ -99,7 +100,8 @@ const ProductDetails = ({ product }) => {
   const initialReviewValues = {
     title: "",
     content: "",
-    value: 0,
+    stars: 0,
+    product: product._id
   };
   const validationReviewSchema = Yup.object({
     title: Yup.string()
@@ -110,7 +112,11 @@ const ProductDetails = ({ product }) => {
       .max(1000, "レビュー内容は1000文字以内で入力してください"),
   });
   const onSubmitReview = (values) => {
-    console.log(values);
+    createReview({ variables: values });
+    setSwitchReview(!switchReview)
+    values.content = "";
+    values.title = "";
+    values.stars = 0
   };
   const formikReview = useFormik({
     initialValues: initialReviewValues,
@@ -118,7 +124,7 @@ const ProductDetails = ({ product }) => {
     onSubmit: onSubmitReview,
   });
   const onChangeStars = (value) => {
-    formikReview.setFieldValue("value", value);
+    formikReview.setFieldValue("stars", value);
   };
 
   return (
@@ -178,12 +184,8 @@ const ProductDetails = ({ product }) => {
             <div>
               <DisplayMessage>この商品に対するレビュー一覧</DisplayMessage>
               {product.reviews &&
-                product.reviews.map((question) => (
-                  <QuestionPreview
-                    question={question}
-                    product_id={product._id}
-                    key={question._id}
-                  />
+                product.reviews.map((review) => (
+                  <p>{review.content}</p>
                 ))}
               <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
             </div>

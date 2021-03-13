@@ -10,6 +10,7 @@ import {
   CREATE_QUESTION,
   GET_QUESTION,
   CREATE_REPLY,
+  CREATE_REVIEW,
 } from "../queries";
 
 //User認証
@@ -74,5 +75,20 @@ export const useCreateReply = () =>
       delete createReply.question;
       question.replies.push(createReply);
       cache.writeQuery({ query: GET_QUESTION, data: { question } });
+    },
+  });
+
+//Review
+export const useCreateReview = () =>
+  useMutation(CREATE_REVIEW, {
+    update(cache, { data: { createReview } }) {
+      const { _id: id } = createReview.product;
+      const { product } = cache.readQuery({
+        query: GET_PRODUCT,
+        variables: { id },
+      });
+      delete createReview.product;
+      product.reviews.push(createReview);
+      cache.writeQuery({ query: GET_PRODUCT, data: { product } });
     },
   });
