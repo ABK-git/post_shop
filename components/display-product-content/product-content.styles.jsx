@@ -34,6 +34,9 @@ export const InContent = styled.p`
   ${tw`text-lg ml-1 whitespace-pre-line`}
 `;
 
+export const IntroduceContainer = styled.div`
+  ${tw`w-full text-lg whitespace-pre-line border-2 border-purple-800 p-2 mx-auto`}
+`;
 
 export const ExhibitDaysAndUserContainer = styled.div`
   ${tw`flex justify-end`}

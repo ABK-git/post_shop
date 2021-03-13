@@ -117,6 +117,9 @@ const ProductDetails = ({ product }) => {
     validationSchema: validationReviewSchema,
     onSubmit: onSubmitReview,
   });
+  const onChangeStars = (value) => {
+    formikReview.setFieldValue("value", value);
+  };
 
   return (
     <ProductDetailsContainer>
@@ -132,7 +135,6 @@ const ProductDetails = ({ product }) => {
           Reviews
         </CustomButton>
       </OpenButtons>
-
       {displayQuestions && (
         <DisplayList>
           {switchQuestion && <QuestionForm formik={formik} />}
@@ -161,7 +163,11 @@ const ProductDetails = ({ product }) => {
 
       {displayReviews && (
         <DisplayList>
-          {switchReview && <ReviewForm formik={formikReview}>form</ReviewForm>}
+          {switchReview && (
+            <ReviewForm formik={formikReview} onChange={onChangeStars}>
+              form
+            </ReviewForm>
+          )}
           {switchReview ? (
             <LeftContainer>
               <CustomButton design="to_list" onClick={chageSwitchReview}>
