@@ -70,3 +70,13 @@ exports.replyMutations = {
     return createdReply;
   },
 };
+
+// ReviewのMutation
+exports.reviewMutations = {
+  createReview: async (root, { input }, ctx) => {
+    const { product } = input;
+    const createdReview = await ctx.models.Review.create(input);
+    await ctx.models.Product.addReview(product, createdReview);
+    return createdReview;
+  },
+};

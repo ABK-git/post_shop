@@ -12,6 +12,12 @@ const productSchema = new Schema({
       ref: "Question",
     },
   ],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
   introduce: { type: String, required: true, minLength: 10, maxLength: 1000 },
   imagePasses: [{ type: String }],
   user: { type: Schema.Types.ObjectId, ref: "User" },

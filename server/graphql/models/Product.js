@@ -8,14 +8,18 @@ class Product {
     try {
       return this.Model.findById(id)
         .populate("user")
-        .populate({ path: "questions" , populate: "replies" });
+        .populate("reviews")
+        .populate({ path: "questions", populate: "replies" });
     } catch (e) {
       throw new Error("商品が存在しません。");
     }
   }
 
   getAll() {
-    return this.Model.find({}).populate("user").populate("questions");
+    return this.Model.find({})
+      .populate("user")
+      .populate("questions")
+      .populate("reviews");
   }
 
   create(data, ctx) {
@@ -28,6 +32,13 @@ class Product {
     await this.Model.findOneAndUpdate(
       { _id },
       { $push: { questions: [question] } }
+    );
+  }
+
+  async addReview(_id, review) {
+    return this.Model.findOneAndUpdate(
+      { _id },
+      { $push: { reviews: [review] } }
     );
   }
 }
