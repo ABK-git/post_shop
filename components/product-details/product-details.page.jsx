@@ -72,7 +72,7 @@ const ProductDetails = ({ product }) => {
   const initialValues = {
     title: "",
     content: "",
-    product: product._id
+    product: product._id,
   };
   const validationSchema = Yup.object({
     title: Yup.string()
@@ -101,7 +101,7 @@ const ProductDetails = ({ product }) => {
     title: "",
     content: "",
     stars: 0,
-    product: product._id
+    product: product._id,
   };
   const validationReviewSchema = Yup.object({
     title: Yup.string()
@@ -113,10 +113,10 @@ const ProductDetails = ({ product }) => {
   });
   const onSubmitReview = (values) => {
     createReview({ variables: values });
-    setSwitchReview(!switchReview)
+    setSwitchReview(!switchReview);
     values.content = "";
     values.title = "";
-    values.stars = 0
+    values.stars = 0;
   };
   const formikReview = useFormik({
     initialValues: initialReviewValues,
@@ -152,7 +152,9 @@ const ProductDetails = ({ product }) => {
             </LeftContainer>
           ) : (
             <div>
-              <DisplayMessage>この商品に対する質問一覧</DisplayMessage>
+              <DisplayMessage>
+                この商品に対する質問一覧 ({product.questions.length})
+              </DisplayMessage>
               {product.questions &&
                 product.questions.map((question) => (
                   <QuestionPreview
@@ -182,11 +184,11 @@ const ProductDetails = ({ product }) => {
             </LeftContainer>
           ) : (
             <div>
-              <DisplayMessage>この商品に対するレビュー一覧</DisplayMessage>
+              <DisplayMessage>
+                この商品に対するレビュー一覧 ({product.reviews.length})
+              </DisplayMessage>
               {product.reviews &&
-                product.reviews.map((review) => (
-                  <p>{review.content}</p>
-                ))}
+                product.reviews.map((review) => <p>{review.content} Star: {review.stars}</p>)}
               <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
             </div>
           )}
