@@ -20,11 +20,7 @@ const QuestionPreview = ({ question, product_id }) => (
           <ExhibitUserContainer>
             投稿者: {question.user.username}
           </ExhibitUserContainer>
-          {question.replies !== undefined ? (
-            <RepliesLength>返信数: {question.replies.length}</RepliesLength>
-          ) : (
-            <RepliesLength>返信数: 0</RepliesLength>
-          )}
+          <RepliesLength>返信数:{question.replies.length}</RepliesLength>
         </TextLeft>
       </UserAndRepliesLength>
       <h1>{moment(parseInt(question.createdAt)).fromNow()}</h1>

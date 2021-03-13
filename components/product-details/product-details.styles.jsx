@@ -16,15 +16,15 @@ export const CategoriesLeftJustify = styled.div`
   ${tw`w-full text-left`}
 `;
 
-export const DisplayQuestions = styled.div`
+export const DisplayList = styled.div`
   ${tw`w-4/5 mt-10 text-center`}
 `;
 
-export const DisplayQuestionsMessage = styled.p`
+export const DisplayMessage = styled.p`
   ${tw`font-bold text-2xl sm:text-4xl`}
 `;
 
-export const ToExhibitQuestion = styled.p`
+export const ToExhibit = styled.p`
   ${tw`text-green-900 font-semibold whitespace-no-wrap text-xl sm:text-3xl
   hover:text-gray-600 cursor-pointer text-left w-0`}
 `;
