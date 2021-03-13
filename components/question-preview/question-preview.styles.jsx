@@ -10,5 +10,17 @@ export const TitleContainer = styled.p`
 `;
 
 export const ExhibitUserContainer = styled.p`
-  ${tw`flex justify-end text-gray-600`}
+  ${tw`text-gray-600`}
+`;
+
+export const RepliesLength = styled.p`
+  ${tw`text-gray-600`}
+`;
+
+export const UserAndRepliesLength = styled.div`
+  ${tw`flex justify-end`}
+`;
+
+export const TextLeft = styled.div`
+  ${tw`text-left`}
 `;

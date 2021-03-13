@@ -26,14 +26,6 @@ const QuestionDetails = ({ question }) => {
     });
   };
 
-  let new_content = [];
-  //question.contentを改行で分割
-  if (question.content.includes("\n")) {
-    new_content = question.content.split("\n");
-  } else {
-    new_content.push(question.content);
-  }
-
   const [createReply, { loading }] = useCreateReply();
   const [content, setContent] = useState("");
   const handleChange = (event) => {
@@ -44,6 +36,7 @@ const QuestionDetails = ({ question }) => {
     createReply({ variables });
     setContent("");
   };
+  
   if (loading) {
     <Spinner />;
   }
@@ -61,8 +54,7 @@ const QuestionDetails = ({ question }) => {
           <QuestionUser>質問者:{question.user.username}</QuestionUser>・
           <p>{moment(parseInt(question.createdAt)).fromNow()}</p>
         </FlexDiv>
-        {new_content &&
-          new_content.map((content, index) => <p key={index}>{content}</p>)}
+        <SplitNewLine>{question.content}</SplitNewLine>
       </QuestionBody>
       <RepliesLength>{question.replies.length}件の返信</RepliesLength>
       {question.replies &&
