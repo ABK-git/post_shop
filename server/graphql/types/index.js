@@ -31,6 +31,7 @@ exports.productTypes = `
     price: Int,
     quantity: Int,
     questions: [Question],
+    reviews: [Review],
     introduce: String,
     imagePasses: [String],
     user: User,
@@ -77,5 +78,24 @@ exports.replyTypes = `
   input ReplyCreateInput{
     content: String!,
     question: ID!,
+  }
+`;
+
+exports.reviewTypes = `
+  type Review {
+    _id: ID,
+    title: String,
+    content: String,
+    stars: Int,
+    user: User,
+    product: Product,
+    createdAt: String,
+  }
+
+  input ReviewCreateInput{
+    title: String!,
+    content: String!,
+    stars: Int!
+    product: ID!
   }
 `;
