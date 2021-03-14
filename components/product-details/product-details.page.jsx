@@ -1,12 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   ProductDetailsContainer,
-  CategoriesLeftJustify,
+  LeftJustify,
   OpenButtons,
   DisplayMessage,
   ToExhibit,
   LeftContainer,
   DisplayList,
+  Flex,
+  EvaluationFont,
 } from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -18,6 +20,10 @@ import { useCreateQuestion, useCreateReview } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import { useRouter } from "next/router";
 import ReviewForm from "../review-form/review-form.component";
+import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
+import DisplayStars from "../display-stars/display-stars.component";
+import { getEvaluationOfStars } from "../../utils/functions";
+import MyContext from "../../context";
 
 const ProductDetails = ({ product }) => {
   const router = useRouter();
@@ -63,8 +69,8 @@ const ProductDetails = ({ product }) => {
     setSwitchReview(!switchReview);
   };
 
-  const [createQuestion] = useCreateQuestion();
-  const [createReview] = useCreateReview();
+  const [createQuestion, { error: createQuestionError }] = useCreateQuestion();
+  const [createReview, { error: createReviewError }] = useCreateReview();
 
   /**
    * formik(Question)
@@ -110,6 +116,7 @@ const ProductDetails = ({ product }) => {
     content: Yup.string()
       .required("レビューの内容を入力してください")
       .max(1000, "レビュー内容は1000文字以内で入力してください"),
+    stars: Yup.number().min("1", "評価を入力してください"),
   });
   const onSubmitReview = (values) => {
     createReview({ variables: values });
@@ -127,11 +134,25 @@ const ProductDetails = ({ product }) => {
     formikReview.setFieldValue("stars", value);
   };
 
+  const my_context = useContext(MyContext);
+  const { smBreakPoint } = my_context;
+
   return (
     <ProductDetailsContainer>
-      <CategoriesLeftJustify>
+      <LeftJustify>
         <DisplayCategories categories={product.categories} />
-      </CategoriesLeftJustify>
+        <Flex>
+          <EvaluationFont>
+            {getEvaluationOfStars(product.reviews)}
+          </EvaluationFont>
+          <DisplayStars
+            value={getEvaluationOfStars(product.reviews)}
+            isEdit={false}
+            size={smBreakPoint ? 40 : 25}
+          />
+          <EvaluationFont>({product.reviews.length})</EvaluationFont>
+        </Flex>
+      </LeftJustify>
       <ProductContent product={product} />
       <OpenButtons>
         <CustomButton design="open_questions" onClick={changeDisplayQuestions}>
@@ -141,6 +162,10 @@ const ProductDetails = ({ product }) => {
           Reviews
         </CustomButton>
       </OpenButtons>
+      {createQuestionError && (
+        <GraphQLErrorMessages error={createQuestionError} />
+      )}
+      {createReviewError && <GraphQLErrorMessages error={createReviewError} />}
       {displayQuestions && (
         <DisplayList>
           {switchQuestion && <QuestionForm formik={formik} />}
@@ -188,7 +213,11 @@ const ProductDetails = ({ product }) => {
                 この商品に対するレビュー一覧 ({product.reviews.length})
               </DisplayMessage>
               {product.reviews &&
-                product.reviews.map((review) => <p>{review.content} Star: {review.stars}</p>)}
+                product.reviews.map((review) => (
+                  <p>
+                    {review.content} Star: {review.stars}
+                  </p>
+                ))}
               <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
             </div>
           )}

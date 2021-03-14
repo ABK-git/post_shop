@@ -1,8 +1,15 @@
 import React from "react";
-
-import { Overhidden, ProductCell, ProductIntroduce } from "./product-preview.styles";
+import {
+  Overhidden,
+  ProductCell,
+  ProductIntroduce,
+  OverhiddenLeft,
+  OverhiddenRight,
+} from "./product-preview.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
 import { useRouter } from "next/router";
+import { getEvaluationOfStars } from "../../utils/functions";
+import DisplayStars from "../display-stars/display-stars.component";
 
 const ProductPreview = ({ product }) => {
   const images = product.imagePasses;
@@ -11,7 +18,7 @@ const ProductPreview = ({ product }) => {
   //商品ページへの移動
   const handleClickToProductDetails = () => {
     router.push(`/product/${product._id}/details`);
-  }
+  };
 
   return (
     <ProductCell>
@@ -21,7 +28,14 @@ const ProductPreview = ({ product }) => {
       />
       <ProductIntroduce onClick={handleClickToProductDetails}>
         <Overhidden>{product.name}</Overhidden>
-        <Overhidden>{product.price}</Overhidden>
+        <OverhiddenLeft>￥{product.price.toLocaleString()}</OverhiddenLeft>
+        <OverhiddenRight>
+          <DisplayStars
+            value={getEvaluationOfStars(product.reviews)}
+            isEdit={false}
+          />
+          <p>({product.reviews.length})</p>
+        </OverhiddenRight>
       </ProductIntroduce>
     </ProductCell>
   );

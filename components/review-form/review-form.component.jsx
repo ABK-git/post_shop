@@ -5,9 +5,10 @@ import {
   ExhibitTitleContainer,
   ExhibitReviewForm,
   ExhibitReviewFormLabel,
-  ReactStarsContainer,
 } from "./review-form.styles";
 import MyContext from "../../context";
+import DisplayStars from "../display-stars/display-stars.component";
+import ErrorMessagesContainer from "../form-error-message/error-messages.component";
 
 const ReviewForm = ({ formik, onChange }) => {
   //context
@@ -34,12 +35,15 @@ const ReviewForm = ({ formik, onChange }) => {
           handleChange={formik.handleChange}
           errorMessage={formik.errors.content}
         />
-        <ReactStarsContainer
+        <DisplayStars
           onChange={onChange}
           value={formik.values.stars}
           size={smBreakPoint ? 40 : 25}
           isHalf={false}
         />
+        {formik.errors.stars && (
+          <ErrorMessagesContainer errorMessage={formik.errors.stars} />
+        )}
         <CustomButton design="exhibit_question" type="submit">
           公開
         </CustomButton>

@@ -12,8 +12,8 @@ export const OpenButtons = styled.div`
   ${tw`mt-10 flex w-4/5 justify-around`}
 `;
 
-export const CategoriesLeftJustify = styled.div`
-  ${tw`w-full text-left`}
+export const LeftJustify = styled.div`
+  ${tw`w-full text-left pl-2`}
 `;
 
 export const DisplayList = styled.div`
@@ -47,4 +47,12 @@ export const ExhibitTitleContainer = styled(FormInput)`
 
 export const ExhibitContentContainer = styled(TextareaInput)`
   ${tw`w-full border-2 border-blue-400 text-left focus:border-blue-400`}
+`;
+
+export const Flex = styled.div`
+  ${tw`flex`}
+`;
+
+export const EvaluationFont = styled.p`
+  ${tw`font-bold text-xl sm:text-3xl`}
 `;
