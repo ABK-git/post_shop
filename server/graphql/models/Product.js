@@ -9,7 +9,7 @@ class Product {
       return this.Model.findById(id)
         .populate("user")
         .populate("reviews")
-        .populate({ path: "questions", populate: "replies" });
+        .populate({ path: "questions", populate: "replies", populate: "user" });
     } catch (e) {
       throw new Error("商品が存在しません。");
     }
