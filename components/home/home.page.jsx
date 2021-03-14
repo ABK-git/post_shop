@@ -57,7 +57,7 @@ const HomePage = () => {
 
   const { data, loading } = getProducts();
   const products = (data && data.products) || [];
-  
+
   const handleClick = () => {
     setDisplaySearchCondition(!displaySearchCondition);
   };
@@ -78,21 +78,13 @@ const HomePage = () => {
     }
     if (category != "") {
       newProducts = newProducts.filter((product) => {
-        if (product.category.includes("/")) {
-          const categories = product.category
-            .split("/")
-            .map((category) => category.toLowerCase());
-          for (let i = 0; i < categories.length; i++) {
-            if (categories[i].indexOf(category.toLowerCase()) >= 0) {
-              return true;
-            }
+        const { categories } = product;
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].indexOf(category.toLowerCase()) >= 0) {
+            return true;
           }
-          return false;
-        } else {
-          return (
-            product.category.toLowerCase().indexOf(category.toLowerCase()) >= 0
-          );
         }
+        return false;
       });
     }
     if (lowestPrice != "" && highestPrice != "") {
@@ -238,10 +230,7 @@ const HomePage = () => {
         <MaxTbody>
           <tr>
             {productsSort(productsFilter(products)).map((product) => (
-              <ProductPreview
-                key={product._id}
-                product={product}
-              />
+              <ProductPreview key={product._id} product={product} />
             ))}
           </tr>
         </MaxTbody>
