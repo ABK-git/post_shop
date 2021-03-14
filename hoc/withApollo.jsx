@@ -19,6 +19,17 @@ export default withApollo(
             return categories;
           },
         },
+        Products: {
+          categories({ category }, args, { cache }) {
+            let categories = [];
+            if (category.includes("/")) {
+              categories = category.split("/").filter((category) => category);
+            } else {
+              categories.push(category);
+            }
+            return categories;
+          },
+        },
       },
     });
   },

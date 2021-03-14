@@ -15,7 +15,6 @@ import * as Yup from "yup";
 import ExhibitForm from "../exhibit-form/exhibit-form.component";
 import { useCreateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
-import ErrorMessagesContainer from "../form-error-message/error-messages.component";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 
 const Exhibit = () => {

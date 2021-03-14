@@ -133,6 +133,7 @@ export const GET_PRODUCTS = gql`
       _id
       name
       category
+      categories @client
       price
       quantity
       reviews {

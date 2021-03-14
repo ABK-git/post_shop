@@ -8,7 +8,7 @@ export const HomeContainer = styled.div`
 `;
 
 export const HomeTitleMessage = styled.h1`
-  ${tw`text-green-600 font-bold text-2xl sm:text-5xl mt-2`}
+  ${tw`text-green-600 font-bold text-3xl sm:text-5xl mt-2 whitespace-no-wrap`}
 `;
 
 export const ProductsLayout = styled.table`
