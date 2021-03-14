@@ -24,6 +24,7 @@ import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message
 import DisplayStars from "../display-stars/display-stars.component";
 import { getEvaluationOfStars } from "../../utils/functions";
 import MyContext from "../../context";
+import Review from "../review/review.component";
 
 const ProductDetails = ({ product }) => {
   const router = useRouter();
@@ -214,9 +215,7 @@ const ProductDetails = ({ product }) => {
               </DisplayMessage>
               {product.reviews &&
                 product.reviews.map((review) => (
-                  <p>
-                    {review.content} Star: {review.stars}
-                  </p>
+                  <Review key={review._id} review={review} />
                 ))}
               <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
             </div>
