@@ -12,10 +12,6 @@ const userSchema = new Schema({
     unique: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
   },
-  name: {
-    type: String,
-    minLength: [4, "Minimum length is 6 characters!"],
-  },
   username: {
     type: String,
     required: true,
