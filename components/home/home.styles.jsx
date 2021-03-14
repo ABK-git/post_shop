@@ -51,7 +51,7 @@ export const MaxTbody = styled.tbody`
 `;
 
 export const MaxTd = styled.td`
-  ${tw`table-cell w-1/2 inline-block sm:w-1/3 m-0 p-0`}
+  ${tw`table-cell w-1/2 inline-block sm:w-1/3 lg:w-1/4 m-0 p-0`}
 `;
 
 export const MaxTr = styled.tr`
