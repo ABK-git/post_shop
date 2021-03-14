@@ -81,7 +81,14 @@ const HomePage = () => {
   const handleChange = (event) => {
     changeFilter(event);
   };
-  const { name, category, highestPrice, lowestPrice } = filterState;
+  const {
+    name,
+    category,
+    highestPrice,
+    lowestPrice,
+    lowestEvaluation,
+    lowestReviewsLength,
+  } = filterState;
   //検索条件によって商品を絞り込むメソッド
   const productsFilter = (products) => {
     let newProducts = products;
@@ -123,6 +130,14 @@ const HomePage = () => {
         );
       }
     }
+    //評価数絞り
+    newProducts = newProducts.filter(
+      (product) => product.reviews.length >= lowestReviewsLength
+    );
+    //評価絞り
+    newProducts = newProducts.filter(
+      (product) => getEvaluationOfStars(product.reviews) >= lowestEvaluation
+    );
     return newProducts;
   };
 
@@ -163,14 +178,14 @@ const HomePage = () => {
         newProducts = newProducts.sort((a, b) => a.price - b.price);
         break;
 
-      case "高評価":
+      case "高評価順":
         newProducts = newProducts.sort(
           (a, b) =>
             getEvaluationOfStars(b.reviews) - getEvaluationOfStars(a.reviews)
         );
         break;
 
-      case "評価数":
+      case "評価数順":
         newProducts = newProducts.sort(
           (a, b) => b.reviews.length - a.reviews.length
         );
@@ -230,6 +245,25 @@ const HomePage = () => {
               onChange={handleChange}
             />
           </SearchPriceDiv>
+          <FormInput
+            type="number"
+            name="lowestEvaluation"
+            label="評価下限"
+            step="0.5"
+            max="5"
+            min="0"
+            value={lowestEvaluation}
+            onChange={handleChange}
+          />
+          <FormInput
+            type="number"
+            name="lowestReviewsLength"
+            label="評価数下限"
+            step="1"
+            min="0"
+            value={lowestReviewsLength}
+            onChange={handleChange}
+          />
           <GroupContainer>
             <FormInputButton onClick={changeSelectDisplay}>
               {sortState}
