@@ -12,6 +12,8 @@ const MyState = ({ children }) => {
       category: "",
       lowestPrice: "",
       highestPrice: "",
+      lowestEvaluation: 0,
+      lowestReviewsLength: 0
     },
     sortState: "",
   };
