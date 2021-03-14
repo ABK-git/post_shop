@@ -50,12 +50,9 @@ const HomePage = () => {
     "商品名昇順",
     "値段降順",
     "値段昇順",
-    "高評価",
-    "評価数",
+    "高評価順",
+    "評価数順",
   ];
-  if (sortState === "") {
-    setSortState(options[0]);
-  }
 
   useEffect(() => {
     if (queryCategory) {

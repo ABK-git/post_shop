@@ -15,7 +15,7 @@ const MyState = ({ children }) => {
       lowestEvaluation: 0,
       lowestReviewsLength: 0
     },
-    sortState: "",
+    sortState: "出品日降順",
   };
 
   const [state, dispatch] = useReducer(Reducer, initialState);

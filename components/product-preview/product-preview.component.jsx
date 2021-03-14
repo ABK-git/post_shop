@@ -10,6 +10,7 @@ import DisplayProductImages from "../display-product-images/product-images.compo
 import { useRouter } from "next/router";
 import { getEvaluationOfStars } from "../../utils/functions";
 import DisplayStars from "../display-stars/display-stars.component";
+import ReloadAndToHome from "../reload-and-tohome";
 
 const ProductPreview = ({ product }) => {
   const images = product.imagePasses;
@@ -20,25 +21,30 @@ const ProductPreview = ({ product }) => {
     router.push(`/product/${product._id}/details`);
   };
 
-  return (
-    <ProductCell>
-      <DisplayProductImages
-        images={images}
-        handleClickToProductDetails={handleClickToProductDetails}
-      />
-      <ProductIntroduce onClick={handleClickToProductDetails}>
-        <Overhidden>{product.name}</Overhidden>
-        <OverhiddenLeft>￥{product.price.toLocaleString()}</OverhiddenLeft>
-        <OverhiddenRight>
-          <DisplayStars
-            value={getEvaluationOfStars(product.reviews)}
-            isEdit={false}
-          />
-          <p>({product.reviews.length})</p>
-        </OverhiddenRight>
-      </ProductIntroduce>
-    </ProductCell>
-  );
+  try {
+    return (
+      <ProductCell>
+        <DisplayProductImages
+          images={images}
+          handleClickToProductDetails={handleClickToProductDetails}
+        />
+        <ProductIntroduce onClick={handleClickToProductDetails}>
+          <Overhidden>{product.name}</Overhidden>
+          <OverhiddenLeft>￥{product.price.toLocaleString()}</OverhiddenLeft>
+          <OverhiddenRight>
+            <DisplayStars
+              value={getEvaluationOfStars(product.reviews)}
+              isEdit={false}
+              cursor_pointer={true}
+            />
+            <p>({product.reviews.length})</p>
+          </OverhiddenRight>
+        </ProductIntroduce>
+      </ProductCell>
+    );
+  } catch (e) {
+    return <ReloadAndToHome />;
+  }
 };
 
 export default ProductPreview;

@@ -43,7 +43,7 @@ const ProductContent = ({ product }) => (
           <SetNameAndContent>
             <InName>出品日:</InName>
             <InContent>
-              {moment(product.createdAt.parseInt).format("L")}
+              {moment(parseInt(product.createdAt)).format("L")}
             </InContent>
           </SetNameAndContent>
         </div>

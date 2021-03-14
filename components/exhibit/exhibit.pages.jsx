@@ -61,13 +61,7 @@ const Exhibit = () => {
 
   //画像のUPLoad構成
   const config = {
-    headers: { "content-type": "multipart/form-data" },
-    onUploadProgress: (event) => {
-      console.log(
-        `Current progress:`,
-        Math.round((event.loaded * 100) / event.total)
-      );
-    },
+    headers: { "content-type": "multipart/form-data" }
   };
 
   //ファイル登録
@@ -127,7 +121,6 @@ const Exhibit = () => {
   const router = useRouter();
   const onSubmit = async (values) => {
     await registerProductImages();
-    console.log(values);
     await createProduct({ variables: values });
     router.push("/");
   };
