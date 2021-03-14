@@ -87,14 +87,25 @@ const HomePage = () => {
         return false;
       });
     }
-    if (lowestPrice != "" && highestPrice != "") {
-      const parseLowestPrice = parseInt(lowestPrice);
-      const parseHighestPrice = parseInt(highestPrice);
-      if (parseLowestPrice < parseHighestPrice) {
+
+    if (lowestPrice || highestPrice) {
+      const parseLowestPrice = (lowestPrice && parseInt(lowestPrice)) || 0;
+      const parseHighestPrice = (highestPrice && parseInt(highestPrice)) || 0;
+      if (parseLowestPrice && parseHighestPrice) {
+        if (parseLowestPrice < parseHighestPrice) {
+          newProducts = newProducts.filter(
+            (product) =>
+              product.price > parseLowestPrice &&
+              product.price < parseHighestPrice
+          );
+        }
+      } else if (parseLowestPrice && parseHighestPrice == 0) {
         newProducts = newProducts.filter(
-          (product) =>
-            product.price > parseLowestPrice &&
-            product.price < parseHighestPrice
+          (product) => product.price > parseLowestPrice
+        );
+      } else if (parseHighestPrice && parseLowestPrice == 0) {
+        newProducts = newProducts.filter(
+          (product) => product.price < parseHighestPrice
         );
       }
     }
