@@ -24,6 +24,7 @@ import ProductPreview from "../product-preview/product-preview.component";
 import FormInput from "../form-input/form-input.component";
 import Router, { useRouter } from "next/router";
 import MyContext from "../../context";
+import { getEvaluationOfStars } from "../../utils/functions";
 
 const HomePage = () => {
   const [displaySearchCondition, setDisplaySearchCondition] = useState(false);
@@ -42,6 +43,19 @@ const HomePage = () => {
     filterState,
     sortState,
   } = my_context;
+  const options = [
+    "出品日降順",
+    "出品日昇順",
+    "商品名降順",
+    "商品名昇順",
+    "値段降順",
+    "値段昇順",
+    "高評価",
+    "評価数",
+  ];
+  if (sortState === "") {
+    setSortState(options[0]);
+  }
 
   useEffect(() => {
     if (queryCategory) {
@@ -148,21 +162,25 @@ const HomePage = () => {
       case "値段昇順":
         newProducts = newProducts.sort((a, b) => a.price - b.price);
         break;
+
+      case "高評価":
+        newProducts = newProducts.sort(
+          (a, b) =>
+            getEvaluationOfStars(b.reviews) - getEvaluationOfStars(a.reviews)
+        );
+        break;
+
+      case "評価数":
+        newProducts = newProducts.sort(
+          (a, b) => b.reviews.length - a.reviews.length
+        );
+        break;
     }
     return newProducts;
   };
   const changeSelectDisplay = () => {
     setSelectDisplay(!selectDisplay);
   };
-
-  const options = [
-    "商品名降順",
-    "商品名昇順",
-    "値段降順",
-    "値段昇順",
-    "出品日降順",
-    "出品日昇順",
-  ];
 
   if (loading) {
     return <Spinner />;
