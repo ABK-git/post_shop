@@ -17,7 +17,7 @@ export const OverhiddenLeft = styled.p`
   ${tw`overflow-x-hidden font-medium truncate flex justify-start`}
 `;
 
-export const OverhiddenRight = styled.p`
+export const OverhiddenRight = styled.div`
   ${tw`overflow-x-hidden font-medium truncate flex justify-end`}
 `;
 
