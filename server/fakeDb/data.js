@@ -48,14 +48,14 @@ const data = {
     },
     {
       _id: user2Id,
-      avatar: "",
+      avatar: "/images/user/test.jpg",
       email: "test@gmail.com",
       username: "Test",
       password: "test",
     },
     {
       _id: user3Id,
-      avatar: "",
+      avatar: "/images/user/pe-ko.jpg",
       email: "aaaa@gmail.com",
       username: "aaaa",
       password: "aaaa",

@@ -12,7 +12,7 @@ export const HeaderOptionsLeft = styled.div`
 `;
 
 export const HeaderOptionsRight = styled.div`
-  ${tw`h-full justify-end items-center sm:flex w-full mr-1 hidden`}
+  ${tw`h-full justify-end items-center sm:flex w-full hidden`}
 `;
 
 export const OptionsLink = styled.button`

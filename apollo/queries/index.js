@@ -95,6 +95,7 @@ export const GET_PRODUCT = gql`
         user {
           _id
           username
+          avatar
         }
       }
       questions {
@@ -105,6 +106,7 @@ export const GET_PRODUCT = gql`
         user {
           _id
           username
+          avatar
         }
         replies {
           _id
@@ -113,6 +115,7 @@ export const GET_PRODUCT = gql`
           user {
             _id
             username
+            avatar
           }
         }
       }
@@ -122,6 +125,7 @@ export const GET_PRODUCT = gql`
       user {
         _id
         username
+        avatar
       }
     }
   }
@@ -145,6 +149,7 @@ export const GET_PRODUCTS = gql`
         user {
           _id
           username
+          avatar
         }
       }
       imagePasses
@@ -153,6 +158,7 @@ export const GET_PRODUCTS = gql`
       user {
         _id
         username
+        avatar
       }
     }
   }
@@ -191,6 +197,7 @@ export const CREATE_PRODUCT = gql`
         user {
           _id
           username
+          avatar
         }
       }
       questions {
@@ -201,6 +208,7 @@ export const CREATE_PRODUCT = gql`
         user {
           _id
           username
+          avatar
         }
         replies {
           _id
@@ -209,6 +217,7 @@ export const CREATE_PRODUCT = gql`
           user {
             _id
             username
+            avatar
           }
         }
       }
@@ -218,6 +227,7 @@ export const CREATE_PRODUCT = gql`
       user {
         _id
         username
+        avatar
       }
     }
   }
@@ -235,6 +245,7 @@ export const CREATE_QUESTION = gql`
       user {
         _id
         username
+        avatar
       }
       product {
         _id
@@ -246,6 +257,7 @@ export const CREATE_QUESTION = gql`
         user {
           _id
           username
+          avatar
         }
       }
     }
@@ -265,6 +277,7 @@ export const GET_QUESTION = gql`
       user {
         _id
         username
+        avatar
       }
       replies {
         _id
@@ -273,6 +286,7 @@ export const GET_QUESTION = gql`
         user {
           _id
           username
+          avatar
         }
       }
     }
@@ -288,6 +302,7 @@ export const CREATE_REPLY = gql`
       user {
         _id
         username
+        avatar
       }
       question
     }
@@ -317,6 +332,7 @@ export const CREATE_REVIEW = gql`
       user {
         _id
         username
+        avatar
       }
       product{
         _id
