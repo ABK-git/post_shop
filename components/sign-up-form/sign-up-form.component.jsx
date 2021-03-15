@@ -1,6 +1,5 @@
 import React from "react";
 import FormInput from "../form-input/form-input.component";
-
 import { SignUpFormContainer, SignUpStart } from "./sign-up-form.styles";
 
 const SignUpForm = ({ formik }) => (

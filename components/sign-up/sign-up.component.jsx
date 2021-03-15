@@ -9,6 +9,8 @@ import Redirect from "../redirect";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import Spinner from "../spinner/spinner.component";
+import axios from "axios";
+import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 
 const SignUp = () => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -19,13 +21,42 @@ const SignUp = () => {
   ] = userSignIn();
   const [alreadySignIn, setAlreadySignIn] = useState(false);
 
+  //画像のUPLoad関連
+  const [file, setFile] = useState(null);
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
+  const handleChangeSetFile = (event) => {
+    let file = event.target.files[0];
+    setFile(file);
+  };
+  const handleDeleteSetFile = () => {
+    setFile(null);
+  };
+  const avatarUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const avatar = await axios
+      .post("/api/user-image-upload", formData, config)
+      .then(({ data: res }) => {
+        return res.avatar.replaceAll("\\", "/").replace("public", "");
+      })
+      .catch(() => {
+        return null;
+      });
+    if (avatar) {
+      formik.values.avatar = avatar;
+    }
+  };
+
+  //formik関連
   const initialValues = {
     username: "",
     email: "",
     password: "",
     password_confirm: "",
+    avatar: "",
   };
-
   const validationSchema = Yup.object({
     username: Yup.string()
       .required("名前を入力してください")
@@ -44,7 +75,8 @@ const SignUp = () => {
       .oneOf([Yup.ref("password")], "passwordが一致しません"),
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    await avatarUpload();
     setCreatedUser(values);
     signUp({ variables: values });
   };
@@ -58,15 +90,19 @@ const SignUp = () => {
   if (data && data.signUp && !alreadySignIn) {
     setAlreadySignIn(true);
     const { email, password } = createdUser;
-    
     signIn({ variables: { email, password } });
   }
 
-  if(loading || signInLoading) return <Spinner/>
+  if (loading || signInLoading) return <Spinner />;
 
   return (
     <SignUpContainer>
       <SignUpMessage>Register</SignUpMessage>
+      <PrepareUserImage
+        handleChangeSetFile={handleChangeSetFile}
+        handleDeleteSetFile={handleDeleteSetFile}
+        file={file}
+      />
       <SignUpForm formik={formik} />
       {authUser && authUser.signIn && <Redirect to="/" />}
       {error && <GraphQLErrorMessages error={error} />}

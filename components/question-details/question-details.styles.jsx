@@ -38,5 +38,5 @@ export const RepliesLength = styled.p`
   ${tw`flex justify-center text-3xl text-gray-700`}
 `;
 export const MarginLeftDiv = styled.div`
-  ${tw`ml-3 whitespace-no-wrap overflow-x-auto`}
+  ${tw`ml-3`}
 `;
