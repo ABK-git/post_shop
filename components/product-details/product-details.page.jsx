@@ -9,6 +9,7 @@ import {
   DisplayList,
   Flex,
   EvaluationFont,
+  PleaseLoginMessage,
 } from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -16,7 +17,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import QuestionForm from "../question-form/question-form.component";
 import ProductContent from "../display-product-content/product-content.component";
-import { useCreateQuestion, useCreateReview } from "../../apollo/actions";
+import {
+  useCreateQuestion,
+  useCreateReview,
+  getAuthUser,
+} from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import { useRouter } from "next/router";
 import ReviewForm from "../review-form/review-form.component";
@@ -25,8 +30,10 @@ import DisplayStars from "../display-stars/display-stars.component";
 import { getEvaluationOfStars } from "../../utils/functions";
 import MyContext from "../../context";
 import Review from "../review/review.component";
+import Spinner from "../spinner/spinner.component";
 
 const ProductDetails = ({ product }) => {
+  const { data: { user } = {}, loading, error } = getAuthUser();
   const router = useRouter();
   const { openQuestions } = router.query;
   const [displayQuestions, setDisplayQuestions] = useState(
@@ -138,6 +145,8 @@ const ProductDetails = ({ product }) => {
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
 
+  if (loading) <Spinner />;
+
   return (
     <ProductDetailsContainer>
       <LeftJustify>
@@ -189,7 +198,13 @@ const ProductDetails = ({ product }) => {
                     key={question._id}
                   />
                 ))}
-              <ToExhibit onClick={changeSwitchQuestion}>質問をする</ToExhibit>
+              {(user && (
+                <ToExhibit onClick={changeSwitchQuestion}>質問をする</ToExhibit>
+              )) || (
+                <PleaseLoginMessage>
+                  質問をするにはログインが必要です
+                </PleaseLoginMessage>
+              )}
             </div>
           )}
         </DisplayList>
@@ -217,7 +232,13 @@ const ProductDetails = ({ product }) => {
                 product.reviews.map((review) => (
                   <Review key={review._id} review={review} />
                 ))}
-              <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
+              {(user && (
+                <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
+              )) || (
+                <PleaseLoginMessage>
+                  レビューをするにはログインが必要です
+                </PleaseLoginMessage>
+              )}
             </div>
           )}
         </DisplayList>
