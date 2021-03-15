@@ -7,10 +7,13 @@ import {
   HeaderOptionsRight,
   OptionsLink,
   MenuIcon,
+  UserImage,
 } from "./header.styles";
 import MyLink from "../my-link/my-link.component";
 import { useRouter } from "next/router";
 import MyContext from "../../context/index";
+import Image from "react-image-resizer";
+import DisplayUserImage from "../display-user-image/display-user-image.component";
 
 const Header = ({ apollo }) => {
   //graphql
@@ -73,6 +76,7 @@ const Header = ({ apollo }) => {
             : "/images/header/menu-on.png"
         }
       />
+      <DisplayUserImage image_pass={user && user.avatar}/>
     </HeaderContainer>
   );
 };

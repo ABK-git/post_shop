@@ -40,7 +40,7 @@ const data = {
   users: [
     {
       _id: user1Id,
-      avatar: "",
+      avatar: "/images/user/admin.jpeg",
       email: "abiko@gmail.com",
       username: "abiko",
       password: "abiko",
