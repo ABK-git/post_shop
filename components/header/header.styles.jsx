@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import tw from "tailwind.macro";
 
+import Image from "react-image-resizer";
+
 export const HeaderContainer = styled.div`
-  ${tw`flex flex-row bg-blue-600 h-16`};
+  ${tw`flex flex-row bg-blue-600 h-16 pr-8`};
 `;
 
 export const HeaderOptionsLeft = styled.div`
@@ -20,4 +22,8 @@ export const OptionsLink = styled.button`
 export const MenuIcon = styled.img`
   ${tw`h-full w-8 h-8 mt-4 mr-4 ml-auto cursor-pointer hover:opacity-75
   sm:hidden`}
+`;
+
+export const UserImage = styled(Image)`
+  ${tw`rounded-full`}
 `;
