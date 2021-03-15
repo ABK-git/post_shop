@@ -56,3 +56,7 @@ export const Flex = styled.div`
 export const EvaluationFont = styled.p`
   ${tw`font-bold text-xl sm:text-3xl`}
 `;
+
+export const PleaseLoginMessage = styled.p`
+  ${tw`font-bold bg-blue-300 text-green-900 text-xl mt-3`}
+`;
