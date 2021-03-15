@@ -5,7 +5,7 @@ import FormInput from "../form-input/form-input.component";
 import TextareaInput from "../textarea-input/textarea-input.component";
 
 export const ProductDetailsContainer = styled.div`
-  ${tw`h-screen w-full py-6 flex flex-col items-center bg-gray-500 overflow-auto`}
+  ${tw`h-screen bg-gray-500 overflow-auto w-full py-6 flex flex-col items-center`}
 `;
 
 export const OpenButtons = styled.div`

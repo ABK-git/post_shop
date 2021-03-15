@@ -3,7 +3,7 @@ import tw from "tailwind.macro";
 import TextareaInput from "../textarea-input/textarea-input.component";
 
 export const QuestionDetailsContainer = styled.div`
-  ${tw`w-full pt-5`}
+  ${tw`w-full pt-5 h-screen bg-gray-500 overflow-auto`}
 `;
 
 export const MainContent = styled.div`
@@ -11,7 +11,7 @@ export const MainContent = styled.div`
 `;
 
 export const QuestionBody = styled.div`
-  ${tw`w-4/5 mx-auto mt-3 pb-3 border-2 border-gray-400`}
+  ${tw` w-4/5 mx-auto mt-3 pb-3 border-2 border-green-700`}
 `;
 
 export const QuestionTitle = styled.p`
@@ -36,4 +36,7 @@ export const ReplyTextareaInput = styled(TextareaInput)`
 
 export const RepliesLength = styled.p`
   ${tw`flex justify-center text-3xl text-gray-700`}
-`
+`;
+export const MarginLeftDiv = styled.div`
+  ${tw`ml-3 whitespace-no-wrap overflow-x-auto`}
+`;

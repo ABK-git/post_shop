@@ -76,7 +76,7 @@ const Header = ({ apollo }) => {
             : "/images/header/menu-on.png"
         }
       />
-      <DisplayUserImage image_pass={user && user.avatar}/>
+      {user && <DisplayUserImage image_pass={user.avatar} />}
     </HeaderContainer>
   );
 };
