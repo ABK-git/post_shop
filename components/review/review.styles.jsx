@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 export const ReviewContainer = styled.div`
-  ${tw`mt-2 w-full bg-white border-2 border-green-700 p-2`}
+  ${tw`flex mt-2 w-full bg-white border-2 border-green-700 p-2`}
 `;
 
 export const TitleContainer = styled.p`
@@ -10,7 +10,7 @@ export const TitleContainer = styled.p`
 `;
 
 export const ExhibitUserContainer = styled.p`
-  ${tw`text-gray-600`}
+  ${tw`text-gray-900 flex justify-start text-xl sm:text-3xl font-bold`}
 `;
 
 export const FlexAndEnd = styled.div`
@@ -22,5 +22,13 @@ export const FlexAndStart = styled.div`
 ;`
 
 export const TextLeft = styled.div`
-  ${tw`text-left`}
+  ${tw`text-left w-full`}
+`;
+
+export const MarginLeftDiv = styled.div`
+  ${tw`ml-3 whitespace-no-wrap overflow-x-auto w-full`}
+`;
+
+export const CreatedAtContainer = styled.div`
+  ${tw`ml-3`}
 `;

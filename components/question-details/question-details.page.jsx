@@ -11,10 +11,13 @@ import {
   ReplyContainer,
   ReplyTextareaInput,
   RepliesLength,
+  MarginLeftDiv,
 } from "./question-details.styles";
 import SplitNewLine from "../split-new-line/split-new-line.component";
 import { useCreateReply } from "../../apollo/actions";
 import Spinner from "../spinner/spinner.component";
+import DisplayUserImage from "../display-user-image/display-user-image.component";
+import Reply from "../reply/reply.component";
 
 const QuestionDetails = ({ question }) => {
   const router = useRouter();
@@ -36,7 +39,7 @@ const QuestionDetails = ({ question }) => {
     createReply({ variables });
     setContent("");
   };
-  
+
   if (loading) {
     <Spinner />;
   }
@@ -49,21 +52,23 @@ const QuestionDetails = ({ question }) => {
         質問一覧に戻る
       </CustomButton>
       <QuestionBody>
-        <QuestionTitle>{question.title}</QuestionTitle>
         <FlexDiv>
-          <QuestionUser>質問者:{question.user.username}</QuestionUser>・
-          <p>{moment(parseInt(question.createdAt)).fromNow()}</p>
+          <DisplayUserImage image_pass={question.user.avatar} />
+          <MarginLeftDiv>
+            <QuestionTitle>{question.title}</QuestionTitle>
+            <FlexDiv>
+              <QuestionUser>質問者:{question.user.username}</QuestionUser>・
+              <p>{moment(parseInt(question.createdAt)).fromNow()}</p>
+            </FlexDiv>
+            <SplitNewLine>{question.content}</SplitNewLine>
+          </MarginLeftDiv>
         </FlexDiv>
-        <SplitNewLine>{question.content}</SplitNewLine>
       </QuestionBody>
+
       <RepliesLength>{question.replies.length}件の返信</RepliesLength>
       {question.replies &&
         question.replies.map((reply) => (
-          <QuestionBody key={reply._id}>
-            <QuestionUser>{reply.user.username}</QuestionUser>
-            <p>{moment(parseInt(reply.createdAt)).fromNow()}</p>
-            <SplitNewLine>{reply.content}</SplitNewLine>
-          </QuestionBody>
+          <Reply key={reply._id} reply={reply} />
         ))}
       <ReplyContainer>
         <ReplyTextareaInput

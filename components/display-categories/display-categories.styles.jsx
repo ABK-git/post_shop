@@ -19,3 +19,4 @@ export const TitleMessage = styled.p`
 export const BorderCategory = styled.div`
   ${tw`flex border-4 border-purple-800 overflow-x-auto`}
 `;
+
