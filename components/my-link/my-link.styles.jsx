@@ -11,6 +11,9 @@ const headerRight = css`
 const smMenu = css`
   ${tw`w-full text-2xl text-green-400 block text-center m-0 p-0 border-2 border-red-600`}
 `;
+const dropdownHeader = css`
+  ${tw`bg-white whitespace-no-wrap bg-green-300 relative`}
+`;
 
 const getLinkStyles = ({ design }) => {
   switch (design) {
@@ -20,12 +23,14 @@ const getLinkStyles = ({ design }) => {
       return headerRight;
     case "sm-menu":
       return smMenu;
+    case "dropdown-header":
+      return dropdownHeader;
     default:
       return "";
   }
 };
 
-export const LinkContainer = styled.span`
+export const LinkContainer = styled.a`
   ${tw`font-bold text-xl m-2 cursor-pointer`}
 
   ${getLinkStyles}
