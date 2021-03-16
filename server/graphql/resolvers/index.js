@@ -1,9 +1,10 @@
 //UserのMutation
 exports.userMutations = {
   signUp: async (root, { input }, ctx) => {
-    //const registerdUser = await ctx.models.User.signUp(input);
-    //return registerdUser._id;
     return await ctx.models.User.signUp(input);
+  },
+  updateUser: async (root, { input }, ctx) => {
+    return await ctx.models.User.updateUser(input, ctx);
   },
   signIn: async (root, { input }, ctx) => {
     return await ctx.models.User.signIn(input, ctx); //ここ
