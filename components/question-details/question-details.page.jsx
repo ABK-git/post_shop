@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import Router from "next/router";
 import React, { useState } from "react";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
@@ -12,6 +12,7 @@ import {
   ReplyTextareaInput,
   RepliesLength,
   MarginLeftDiv,
+  PaginationContainer,
 } from "./question-details.styles";
 import SplitNewLine from "../split-new-line/split-new-line.component";
 import { useCreateReply } from "../../apollo/actions";
@@ -20,14 +21,9 @@ import DisplayUserImage from "../display-user-image/display-user-image.component
 import Reply from "../reply/reply.component";
 
 const QuestionDetails = ({ question }) => {
-  const router = useRouter();
-  //質問一覧に戻る
-  const clickToProductDetails = () => {
-    router.push({
-      pathname: `/product/${question.product._id}/details`,
-      query: { openQuestions: true },
-    });
-  };
+  //Pagination
+  const [offset, setOffset] = useState(0);
+  const parPage = 5;
 
   const [createReply, { loading }] = useCreateReply();
   const [content, setContent] = useState("");
@@ -47,7 +43,7 @@ const QuestionDetails = ({ question }) => {
   return (
     <QuestionDetailsContainer>
       <CustomButton
-        onClick={clickToProductDetails}
+        onClick={() => Router.back()}
         design="to_list_and_margin-left">
         質問一覧に戻る
       </CustomButton>
@@ -67,9 +63,19 @@ const QuestionDetails = ({ question }) => {
 
       <RepliesLength>{question.replies.length}件の返信</RepliesLength>
       {question.replies &&
-        question.replies.map((reply) => (
-          <Reply key={reply._id} reply={reply} />
-        ))}
+        question.replies
+          .slice(offset, offset + parPage)
+          .map((reply) => <Reply key={reply._id} reply={reply} />)}
+      {question.replies.length > 5 && (
+        <PaginationContainer
+          limit={parPage}
+          offset={offset}
+          total={question.replies.length}
+          onClick={(e, offSet) => setOffset(offSet)}
+          variant="outlined"
+          color="primary"
+        />
+      )}
       <ReplyContainer>
         <ReplyTextareaInput
           name="reply"

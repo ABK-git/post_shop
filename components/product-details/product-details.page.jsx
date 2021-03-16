@@ -31,6 +31,7 @@ import { getEvaluationOfStars } from "../../utils/functions";
 import MyContext from "../../context";
 import Review from "../review/review.component";
 import Spinner from "../spinner/spinner.component";
+import Pagination from "material-ui-flat-pagination";
 
 const ProductDetails = ({ product }) => {
   const { data: { user } = {}, loading, error } = getAuthUser();
@@ -50,6 +51,11 @@ const ProductDetails = ({ product }) => {
     );
   };
   const ref = useRef(null);
+
+  //Pagination関連
+  const [offsetQuestion, setOffsetQuestion] = useState(0);
+  const [offsetReview, setOffsetReview] = useState(0);
+  const parPage = 5;
 
   useEffect(() => {
     if (openQuestions) {
@@ -191,13 +197,23 @@ const ProductDetails = ({ product }) => {
                 この商品に対する質問一覧 ({product.questions.length})
               </DisplayMessage>
               {product.questions &&
-                product.questions.map((question) => (
-                  <QuestionPreview
-                    question={question}
-                    product_id={product._id}
-                    key={question._id}
-                  />
-                ))}
+                product.questions
+                  .slice(offsetQuestion, offsetQuestion + parPage)
+                  .map((question) => (
+                    <QuestionPreview
+                      question={question}
+                      product_id={product._id}
+                      key={question._id}
+                    />
+                  ))}
+              {product.questions.length > 5 && (
+                <Pagination
+                  limit={parPage}
+                  offset={offsetQuestion}
+                  total={product.questions.length}
+                  onClick={(e, offSet) => setOffsetQuestion(offSet)}
+                />
+              )}
               {(user && (
                 <ToExhibit onClick={changeSwitchQuestion}>質問をする</ToExhibit>
               )) || (
@@ -229,9 +245,17 @@ const ProductDetails = ({ product }) => {
                 この商品に対するレビュー一覧 ({product.reviews.length})
               </DisplayMessage>
               {product.reviews &&
-                product.reviews.map((review) => (
-                  <Review key={review._id} review={review} />
-                ))}
+                product.reviews
+                  .slice(offsetReview, offsetReview + parPage)
+                  .map((review) => <Review key={review._id} review={review} />)}
+              {product.reviews.length > 5 && (
+                <Pagination
+                  limit={parPage}
+                  offset={offsetReview}
+                  total={product.reviews.length}
+                  onClick={(e, offSet) => setOffsetReview(offSet)}
+                />
+              )}
               {(user && (
                 <ToExhibit onClick={chageSwitchReview}>レビューする</ToExhibit>
               )) || (
