@@ -51,6 +51,7 @@ exports.createApolloServer = () => {
 
     type Mutation {
       signUp(input: SignUpInput): User
+      updateUser(input: SignUpInput): User
       signIn(input: SignInInput): User
       signOut: Boolean
 
@@ -87,7 +88,7 @@ exports.createApolloServer = () => {
         Product: new Product(mongoose.model("Product"), req.user),
         Question: new Question(mongoose.model("Question"), req.user),
         Reply: new Reply(mongoose.model("Reply"), req.user),
-        Review: new Review(mongoose.model("Review"), req.user)
+        Review: new Review(mongoose.model("Review"), req.user),
       },
     }),
   });

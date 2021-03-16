@@ -43,6 +43,7 @@ const data = {
       avatar: "/images/user/admin.jpeg",
       email: "abiko@gmail.com",
       username: "abiko",
+      products: [product1Id, product2Id, product4Id, product6Id],
       password: "abiko",
       role: "admin",
     },
@@ -51,6 +52,7 @@ const data = {
       avatar: "/images/user/test.jpg",
       email: "test@gmail.com",
       username: "Test",
+      products: [product3Id, product7Id],
       password: "test",
     },
     {
@@ -58,6 +60,7 @@ const data = {
       avatar: "/images/user/pe-ko.jpg",
       email: "aaaa@gmail.com",
       username: "aaaa",
+      products: [product5Id],
       password: "aaaa",
     },
   ],
