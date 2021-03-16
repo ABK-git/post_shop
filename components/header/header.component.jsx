@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAuthUser, userSignOut } from "../../apollo/actions";
+import { getLazyAuthUser, userSignOut } from "../../apollo/actions";
 import withApollo from "../../hoc/withApollo";
 import {
   HeaderContainer,
@@ -19,12 +19,17 @@ import Spinner from "../spinner/spinner.component";
 
 const Header = ({ apollo }) => {
   //graphql
-  const { data: { user } = {}, loading } = getAuthUser();
+  const [getUser, { data, error, loading }] = getLazyAuthUser();
+  const [user, setUser] = useState(null);
   const [signOut] = userSignOut();
   const router = useRouter();
   //context
   const my_context = useContext(MyContext);
   const { displayMenu, changeDisplayMenu } = my_context;
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleLogout = () => {
     signOut().then(() => {
@@ -37,8 +42,17 @@ const Header = ({ apollo }) => {
     setIsOpen(!isOpen);
   };
 
-  if(loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (data) {
+    if ((data.user && !user) || data.user.avatar !== user.avatar) {
+      setUser(data.user);
+    }
+    if (!data.user && user) {
+      setUser(null);
+    }
   }
 
   return (

@@ -65,10 +65,10 @@ export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
     signIn(input: { email: $email, password: $password }) {
       _id
+      avatar
       username
       email
       password
-      avatar
       products {
         _id
         name
@@ -86,10 +86,10 @@ export const GET_USER = gql`
   query User {
     user {
       _id
+      avatar
       username
       email
       password
-      avatar
       products {
         _id
         name
@@ -129,8 +129,8 @@ export const GET_PRODUCT = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
       }
       questions {
@@ -140,8 +140,8 @@ export const GET_PRODUCT = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
         replies {
           _id
@@ -149,8 +149,8 @@ export const GET_PRODUCT = gql`
           createdAt
           user {
             _id
-            username
             avatar
+            username
           }
         }
       }
@@ -159,8 +159,8 @@ export const GET_PRODUCT = gql`
       createdAt
       user {
         _id
-        username
         avatar
+        username
       }
     }
   }
@@ -183,8 +183,8 @@ export const GET_PRODUCTS = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
       }
       imagePasses
@@ -192,8 +192,8 @@ export const GET_PRODUCTS = gql`
       createdAt
       user {
         _id
-        username
         avatar
+        username
       }
     }
   }
@@ -231,8 +231,8 @@ export const CREATE_PRODUCT = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
       }
       questions {
@@ -242,8 +242,8 @@ export const CREATE_PRODUCT = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
         replies {
           _id
@@ -251,8 +251,8 @@ export const CREATE_PRODUCT = gql`
           createdAt
           user {
             _id
-            username
             avatar
+            username
           }
         }
       }
@@ -261,8 +261,8 @@ export const CREATE_PRODUCT = gql`
       createdAt
       user {
         _id
-        username
         avatar
+        username
       }
     }
   }
@@ -279,8 +279,8 @@ export const CREATE_QUESTION = gql`
       createdAt
       user {
         _id
-        username
         avatar
+        username
       }
       product {
         _id
@@ -291,8 +291,8 @@ export const CREATE_QUESTION = gql`
         createdAt
         user {
           _id
-          username
           avatar
+          username
         }
       }
     }
