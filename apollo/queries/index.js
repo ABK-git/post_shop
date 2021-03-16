@@ -26,6 +26,41 @@ export const SIGN_UP = gql`
     }
   }
 `;
+export const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $avatar: String
+    $username: String!
+    $email: String!
+    $password: String!
+    $password_confirm: String!
+  ) {
+    updateUser(
+      input: {
+        avatar: $avatar
+        username: $username
+        email: $email
+        password: $password
+        password_confirm: $password_confirm
+      }
+    ) {
+      _id
+      username
+      email
+      password
+      avatar
+      products {
+        _id
+        name
+        category
+        price
+        quantity
+        imagePasses
+        introduce
+        createdAt
+      }
+    }
+  }
+`;
 export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
     signIn(input: { email: $email, password: $password }) {
@@ -334,7 +369,7 @@ export const CREATE_REVIEW = gql`
         username
         avatar
       }
-      product{
+      product {
         _id
       }
     }

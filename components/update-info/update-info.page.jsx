@@ -8,9 +8,10 @@ import Spinner from "../spinner/spinner.component";
 import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 import { UpdateInfoContainer, TitleMessage } from "./update-info.styles";
+import { userUpdate } from "../../apollo/actions";
 
 const UpdateInfo = ({ user }) => {
-  //const [signUp, { data, loading, error }] = userSignUp();
+  const [updateUser, { data, loading, error }] = userUpdate();
 
   //画像のUPLoad関連
   const [file, setFile] = useState(null);
@@ -68,7 +69,7 @@ const UpdateInfo = ({ user }) => {
   const onSubmit = async (values) => {
     await avatarUpload();
     console.log(values);
-    //signUp({ variables: values });
+    updateUser({ variables: values });
   };
 
   const formik = useFormik({
@@ -76,10 +77,13 @@ const UpdateInfo = ({ user }) => {
     validationSchema,
     onSubmit,
   });
-  //User登録が完了し、認証が終わっていない場合
-  //if (data && data.signUp) {}
-
-  //if (loading) return <Spinner />;
+  //User編集後
+  if (loading) {
+    return <Spinner />;
+  }
+  if (data && data.updateUser) {
+    return <Redirect to="/"/>;
+  }
 
   return (
     <UpdateInfoContainer>
@@ -90,6 +94,7 @@ const UpdateInfo = ({ user }) => {
         file={file}
         avatar={user.avatar}
       />
+      {error && <GraphQLErrorMessages error={error} />}
       <SignUpForm formik={formik} />
     </UpdateInfoContainer>
   );

@@ -11,10 +11,20 @@ import {
   GET_QUESTION,
   CREATE_REPLY,
   CREATE_REVIEW,
+  UPDATE_USER,
 } from "../queries";
 
 //User認証
 export const userSignUp = () => useMutation(SIGN_UP);
+export const userUpdate = () =>
+  useMutation(UPDATE_USER, {
+    update(cache, { data: { user } }) {
+      cache.writeQuery({
+        query: GET_USER,
+        data: { user },
+      });
+    },
+  });
 export const userSignIn = () =>
   useMutation(SIGN_IN, {
     update(cache, { data: { signIn } }) {
