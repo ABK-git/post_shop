@@ -5,7 +5,7 @@ import Image from "react-image-resizer";
 import DisplayUserImage from "../display-user-image/display-user-image.component";
 
 export const HeaderContainer = styled.div`
-  ${tw`flex flex-row bg-blue-600 h-16 pr-8`};
+  ${tw`flex flex-row bg-blue-600 h-16 pr-4`};
 `;
 
 export const HeaderOptionsLeft = styled.div`
