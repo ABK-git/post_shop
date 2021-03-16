@@ -48,7 +48,6 @@ const SignUp = () => {
       formik.values.avatar = avatar;
     }
   };
-
   //formik関連
   const initialValues = {
     username: "",

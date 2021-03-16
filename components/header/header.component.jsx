@@ -7,13 +7,14 @@ import {
   HeaderOptionsRight,
   OptionsLink,
   MenuIcon,
-  UserImage,
+  LiContainer,
+  MenuContainer,
+  SubMenu,
+  DisplayUserImageContainer,
 } from "./header.styles";
 import MyLink from "../my-link/my-link.component";
 import { useRouter } from "next/router";
 import MyContext from "../../context/index";
-import Image from "react-image-resizer";
-import DisplayUserImage from "../display-user-image/display-user-image.component";
 
 const Header = ({ apollo }) => {
   //graphql
@@ -42,6 +43,12 @@ const Header = ({ apollo }) => {
     signOut().then(() => {
       apollo.resetStore().then(() => router.push("/"));
     });
+  };
+
+  //Userドロップダウンリスト関連
+  const [isOpen, setIsOpen] = useState(false);
+  const changeIsOpen = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -76,7 +83,30 @@ const Header = ({ apollo }) => {
             : "/images/header/menu-on.png"
         }
       />
-      {user && <DisplayUserImage image_pass={user.avatar} />}
+      {user && (
+        <MenuContainer>
+          <DisplayUserImageContainer
+            image_pass={user.avatar}
+            onClick={changeIsOpen}
+          />
+          <SubMenu>
+            {isOpen && (
+              <ul>
+                <LiContainer onClick={changeIsOpen}>
+                  <MyLink href="/user/update-info" design="dropdown-header">
+                    登録情報編集
+                  </MyLink>
+                </LiContainer>
+                <LiContainer onClick={changeIsOpen}>
+                  <MyLink href="/" design="dropdown-header">
+                    購入履歴
+                  </MyLink>
+                </LiContainer>
+              </ul>
+            )}
+          </SubMenu>
+        </MenuContainer>
+      )}
     </HeaderContainer>
   );
 };

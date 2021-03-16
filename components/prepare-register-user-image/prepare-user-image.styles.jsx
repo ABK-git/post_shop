@@ -6,7 +6,7 @@ export const NoneInput = styled.input`
 `;
 
 export const ImgContainer = styled.label`
-  ${tw`block w-32 h-32 bg-cover mx-auto`}
+  ${tw`block w-32 h-32 bg-cover mx-auto cursor-pointer`}
   ${(props) =>
     props.file
       ? css`
@@ -22,5 +22,5 @@ export const GroupContainer = styled.div`
 `;
 
 export const ImageOfFile = styled.img`
-  ${tw`absolute w-32 h-32 rounded-full inset-0 m-auto`}
+  ${tw`absolute w-32 h-32 rounded-full inset-0 m-auto cursor-pointer`}
 `;
