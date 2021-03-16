@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
+    "@material-ui/core": "^4.11.3",
     "@styled-icons/boxicons-regular": "^10.23.0",
     "@styled-icons/icomoon": "^10.18.0",
     "apollo-boost": "^0.4.9",
@@ -23,6 +24,7 @@
     "express-session": "^1.17.1",
     "formik": "^2.2.6",
     "graphql": "^15.5.0",
+    "material-ui-flat-pagination": "^4.1.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.15",
     "multer": "^1.4.2",

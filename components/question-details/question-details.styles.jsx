@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import tw from "tailwind.macro";
 import TextareaInput from "../textarea-input/textarea-input.component";
+import Pagination from "material-ui-flat-pagination";
 
 export const QuestionDetailsContainer = styled.div`
   ${tw`w-full pt-5 h-screen bg-gray-500 overflow-auto`}
@@ -39,4 +40,8 @@ export const RepliesLength = styled.p`
 `;
 export const MarginLeftDiv = styled.div`
   ${tw`ml-3`}
+`;
+
+export const PaginationContainer = styled(Pagination)`
+  ${tw`flex justify-center`}
 `;
