@@ -6,11 +6,12 @@ export const NoneInput = styled.input`
 `;
 
 export const ImgContainer = styled.label`
-  ${tw`block w-32 h-32 bg-cover mx-auto cursor-pointer`}
+  ${tw`block w-32 h-32 bg-cover mx-auto cursor-pointer rounded-full`}
+  background-image: url("/images/user/no_user.png");
   ${(props) =>
-    props.file
+    props.avatar
       ? css`
-          background-image: url(URL.createObjectURL(props.file));
+          background-image: url(${props.avatar});
         `
       : css`
           background-image: url("/images/user/no_user.png");

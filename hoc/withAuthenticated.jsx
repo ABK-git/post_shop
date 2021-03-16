@@ -4,17 +4,17 @@ import React, { useEffect } from "react";
 import Spinner from "../components/spinner/spinner.component";
 
 const WithAuthenticated = (WrappedComponent) => (props) => {
-  const {
-    data: { user } = {},
-    loading,
-    error,
-  } = getAuthUser();
+  const { data: { user } = {}, loading, error } = getAuthUser();
 
   if (loading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
-  return user ? <WrappedComponent {...props} /> : <Redirect to="/" />;
+  return user ? (
+    <WrappedComponent {...props} user={user} />
+  ) : (
+    <Redirect to="/" />
+  );
 };
 
 export default WithAuthenticated;
