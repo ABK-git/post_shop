@@ -50,9 +50,6 @@ export const useCreateProduct = () =>
         query: GET_PRODUCTS,
         data: { products: [createProduct, ...products] },
       });
-      const { user } = cache.readQuery({ query: GET_USER });
-      user.products.push(createProduct);
-      cache.writeQuery({ query: GET_USER, data: { user } });
     },
   });
 
