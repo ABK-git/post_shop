@@ -10,6 +10,7 @@ const PrepareUserImage = ({
   handleChangeSetFile,
   handleDeleteSetFile,
   file,
+  avatar
 }) => (
   <GroupContainer>
     {file && (
@@ -18,7 +19,7 @@ const PrepareUserImage = ({
         onClick={handleDeleteSetFile}
       />
     )}
-    <ImgContainer file={file}>
+    <ImgContainer avatar={avatar}>
       <NoneInput
         accept="image/*"
         type="file"

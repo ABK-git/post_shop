@@ -5,7 +5,7 @@ const DisplayUserImage = ({ image_pass, ...otherProps }) =>
   image_pass ? (
     <UserImage
       src={image_pass}
-      onError={"/images/user/no_user.png"}
+      onerror={"/images/user/no_user.png"}
       {...otherProps}
     />
   ) : (
