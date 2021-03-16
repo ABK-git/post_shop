@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getLazyAuthUser, userSignOut } from "../../apollo/actions";
+import { getAuthUser, userSignOut } from "../../apollo/actions";
 import withApollo from "../../hoc/withApollo";
 import {
   HeaderContainer,
@@ -15,41 +15,31 @@ import {
 import MyLink from "../my-link/my-link.component";
 import { useRouter } from "next/router";
 import MyContext from "../../context/index";
+import Spinner from "../spinner/spinner.component";
 
 const Header = ({ apollo }) => {
   //graphql
-  const [getUser, { data, error }] = getLazyAuthUser();
-  const [user, setUser] = useState(null);
+  const { data: { user } = {}, loading } = getAuthUser();
   const [signOut] = userSignOut();
   const router = useRouter();
   //context
   const my_context = useContext(MyContext);
   const { displayMenu, changeDisplayMenu } = my_context;
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  if (data) {
-    if (data.user && !user) {
-      setUser(data.user);
-    }
-    if (!data.user && user) {
-      setUser(null);
-    }
-  }
-
   const handleLogout = () => {
     signOut().then(() => {
       apollo.resetStore().then(() => router.push("/"));
     });
   };
-
   //Userドロップダウンリスト関連
   const [isOpen, setIsOpen] = useState(false);
   const changeIsOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  if(loading){
+    return <Spinner/>
+  }
 
   return (
     <HeaderContainer>

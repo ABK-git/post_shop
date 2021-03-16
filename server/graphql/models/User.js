@@ -28,7 +28,7 @@ class User {
     //ログインユーザーの取得
     let oldAvatar = "";
     const id = ctx.getUser();
-    const user = await this.Model.findById(id);
+    const user = await this.Model.findById(id).populate("products");
     if(!user){
       throw new Error("ログインしてください");
     }
@@ -38,7 +38,9 @@ class User {
     user.username = username;
     user.email = email;
     user.password = password;
-    user.avatar = avatar;
+    if(avatar){
+      user.avatar = avatar;
+    }
     //update
     await user.save();
     //古いUser画像を削除
