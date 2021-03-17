@@ -7,6 +7,7 @@ const {
   questionTypes,
   replyTypes,
   reviewTypes,
+  orderTypes,
 } = require("./types");
 //GraphQL Model
 const User = require("./models/User");
@@ -14,6 +15,7 @@ const Product = require("./models/Product");
 const Question = require("./models/Question");
 const Reply = require("./models/Reply");
 const Review = require("./models/Review");
+const Order = require("./models/Order");
 
 //GraphQL resolvers
 const {
@@ -25,6 +27,7 @@ const {
   questionQueries,
   replyMutations,
   reviewMutations,
+  orderMutations,
 } = require("./resolvers");
 //context
 const { buildAuthContext } = require("./context");
@@ -37,6 +40,7 @@ exports.createApolloServer = () => {
     ${questionTypes}
     ${replyTypes}
     ${reviewTypes}
+    ${orderTypes}
 
     type Query {
       user: User
@@ -47,6 +51,7 @@ exports.createApolloServer = () => {
       question(id: ID): Question
       reply(id: ID): Reply
       review(id: ID): Review
+      order(id: ID): Order
     }
 
     type Mutation {
@@ -59,6 +64,7 @@ exports.createApolloServer = () => {
       createQuestion(input: QuestionCreateInput): Question
       createReply(input: ReplyCreateInput): Reply
       createReview(input: ReviewCreateInput): Review
+      createOrder(input: OrderCreateInput): Order
     }
   `;
   //resolver
@@ -74,6 +80,7 @@ exports.createApolloServer = () => {
       ...questionMutations,
       ...replyMutations,
       ...reviewMutations,
+      ...orderMutations,
     },
   };
 
@@ -89,6 +96,7 @@ exports.createApolloServer = () => {
         Question: new Question(mongoose.model("Question"), req.user),
         Reply: new Reply(mongoose.model("Reply"), req.user),
         Review: new Review(mongoose.model("Review"), req.user),
+        Order: new Order(mongoose.model("Order"), req.user),
       },
     }),
   });
