@@ -53,7 +53,7 @@ const Header = ({ apollo }) => {
     if (!data.user && user) {
       setUser(null);
     }
-    if (user && data.user) {
+    if (user && data.user && data.user.avatar != null) {
       if (data.user.avatar !== user.avatar) {
         setUser(data.user);
       }
@@ -104,6 +104,11 @@ const Header = ({ apollo }) => {
                 <LiContainer onClick={changeIsOpen}>
                   <MyLink href="/user/update-info" design="dropdown-header">
                     登録情報編集
+                  </MyLink>
+                </LiContainer>
+                <LiContainer onClick={changeIsOpen}>
+                  <MyLink href="/user/cart" design="dropdown-header">
+                    カート
                   </MyLink>
                 </LiContainer>
                 <LiContainer onClick={changeIsOpen}>

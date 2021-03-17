@@ -13,6 +13,7 @@ import {
   CREATE_REVIEW,
   UPDATE_USER,
   CREATE_ORDER,
+  USERS_CART,
 } from "../queries";
 
 //User認証
@@ -102,9 +103,31 @@ export const useCreateReview = () =>
   });
 
 //Order
+export const getUsersCart = () => useQuery(USERS_CART);
 export const useCreateOrder = () =>
   useMutation(CREATE_ORDER, {
     update(cache, { data: { createOrder } }) {
-      console.log(createOrder);
+      let { usersCart } = cache.readQuery({
+        query: USERS_CART,
+      });
+      
+      const addQuantity = (order) =>
+        order.product._id === createOrder.product._id;
+      const haveSameOrder = usersCart.findIndex(addQuantity);
+      if (haveSameOrder >= 0) {
+        cache.writeQuery({ query: USERS_CART, data: { usersCart } });
+      } else {
+        if (usersCart.length === 0) {
+          cache.writeQuery({
+            query: USERS_CART,
+            data: { usersCart: [createOrder] },
+          });
+        } else {
+          cache.writeQuery({
+            query: USERS_CART,
+            data: { usersCart: [...usersCart, createOrder] },
+          });
+        }
+      }
     },
   });

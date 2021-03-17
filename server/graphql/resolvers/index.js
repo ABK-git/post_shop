@@ -89,3 +89,10 @@ exports.orderMutations = {
     return ctx.models.Order.getById(createdOrder._id);
   },
 };
+
+//OrderのQuery
+exports.orderQueries = {
+  usersCart: async (root, args, ctx) => {
+    return ctx.models.Order.getAllByUserCart();
+  },
+};
