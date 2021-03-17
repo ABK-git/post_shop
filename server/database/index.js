@@ -9,6 +9,7 @@ require("./models/product");
 require("./models/question");
 require("./models/reply");
 require("./models/review");
+require("./models/order");
 
 exports.connect = () => {
   mongoose.connect(

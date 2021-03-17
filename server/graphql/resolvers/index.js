@@ -81,3 +81,11 @@ exports.reviewMutations = {
     return createdReview;
   },
 };
+
+//OrderのMutation
+exports.orderMutations = {
+  createOrder: async (root, { input }, ctx) => {
+    const createdOrder = await ctx.models.Order.create(input);
+    return ctx.models.Order.getById(createdOrder._id);
+  },
+};

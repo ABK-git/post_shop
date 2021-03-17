@@ -99,3 +99,21 @@ exports.reviewTypes = `
     product: ID!
   }
 `;
+
+exports.orderTypes = `
+  type Order{
+    _id: ID,
+    user: User,
+    product: Product,
+    quantity: Int,
+    createdAt: String,
+    updatedAt: String,
+    ordered: Boolean,
+    adminChecked: Boolean
+  }
+
+  input OrderCreateInput{
+    product: ID!,
+    quantity: Int!,
+  }
+`;
