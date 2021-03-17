@@ -51,6 +51,7 @@ const DisplayProductImages = ({
             getVisibility={imagesNumber === 0}
             isExhibit={
               handleRemoveImage == undefined &&
+              images &&
               images.length === 0 &&
               index !== undefined
             }
@@ -64,7 +65,7 @@ const DisplayProductImages = ({
               width={smBreakPoint ? 250 : 160}
               height={smBreakPoint ? 200 : 130}
             />
-          ) : images.length != 0 ? (
+          ) :images && images.length != 0 ? (
             handleClickToProductDetails != undefined ? (
               <ToDetails onClick={handleClickToProductDetails}>
                 <Image
@@ -112,17 +113,18 @@ const DisplayProductImages = ({
         ) : (
           <ChevronRightButton
             onClick={changeImageRight}
-            getVisibility={imagesNumber === images.length - 1}
+            getVisibility={images && imagesNumber === images.length - 1}
             isExhibit={
               handleRemoveImage == undefined &&
+              images && 
               images.length === 0 &&
               index !== undefined
             }
-            style={{ visibility: images.length === 0 && "hidden" }}
+            style={{ visibility: images == null && "hidden" }}
           />
         )}
       </ProductImagesContainer>
-      {handleRemoveImage && (
+      {handleRemoveImage && images && (
         <ImageIndex>{index + 1 + "/" + images.length}</ImageIndex>
       )}
     </div>
