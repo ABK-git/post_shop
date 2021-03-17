@@ -113,7 +113,6 @@ exports.orderTypes = `
   }
 
   input OrderCreateInput{
-    product: ID!,
-    quantity: Int!,
+    product: ID!
   }
 `;

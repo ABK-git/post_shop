@@ -8,12 +8,26 @@ class Order {
     return this.Model.findById(id).populate("product");
   }
 
-  create(data) {
+  async create(data) {
     if (!this.user) {
       throw new Error("ログインしてください");
     }
-    data.user = this.user;
-    return this.Model.create(data);
+    //購入ユーザのカートに同じ商品が入っているかを確認。
+    const getSameProductOrder = await this.Model.findOne({
+      user: this.user._id,
+      ordered: false,
+    });
+    //findOneは見つからなかった場合null
+    if (getSameProductOrder) {
+      //個数を一つ追加
+      await getSameProductOrder.quantity++;
+      await getSameProductOrder.save();
+      return getSameProductOrder;
+    } else {
+      data.user = this.user;
+      const createdOrder = await this.Model.create(data);
+      return await this.Model.findById(createdOrder._id);
+    }
   }
 }
 
