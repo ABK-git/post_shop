@@ -19,7 +19,7 @@ const PrepareUserImage = ({
         onClick={handleDeleteSetFile}
       />
     )}
-    <ImgContainer avatar={avatar}>
+    <ImgContainer avatar={avatar} file={file}>
       <NoneInput
         accept="image/*"
         type="file"
