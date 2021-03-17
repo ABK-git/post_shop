@@ -13,38 +13,32 @@ import DisplayStars from "../display-stars/display-stars.component";
 import ReloadAndToHome from "../reload-and-tohome";
 
 const ProductPreview = ({ product }) => {
-  const images = product.imagePasses;
-
   const router = useRouter();
   //商品ページへの移動
   const handleClickToProductDetails = () => {
     router.push(`/product/${product._id}/details`);
   };
 
-  try {
-    return (
-      <ProductCell>
-        <DisplayProductImages
-          images={images}
-          handleClickToProductDetails={handleClickToProductDetails}
-        />
-        <ProductIntroduce onClick={handleClickToProductDetails}>
-          <Overhidden>{product.name}</Overhidden>
-          <OverhiddenLeft>￥{product.price.toLocaleString()}</OverhiddenLeft>
-          <OverhiddenRight>
-            <DisplayStars
-              value={getEvaluationOfStars(product.reviews)}
-              isEdit={false}
-              cursor_pointer={true}
-            />
-            <p>({product.reviews.length})</p>
-          </OverhiddenRight>
-        </ProductIntroduce>
-      </ProductCell>
-    );
-  } catch (e) {
-    return <ReloadAndToHome />;
-  }
+  return (
+    <ProductCell>
+      <DisplayProductImages
+        images={product.imagePasses}
+        handleClickToProductDetails={handleClickToProductDetails}
+      />
+      <ProductIntroduce onClick={handleClickToProductDetails}>
+        <Overhidden>{product.name}</Overhidden>
+        <OverhiddenLeft>￥{product.price}</OverhiddenLeft>
+        <OverhiddenRight>
+          <DisplayStars
+            value={getEvaluationOfStars(product.reviews)}
+            isEdit={false}
+            cursor_pointer={true}
+          />
+          <p>({product.reviews.length})</p>
+        </OverhiddenRight>
+      </ProductIntroduce>
+    </ProductCell>
+  );
 };
 
 export default ProductPreview;

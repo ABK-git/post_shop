@@ -9,7 +9,6 @@ import Cart from "../../components/cart/cart.page";
 const CartPage = () => {
   const { data, loading } = getUsersCart();
   const usersCart = (data && data.usersCart) || {};
-
   if (loading) {
     return <Spinner />;
   }

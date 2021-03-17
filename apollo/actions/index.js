@@ -110,13 +110,12 @@ export const useCreateOrder = () =>
       let { usersCart } = cache.readQuery({
         query: USERS_CART,
       });
-      
+
       const addQuantity = (order) =>
         order.product._id === createOrder.product._id;
+
       const haveSameOrder = usersCart.findIndex(addQuantity);
-      if (haveSameOrder >= 0) {
-        cache.writeQuery({ query: USERS_CART, data: { usersCart } });
-      } else {
+      if (haveSameOrder < 0) {
         if (usersCart.length === 0) {
           cache.writeQuery({
             query: USERS_CART,
