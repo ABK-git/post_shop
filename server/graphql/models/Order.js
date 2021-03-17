@@ -10,11 +10,8 @@ class Order {
 
   getAllByUserCart() {
     return this.Model.find({ user: this.user._id, ordered: false })
-      .populate({ path: "product", populate: "user" })
-      .populate("user")
-      .sort({
-        updatedAt: "asc",
-      });
+      .populate({ path: "product", populate: {path: "user"} })
+      .populate("user");
   }
 
   async create(data) {
