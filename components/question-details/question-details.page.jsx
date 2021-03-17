@@ -1,4 +1,4 @@
-import Router from "next/router";
+import router from "next/router";
 import React, { useState } from "react";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
@@ -43,7 +43,7 @@ const QuestionDetails = ({ question }) => {
   return (
     <QuestionDetailsContainer>
       <CustomButton
-        onClick={() => Router.back()}
+        onClick={() => router.back()}
         design="to_list_and_margin-left">
         質問一覧に戻る
       </CustomButton>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   ProductDetailsContainer,
   LeftJustify,
@@ -35,38 +35,16 @@ import Pagination from "material-ui-flat-pagination";
 
 const ProductDetails = ({ product }) => {
   const { data: { user } = {}, loading, error } = getAuthUser();
-  const router = useRouter();
-  const { openQuestions } = router.query;
-  const [displayQuestions, setDisplayQuestions] = useState(
-    openQuestions ? true : false
-  );
+
+  const [displayQuestions, setDisplayQuestions] = useState(false);
   const [switchQuestion, setSwitchQuestion] = useState(false);
   const [displayReviews, setDiplayReviews] = useState(false);
   const [switchReview, setSwitchReview] = useState(false);
-  const clearQuery = () => {
-    router.replace(
-      `/product/${product._id}/details`,
-      `/product/${product._id}/details`,
-      { shallow: true }
-    );
-  };
-  const ref = useRef(null);
 
   //Pagination関連
   const [offsetQuestion, setOffsetQuestion] = useState(0);
   const [offsetReview, setOffsetReview] = useState(0);
   const parPage = 5;
-
-  useEffect(() => {
-    if (openQuestions) {
-      ref.current = setTimeout(() => {
-        clearQuery();
-      }, 100);
-    }
-    return () => {
-      clearTimeout(ref.current);
-    };
-  }, [openQuestions]);
 
   const changeDisplayQuestions = () => {
     setDiplayReviews(false);
