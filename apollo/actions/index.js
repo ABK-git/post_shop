@@ -12,6 +12,7 @@ import {
   CREATE_REPLY,
   CREATE_REVIEW,
   UPDATE_USER,
+  CREATE_ORDER,
 } from "../queries";
 
 //User認証
@@ -97,5 +98,13 @@ export const useCreateReview = () =>
       delete createReview.product;
       product.reviews.push(createReview);
       cache.writeQuery({ query: GET_PRODUCT, data: { product } });
+    },
+  });
+
+//Order
+export const useCreateOrder = () =>
+  useMutation(CREATE_ORDER, {
+    update(cache, { data: { createOrder } }) {
+      console.log(createOrder);
     },
   });

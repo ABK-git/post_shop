@@ -21,6 +21,7 @@ import {
   useCreateQuestion,
   useCreateReview,
   getAuthUser,
+  useCreateOrder,
 } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import ReviewForm from "../review-form/review-form.component";
@@ -62,6 +63,7 @@ const ProductDetails = ({ product }) => {
 
   const [createQuestion, { error: createQuestionError }] = useCreateQuestion();
   const [createReview, { error: createReviewError }] = useCreateReview();
+  const [createOrder, { error: createOrderError , data }] = useCreateOrder();
 
   /**
    * formik(Question)
@@ -124,12 +126,7 @@ const ProductDetails = ({ product }) => {
   const onChangeStars = (value) => {
     formikReview.setFieldValue("stars", value);
   };
-
-  //商品をカートに入れる
-  const onAddCart = () => {
-    console.log("addCart");
-  };
-
+  
   //レスポンシブデザイン
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
@@ -250,8 +247,11 @@ const ProductDetails = ({ product }) => {
           )}
         </DisplayList>
       )}
-
-      <CustomButton design="add_cart" onClick={onAddCart}>
+      <CustomButton
+        design="add_cart"
+        onClick={() => {
+          createOrder({ variables: { product: product._id } });
+        }}>
         カートに入れる
       </CustomButton>
     </ProductDetailsContainer>

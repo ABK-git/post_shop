@@ -26,7 +26,8 @@ class Order {
     } else {
       data.user = this.user;
       const createdOrder = await this.Model.create(data);
-      return await this.Model.findById(createdOrder._id);
+      const newOrder = await this.Model.findById(createdOrder._id);
+      return newOrder;
     }
   }
 }

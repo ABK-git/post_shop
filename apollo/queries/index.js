@@ -375,3 +375,31 @@ export const CREATE_REVIEW = gql`
     }
   }
 `;
+
+//Order
+export const CREATE_ORDER = gql`
+  mutation CreateOrder($product: ID!) {
+    createOrder(input: { product: $product }) {
+      _id
+      product {
+        _id
+        name
+        quantity
+        price
+        user{
+          _id
+          username
+        }
+      }
+      user{
+        _id
+        username
+      }
+      quantity
+      ordered
+      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;
