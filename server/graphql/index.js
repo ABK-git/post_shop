@@ -28,6 +28,7 @@ const {
   replyMutations,
   reviewMutations,
   orderMutations,
+  orderQueries,
 } = require("./resolvers");
 //context
 const { buildAuthContext } = require("./context");
@@ -52,6 +53,8 @@ exports.createApolloServer = () => {
       reply(id: ID): Reply
       review(id: ID): Review
       order(id: ID): Order
+
+      usersCart: [Order]
     }
 
     type Mutation {
@@ -73,6 +76,7 @@ exports.createApolloServer = () => {
       ...userQueries,
       ...productQueries,
       ...questionQueries,
+      ...orderQueries,
     },
     Mutation: {
       ...userMutations,

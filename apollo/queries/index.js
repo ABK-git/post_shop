@@ -376,24 +376,56 @@ export const CREATE_REVIEW = gql`
   }
 `;
 
-//Order
-export const CREATE_ORDER = gql`
-  mutation CreateOrder($product: ID!) {
-    createOrder(input: { product: $product }) {
+//OrderのQuery
+export const USERS_CART = gql`
+  query UsersCart {
+    usersCart {
       _id
+      user {
+        _id
+        username
+        avatar
+      }
       product {
         _id
         name
         quantity
         price
-        user{
+        user {
           _id
           username
+          avatar
         }
       }
-      user{
+      quantity
+      ordered
+      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+//OrderのMutation
+export const CREATE_ORDER = gql`
+  mutation CreateOrder($product: ID!) {
+    createOrder(input: { product: $product }) {
+      _id
+      user {
         _id
         username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        user {
+          _id
+          username
+          avatar
+        }
       }
       quantity
       ordered
