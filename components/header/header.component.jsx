@@ -47,11 +47,16 @@ const Header = ({ apollo }) => {
   }
 
   if (data) {
-    if ((data.user && !user) || data.user.avatar !== user.avatar) {
+    if (data.user && !user) {
       setUser(data.user);
     }
     if (!data.user && user) {
       setUser(null);
+    }
+    if (user && data.user) {
+      if (data.user.avatar !== user.avatar) {
+        setUser(data.user);
+      }
     }
   }
 

@@ -7,15 +7,19 @@ export const NoneInput = styled.input`
 
 export const ImgContainer = styled.label`
   ${tw`block w-32 h-32 bg-cover mx-auto cursor-pointer rounded-full`}
-  background-image: url("/images/user/no_user.png");
-  ${(props) =>
-    props.avatar
-      ? css`
+  ${(props) => {
+    if (!props.file) {
+      if (props.avatar) {
+        return css`
           background-image: url(${props.avatar});
-        `
-      : css`
+        `;
+      } else {
+        return css`
           background-image: url("/images/user/no_user.png");
-        `}
+        `;
+      }
+    }
+  }}
 `;
 
 export const GroupContainer = styled.div`
