@@ -8,6 +8,15 @@ class Order {
     return this.Model.findById(id).populate("product");
   }
 
+  getAllByUserCart() {
+    return this.Model.find({ user: this.user._id, ordered: false })
+      .populate({ path: "product", populate: "user" })
+      .populate("user")
+      .sort({
+        updatedAt: "asc",
+      });
+  }
+
   async create(data) {
     if (!this.user) {
       throw new Error("ログインしてください");
@@ -16,6 +25,7 @@ class Order {
     const getSameProductOrder = await this.Model.findOne({
       user: this.user._id,
       ordered: false,
+      product: data.product,
     });
     //findOneは見つからなかった場合null
     if (getSameProductOrder) {
