@@ -250,6 +250,7 @@ const ProductDetails = ({ product }) => {
           )}
         </DisplayList>
       )}
+
       <CustomButton design="add_cart" onClick={onAddCart}>
         カートに入れる
       </CustomButton>
