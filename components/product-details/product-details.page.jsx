@@ -23,7 +23,6 @@ import {
   getAuthUser,
 } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
-import { useRouter } from "next/router";
 import ReviewForm from "../review-form/review-form.component";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import DisplayStars from "../display-stars/display-stars.component";
@@ -126,6 +125,12 @@ const ProductDetails = ({ product }) => {
     formikReview.setFieldValue("stars", value);
   };
 
+  //商品をカートに入れる
+  const onAddCart = () => {
+    console.log("addCart");
+  };
+
+  //レスポンシブデザイン
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
 
@@ -245,6 +250,9 @@ const ProductDetails = ({ product }) => {
           )}
         </DisplayList>
       )}
+      <CustomButton design="add_cart" onClick={onAddCart}>
+        カートに入れる
+      </CustomButton>
     </ProductDetailsContainer>
   );
 };

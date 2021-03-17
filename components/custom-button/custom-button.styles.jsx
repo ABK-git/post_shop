@@ -29,6 +29,11 @@ const replyQuestion = css`
   ${tw`bg-red-600 hover:opacity-75 border-3 border-blue-700 w-full mt-0`}
 `;
 
+const addCart = css`
+  ${tw`w-1/2 font-bold bg-purple-700 mt-4 text-white rounded-md 
+  hover:bg-red-700 hover:text-blue-900`}
+`;
+
 const getButtonStyles = ({ design }) => {
   switch (design) {
     case "open_questions":
@@ -48,6 +53,9 @@ const getButtonStyles = ({ design }) => {
 
     case "reply_to_question":
       return replyQuestion;
+
+    case "add_cart":
+      return addCart;
 
     default:
       return "";
