@@ -32,9 +32,7 @@ class Order {
       return getSameProductOrder;
     } else {
       data.user = this.user;
-      const createdOrder = await this.Model.create(data);
-      const newOrder = await this.Model.findById(createdOrder._id);
-      return newOrder;
+      return this.Model.create(data);
     }
   }
 }
