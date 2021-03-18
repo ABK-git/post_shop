@@ -1,7 +1,27 @@
 import React from "react";
+import OrderPreview from "../order-preview/order-preview.component";
+import {
+  AmountCart,
+  CartContainer,
+  OverPreviewContainer,
+  TitleMessage,
+} from "./cart.styles";
 
 const Cart = ({ usersCart }) => {
-  console.log(usersCart);
-  return <div>Hello usersCart</div>;
+  let amountCart = 0;
+  usersCart.forEach((order) => {
+    amountCart += order.product.price * order.quantity;
+  });
+  return (
+    <CartContainer>
+      <TitleMessage>YOUR CART</TitleMessage>
+      <AmountCart>合計:￥{amountCart.toLocaleString()}</AmountCart>
+      <OverPreviewContainer>
+        {usersCart.map((order) => (
+          <OrderPreview key={order._id} order={order} />
+        ))}
+      </OverPreviewContainer>
+    </CartContainer>
+  );
 };
 export default Cart;

@@ -30,7 +30,7 @@ const replyQuestion = css`
 `;
 
 const addCart = css`
-  ${tw`w-1/2 font-bold bg-purple-700 mt-4 text-white rounded-md 
+  ${tw`w-1/2 font-bold bg-purple-700 mt-4 text-white rounded-md
   hover:bg-red-700 hover:text-blue-900`}
 `;
 

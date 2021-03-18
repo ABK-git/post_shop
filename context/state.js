@@ -13,7 +13,7 @@ const MyState = ({ children }) => {
       lowestPrice: "",
       highestPrice: "",
       lowestEvaluation: 0,
-      lowestReviewsLength: 0
+      lowestReviewsLength: 0,
     },
     sortState: "出品日降順",
   };
@@ -45,6 +45,7 @@ const MyState = ({ children }) => {
   };
 
   const smBreakPoint = useMediaQuery({ minWidth: 640 });
+  const hmBreakPoint = useMediaQuery({ minWidth: 360 });
 
   const { displayMenu, filterState, sortState } = state;
   return (
@@ -54,10 +55,11 @@ const MyState = ({ children }) => {
         filterState,
         sortState,
         smBreakPoint,
+        hmBreakPoint,
         changeDisplayMenu,
         changeFilter,
         setFilterFromQuery,
-        setSortState
+        setSortState,
       }}>
       {children}
     </MyContext.Provider>
