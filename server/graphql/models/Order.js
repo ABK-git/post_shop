@@ -5,13 +5,15 @@ class Order {
   }
 
   getById(id) {
-    return this.Model.findById(id).populate("product");
+    return this.Model.findById(id)
+      .populate({ path: "product", populate: { path: "user" } })
+      .populate("user");
   }
 
   getAllByUserCart() {
     return this.Model.find({ user: this.user._id, ordered: false })
-      .populate({ path: "product", populate: {path: "user"} })
-      .populate("user");
+      .populate("user")
+      .populate({ path: "product", populate: { path: "user" } });
   }
 
   async create(data) {
@@ -23,7 +25,10 @@ class Order {
       user: this.user._id,
       ordered: false,
       product: data.product,
-    });
+    })
+      .populate("user")
+      .populate({ path: "product", populate: { path: "user" } });
+
     //findOneは見つからなかった場合null
     if (getSameProductOrder) {
       //個数を一つ追加
