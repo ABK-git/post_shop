@@ -16,6 +16,7 @@ import ExhibitForm from "../exhibit-form/exhibit-form.component";
 import { useCreateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
+import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -146,7 +147,7 @@ const Exhibit = () => {
         )}
       </ContainerDropzone>
       {images.length != 0 && (
-        <DisplayProductImages
+        <PrepareProductImages
           images={images}
           index={index}
           handleClickLeftButton={handleClickLeftButton}
