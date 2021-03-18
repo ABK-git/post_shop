@@ -4,17 +4,12 @@ import {
   ChevronLeftCircle,
   ChevronRightCircle,
 } from "@styled-icons/boxicons-regular";
-import Image from "react-image-resizer";
 
-const setVisible = ({ getVisibility, isExhibit }) => {
-  if (isExhibit) {
-    return invisible;
+const setVisible = ({ getVisibility }) => {
+  if (getVisibility) {
+    return visible;
   } else {
-    if (getVisibility) {
-      return invisible;
-    } else {
-      return visible;
-    }
+    return invisible;
   }
 };
 const visible = css`
@@ -34,38 +29,24 @@ export const ResizeImagesAndRemoveButton = styled.div`
   }
 `;
 
-export const ProductImagesContainer = styled.div`
-  ${tw`flex`}
-`;
-
-export const RemoveImageButton = styled.button`
-  ${tw`
-  m-auto hidden flex-col justify-center items-center absolute
-  font-bold text-xl sm:font-black sm:text-4xl bg-red-500 rounded-lg
-  hover:bg-black hover:text-red-500
-  `}
-`;
-
-export const ResizeImagesContainer = styled(Image)`
+export const Flex = styled.div`
   ${tw`flex`}
 `;
 
 export const ChevronRightButton = styled(ChevronRightCircle)`
-  ${tw` w-10 text-blue-600 hover:text-red-600`}
+  ${tw` w-10 text-blue-600 hover:text-red-600 my-auto`}
 
   ${setVisible}
 `;
 
 export const ChevronLeftButton = styled(ChevronLeftCircle)`
-  ${tw` w-10 text-blue-600 hover:text-red-600`};
+  ${tw`w-10 text-blue-600 hover:text-red-600 my-auto`};
 
   ${setVisible}
-`;
-
-export const ImageIndex = styled.p`
-  ${tw`w-full text-center`}
 `;
 
 export const ToDetails = styled.div`
   ${tw`cursor-pointer`}
 `;
+
+
