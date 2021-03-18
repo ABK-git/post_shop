@@ -24,7 +24,7 @@ const ProductContent = ({ product }) => (
       </SetNameAndContent>
       <SetNameAndContent>
         <InName>値段:</InName>
-        <InContent>{product.price}</InContent>
+        <InContent>{product.price.toLocaleString()}</InContent>
       </SetNameAndContent>
       <SetNameAndContent>
         <InName>在庫:</InName>
