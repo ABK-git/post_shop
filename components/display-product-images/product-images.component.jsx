@@ -38,7 +38,6 @@ const ProductImages = ({ images, handleClickToProductDetails }) => {
             }
             width={160}
             height={130}
-            onError={"/images/products/noimage.png"}
           />
         </ToDetails>
       ) : (
@@ -48,12 +47,11 @@ const ProductImages = ({ images, handleClickToProductDetails }) => {
           }
           width={smBreakPoint ? 250 : 160}
           height={smBreakPoint ? 200 : 130}
-          onError={"/images/products/noimage.png"}
         />
       )}
       <ChevronRightButton
         onClick={changeImageRight}
-        getVisibility={imagesNumber < images.length - 1}
+        getVisibility={images && imagesNumber < images.length - 1}
       />
     </Flex>
   );

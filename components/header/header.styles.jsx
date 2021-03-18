@@ -44,3 +44,7 @@ export const SubMenu = styled.div`
 export const DisplayUserImageContainer = styled(DisplayUserImage)`
   ${tw`mx-auto cursor-pointer`}
 `;
+
+export const Flex = styled.div`
+  ${tw`flex`}
+`;
