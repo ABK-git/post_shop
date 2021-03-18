@@ -7,8 +7,8 @@ module.exports = {
         bigelow: ["Bigelow Rules", "cursive"],
       },
       width: {
-        '98/100': '98%'
-      }
+        "98/100": "98%",
+      },
     },
   },
   variants: {

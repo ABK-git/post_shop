@@ -27,7 +27,9 @@ const ProductPreview = ({ product }) => {
       />
       <ProductIntroduce onClick={handleClickToProductDetails}>
         <Overhidden>{product.name}</Overhidden>
-        <OverhiddenLeft>￥{product.price}</OverhiddenLeft>
+        <OverhiddenLeft>
+          ￥{String(product.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
+        </OverhiddenLeft>
         <OverhiddenRight>
           <DisplayStars
             value={getEvaluationOfStars(product.reviews)}

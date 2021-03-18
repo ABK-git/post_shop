@@ -391,6 +391,7 @@ export const USERS_CART = gql`
         name
         quantity
         price
+        imagePasses
         user {
           _id
           username
@@ -421,6 +422,7 @@ export const CREATE_ORDER = gql`
         name
         quantity
         price
+        imagePasses
         user {
           _id
           username
