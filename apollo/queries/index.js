@@ -497,3 +497,9 @@ export const MINUS_ORDER_QUANTITY = gql`
     }
   }
 `;
+
+export const DELETE_ORDER = gql`
+  mutation DeleteOrder($id: ID) {
+    deleteOrder(id: $id)
+  }
+`;
