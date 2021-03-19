@@ -15,6 +15,7 @@ import {
   CREATE_ORDER,
   USERS_CART,
   PLUS_ORDER_QUANTITY,
+  MINUS_ORDER_QUANTITY,
 } from "../queries";
 
 //User認証
@@ -106,6 +107,7 @@ export const useCreateReview = () =>
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
+export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
 export const useCreateOrder = () =>
   useMutation(CREATE_ORDER, {
     update(cache, { data: { createOrder } }) {
