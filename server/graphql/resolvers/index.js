@@ -88,6 +88,9 @@ exports.orderMutations = {
     const createdOrder = await ctx.models.Order.create(input);
     return ctx.models.Order.getById(createdOrder._id);
   },
+  plusQuantity: async (root, { id }, ctx) => {
+    return await ctx.models.Order.plusQuantity(id);
+  },
 };
 
 //OrderのQuery

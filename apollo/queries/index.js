@@ -437,3 +437,33 @@ export const CREATE_ORDER = gql`
     }
   }
 `;
+
+export const PLUS_ORDER_QUANTITY = gql`
+  mutation PlusQuantity($id: ID) {
+    plusQuantity(id: $id) {
+      _id
+      user {
+        _id
+        username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        imagePasses
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
+      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;

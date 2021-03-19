@@ -14,6 +14,7 @@ import {
   UPDATE_USER,
   CREATE_ORDER,
   USERS_CART,
+  PLUS_ORDER_QUANTITY,
 } from "../queries";
 
 //User認証
@@ -42,7 +43,6 @@ export const userSignOut = () => useMutation(SIGN_OUT);
 
 //Product
 export const getProduct = (options) => useQuery(GET_PRODUCT, options);
-export const getLazyProduct = (options) => useLazyQuery(GET_PRODUCT, options);
 export const getProducts = () => useQuery(GET_PRODUCTS);
 export const getLazyProducts = () => useLazyQuery(GET_PRODUCTS);
 export const useCreateProduct = () =>
@@ -105,6 +105,7 @@ export const useCreateReview = () =>
 
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
+export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const useCreateOrder = () =>
   useMutation(CREATE_ORDER, {
     update(cache, { data: { createOrder } }) {
