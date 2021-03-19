@@ -1,14 +1,13 @@
 import styled, { css } from "styled-components";
 import tw from "tailwind.macro";
-import {
-  PlusCircle,
-  MinusCircle
-} from "@styled-icons/boxicons-regular";
-
+import { PlusCircle, MinusCircle } from "@styled-icons/boxicons-regular";
+import { Bin } from "@styled-icons/icomoon";
 
 const getHmBreakPoint = ({ hmBreakPoint }) => {
   if (hmBreakPoint) {
-    return css`${tw`w-1/2`}`
+    return css`
+      ${tw`w-1/2`}
+    `;
   }
 };
 export const OrderPreviewContainer = styled.div`
@@ -47,13 +46,17 @@ export const BorderPrice = styled.hr`
 `;
 
 export const Flex = styled.div`
-  ${tw`flex justify-center w-full content-around`}
+  ${tw`flex w-full justify-around`}
 `;
 
 export const PlusCircleButton = styled(PlusCircle)`
-  ${tw`flex justify-start w-8 ml-2 text-blue-600 hover:text-green-800`}
+  ${tw`flex  w-8 ml-2 text-blue-600 hover:text-green-800`}
 `;
 
 export const MinusCircleButton = styled(MinusCircle)`
-  ${tw`flex justify-end w-8 mr-2 text-red-600 hover:text-green-800`}
+  ${tw`flex  w-8 mr-2 text-red-600 hover:text-green-800`}
+`;
+
+export const BinButton = styled(Bin)`
+  ${tw`flex  w-8 mr-2 text-red-600 hover:text-green-800`}
 `;

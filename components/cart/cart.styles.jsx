@@ -9,7 +9,7 @@ export const TitleMessage = styled.p`
   ${tw`font-bold text-3xl sm:text-4xl text-red-600 mb-1`}
 `;
 
-export const OverPreviewContainer = styled.div`
+export const OrderPreviewContainer = styled.div`
   ${tw`w-full flex flex-wrap`}
 `;
 
