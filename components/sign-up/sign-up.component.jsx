@@ -12,13 +12,10 @@ import Spinner from "../spinner/spinner.component";
 import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 
-const SignUp = () => {
+const SignUp = ({ apollo }) => {
   const [signUp, { data, loading, error }] = userSignUp();
   const [createdUser, setCreatedUser] = useState([]);
-  const [
-    signIn,
-    { data: authUser, loading: signInLoading, error: signInError },
-  ] = userSignIn();
+  const [signIn, { loading: signInLoading }] = userSignIn();
   const [alreadySignIn, setAlreadySignIn] = useState(false);
 
   //画像のUPLoad関連
@@ -89,7 +86,9 @@ const SignUp = () => {
   if (data && data.signUp && !alreadySignIn) {
     setAlreadySignIn(true);
     const { email, password } = createdUser;
-    signIn({ variables: { email, password } });
+    signIn({ variables: { email, password } }).then(() => {
+      apollo.resetStore().then(() => router.push("/"));
+    });
   }
 
   if (loading || signInLoading) return <Spinner />;
@@ -103,7 +102,6 @@ const SignUp = () => {
         file={file}
       />
       <SignUpForm formik={formik} />
-      {authUser && authUser.signIn && <Redirect to="/" />}
       {error && <GraphQLErrorMessages error={error} />}
     </SignUpContainer>
   );

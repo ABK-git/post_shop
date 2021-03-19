@@ -26,7 +26,7 @@ import Router, { useRouter } from "next/router";
 import MyContext from "../../context";
 import { getEvaluationOfStars } from "../../utils/functions";
 
-const HomePage = () => {
+const HomePage = ({ productsFromPage }) => {
   const [displaySearchCondition, setDisplaySearchCondition] = useState(false);
   const router = useRouter();
   const { category: queryCategory } = router.query;
@@ -66,8 +66,7 @@ const HomePage = () => {
     };
   }, [queryCategory]);
 
-  const { data, loading } = getProducts();
-  const products = (data && data.products) || [];
+  const products = productsFromPage;
 
   const handleClick = () => {
     setDisplaySearchCondition(!displaySearchCondition);
@@ -194,15 +193,15 @@ const HomePage = () => {
     setSelectDisplay(!selectDisplay);
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
-  if (products.length !== 0) {
-    if (products[0].imagePasses == null) {
-      Router.reload();
-    }
-  }
+  // if (products.length !== 0) {
+  //   if (products[products.length - 1].imagePasses == null) {
+  //     Router.reload();
+  //   }
+  // }
 
   return (
     <HomeContainer>
@@ -299,4 +298,4 @@ const HomePage = () => {
   );
 };
 
-export default withApollo(HomePage);
+export default HomePage;
