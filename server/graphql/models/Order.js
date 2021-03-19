@@ -34,6 +34,10 @@ class Order {
     return order;
   }
 
+  findAndDelete(id) {
+    return this.Model.findOneAndRemove({ _id: id });
+  }
+
   async create(data) {
     if (!this.user) {
       throw new Error("ログインしてください");

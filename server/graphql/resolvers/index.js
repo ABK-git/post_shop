@@ -94,6 +94,10 @@ exports.orderMutations = {
   minusQuantity: async (root, { id }, ctx) => {
     return await ctx.models.Order.minusQuantity(id);
   },
+  deleteOrder: async (root, { id }, ctx) => {
+    const deleteOrder = await ctx.models.Order.findAndDelete(id);
+    return deleteOrder._id;
+  },
 };
 
 //OrderのQuery
