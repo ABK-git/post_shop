@@ -467,3 +467,33 @@ export const PLUS_ORDER_QUANTITY = gql`
     }
   }
 `;
+
+export const MINUS_ORDER_QUANTITY = gql`
+  mutation MinusQuantity($id: ID) {
+    minusQuantity(id: $id) {
+      _id
+      user {
+        _id
+        username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        imagePasses
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
+      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;
