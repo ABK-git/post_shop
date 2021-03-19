@@ -16,6 +16,7 @@ import {
   USERS_CART,
   PLUS_ORDER_QUANTITY,
   MINUS_ORDER_QUANTITY,
+  DELETE_ORDER,
 } from "../queries";
 
 //User認証
@@ -108,6 +109,19 @@ export const useCreateReview = () =>
 export const getUsersCart = () => useQuery(USERS_CART);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
+export const removeOrderFromCart = () =>
+  useMutation(DELETE_ORDER, {
+    update(cache, { data: { deleteOrder } }) {
+      const { usersCart } = cache.readQuery({ query: USERS_CART });
+      const newUsersCart = usersCart.filter(
+        (order) => order._id !== deleteOrder
+      );
+      cache.writeQuery({
+        query: USERS_CART,
+        data: { usersCart: newUsersCart },
+      });
+    },
+  });
 export const useCreateOrder = () =>
   useMutation(CREATE_ORDER, {
     update(cache, { data: { createOrder } }) {

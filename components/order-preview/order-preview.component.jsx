@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
-import { minusOrderQuantity, plusOrderQuantity } from "../../apollo/actions";
+import {
+  removeOrderFromCart,
+  minusOrderQuantity,
+  plusOrderQuantity,
+} from "../../apollo/actions";
 import MyContext from "../../context";
 import ProductImages from "../display-product-images/product-images.component";
 import {
@@ -24,6 +28,7 @@ const OrderPreview = ({ order }) => {
   //graphql
   const [plusQuantity] = plusOrderQuantity();
   const [minusQuantity] = minusOrderQuantity();
+  const [deleteOrder] = removeOrderFromCart();
 
   return (
     <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>
@@ -40,7 +45,13 @@ const OrderPreview = ({ order }) => {
               )}
             </LeftJutifyStart>
             <Flex>
-              {(order.quantity === 1 && <BinButton />) || (
+              {(order.quantity === 1 && (
+                <BinButton
+                  onClick={() => {
+                    deleteOrder({ variables: { id: order._id } });
+                  }}
+                />
+              )) || (
                 <MinusCircleButton
                   onClick={() => {
                     minusQuantity({ variables: { id: order._id } });
