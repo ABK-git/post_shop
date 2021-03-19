@@ -42,6 +42,7 @@ export const userSignOut = () => useMutation(SIGN_OUT);
 
 //Product
 export const getProduct = (options) => useQuery(GET_PRODUCT, options);
+export const getLazyProduct = (options) => useLazyQuery(GET_PRODUCT, options);
 export const getProducts = () => useQuery(GET_PRODUCTS);
 export const getLazyProducts = () => useLazyQuery(GET_PRODUCTS);
 export const useCreateProduct = () =>
