@@ -68,6 +68,8 @@ exports.createApolloServer = () => {
       createReply(input: ReplyCreateInput): Reply
       createReview(input: ReviewCreateInput): Review
       createOrder(input: OrderCreateInput): Order
+
+      plusQuantity(id: ID): Order
     }
   `;
   //resolver

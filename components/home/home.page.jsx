@@ -193,16 +193,6 @@ const HomePage = ({ productsFromPage }) => {
     setSelectDisplay(!selectDisplay);
   };
 
-  // if (loading) {
-  //   return <Spinner />;
-  // }
-
-  // if (products.length !== 0) {
-  //   if (products[products.length - 1].imagePasses == null) {
-  //     Router.reload();
-  //   }
-  // }
-
   return (
     <HomeContainer>
       {displaySearchCondition && (

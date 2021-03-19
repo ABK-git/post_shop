@@ -3,7 +3,7 @@ import OrderPreview from "../order-preview/order-preview.component";
 import {
   AmountCart,
   CartContainer,
-  OverPreviewContainer,
+  OrderPreviewContainer,
   TitleMessage,
 } from "./cart.styles";
 
@@ -16,11 +16,11 @@ const Cart = ({ usersCart }) => {
     <CartContainer>
       <TitleMessage>YOUR CART</TitleMessage>
       <AmountCart>合計:￥{amountCart.toLocaleString()}</AmountCart>
-      <OverPreviewContainer>
+      <OrderPreviewContainer>
         {usersCart.map((order) => (
           <OrderPreview key={order._id} order={order} />
         ))}
-      </OverPreviewContainer>
+      </OrderPreviewContainer>
     </CartContainer>
   );
 };

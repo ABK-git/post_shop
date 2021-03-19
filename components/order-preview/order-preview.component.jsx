@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { plusOrderQuantity } from "../../apollo/actions";
 import MyContext from "../../context";
 import ProductImages from "../display-product-images/product-images.component";
 import {
@@ -13,12 +14,15 @@ import {
   QuantityContainer,
   MinusCircleButton,
   PlusCircleButton,
+  BinButton,
 } from "./order-preview.styles";
 
 const OrderPreview = ({ order }) => {
   //context
   const my_context = useContext(MyContext);
   const { hmBreakPoint } = my_context;
+
+  const [plusQuantity] = plusOrderQuantity();
   return (
     <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>
       <ProductName>{order.product.name}</ProductName>
@@ -27,12 +31,23 @@ const OrderPreview = ({ order }) => {
         <TextRight>
           <div>
             <LeftJutifyStart>
-              単価:￥{order.product.price.toLocaleString()}
+              単価:￥
+              {String(order.product.price).replace(
+                /(\d)(?=(\d\d\d)+(?!\d))/g,
+                "$1,"
+              )}
             </LeftJutifyStart>
             <Flex>
-              <MinusCircleButton>-</MinusCircleButton>
+              {(order.quantity === 1 && <BinButton />) || (
+                <MinusCircleButton>-</MinusCircleButton>
+              )}
               <QuantityContainer>{order.quantity}</QuantityContainer>
-              <PlusCircleButton>+</PlusCircleButton>
+              <PlusCircleButton
+                onClick={() => {
+                  plusQuantity({ variables: { id: order._id } });
+                }}>
+                +
+              </PlusCircleButton>
             </Flex>
           </div>
         </TextRight>

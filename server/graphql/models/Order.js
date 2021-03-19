@@ -16,6 +16,15 @@ class Order {
       .populate({ path: "product", populate: { path: "user" } });
   }
 
+  async plusQuantity(id) {
+    const order = await this.Model.findById(id)
+      .populate("user")
+      .populate({ path: "product", populate: { path: "user" } });
+    order.quantity++;
+    await order.save();
+    return order;
+  }
+
   async create(data) {
     if (!this.user) {
       throw new Error("ログインしてください");
