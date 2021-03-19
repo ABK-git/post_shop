@@ -9,9 +9,11 @@ import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import Redirect from "../redirect";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import Spinner from "../spinner/spinner.component";
+import { useRouter } from "next/router";
 
-const SignIn = () => {
+const SignIn = ({ apollo }) => {
   const [signIn, { data, loading, error }] = userSignIn();
+  const router = useRouter();
 
   const initialValues = {
     email: "",
@@ -31,7 +33,9 @@ const SignIn = () => {
   });
 
   const onSubmit = (values) => {
-    signIn({ variables: values });
+    signIn({ variables: values }).then(() => {
+      apollo.resetStore().then(() => router.push("/"));
+    });
   };
 
   const formik = useFormik({
@@ -46,7 +50,6 @@ const SignIn = () => {
     <SignInContainer>
       <SignInMessage>Login</SignInMessage>
       <SignInForm formik={formik} />
-      {data && data.signIn && <Redirect to="/" />}
       {error && <GraphQLErrorMessages error={error} />}
     </SignInContainer>
   );
