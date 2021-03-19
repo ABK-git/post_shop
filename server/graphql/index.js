@@ -70,6 +70,7 @@ exports.createApolloServer = () => {
       createOrder(input: OrderCreateInput): Order
 
       plusQuantity(id: ID): Order
+      minusQuantity(id: ID): Order
     }
   `;
   //resolver

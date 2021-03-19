@@ -91,6 +91,9 @@ exports.orderMutations = {
   plusQuantity: async (root, { id }, ctx) => {
     return await ctx.models.Order.plusQuantity(id);
   },
+  minusQuantity: async (root, { id }, ctx) => {
+    return await ctx.models.Order.minusQuantity(id);
+  },
 };
 
 //OrderのQuery
