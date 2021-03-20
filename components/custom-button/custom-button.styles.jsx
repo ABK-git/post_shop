@@ -34,6 +34,12 @@ const addCart = css`
   hover:bg-red-700 hover:text-blue-900`}
 `;
 
+const orderPreview = css`
+  ${tw`hidden font-bold mx-auto text-yellow-600 text-2xl 
+  bg-purple-800 rounded-lg items-center justify-center  w-full
+  hover:bg-blue-600 hover:text-red-800 mb-3 `}
+`;
+
 const getButtonStyles = ({ design }) => {
   switch (design) {
     case "open_questions":
@@ -56,6 +62,9 @@ const getButtonStyles = ({ design }) => {
 
     case "add_cart":
       return addCart;
+
+    case "order-preview":
+      return orderPreview;
 
     default:
       return "";
