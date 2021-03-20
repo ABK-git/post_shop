@@ -15,7 +15,7 @@ const GraphQLErrorMessages = ({ error }) => {
 
   return (
     <ErrorMessagesContainer>
-      {Object.values({ errorMessages })
+      {errorMessages && Object.values({ errorMessages })
         .join()
         .split(",")
         .map((error, index) => (
