@@ -41,10 +41,10 @@ class Order {
   async settlementCart(id, ctx) {
     //orderとproduct取得
     const order = await this.Model.findById(id);
-    const product = await ctx.models.Product.getById(order.product._id);
+    const product = await ctx.models.Product.findById(order.product._id);
     //在庫数が注文に応えられない場合
     if (product.quantity < order.quantity) {
-      throw new Error(`${product.name}の在庫数は${product.quantity}です`);
+      throw new Error(`在庫${product.quantity}です`);
     }
     //注文数を在庫から減らす
     product.quantity -= order.quantity;

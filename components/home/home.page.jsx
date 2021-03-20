@@ -87,12 +87,14 @@ const HomePage = ({ productsFromPage }) => {
   } = filterState;
   //検索条件によって商品を絞り込むメソッド
   const productsFilter = (products) => {
+    //名前絞り
     let newProducts = products;
     if (name != "") {
       newProducts = newProducts.filter((product) =>
         product.name.toLowerCase().includes(name.toLowerCase())
       );
     }
+    //カテゴリ絞り
     if (category != "") {
       newProducts = newProducts.filter((product) => {
         const { categories } = product;
@@ -104,7 +106,7 @@ const HomePage = ({ productsFromPage }) => {
         return false;
       });
     }
-
+    //値段絞り
     if (lowestPrice || highestPrice) {
       const parseLowestPrice = (lowestPrice && parseInt(lowestPrice)) || 0;
       const parseHighestPrice = (highestPrice && parseInt(highestPrice)) || 0;
@@ -127,13 +129,20 @@ const HomePage = ({ productsFromPage }) => {
       }
     }
     //評価数絞り
-    newProducts = newProducts.filter(
-      (product) => product.reviews.length >= lowestReviewsLength
-    );
+    if (lowestReviewsLength > 0) {
+      newProducts = newProducts.filter(
+        (product) => product.reviews.length >= lowestReviewsLength
+      );
+    }
     //評価絞り
-    newProducts = newProducts.filter(
-      (product) => getEvaluationOfStars(product.reviews) >= lowestEvaluation
-    );
+    if (lowestEvaluation > 0) {
+      newProducts = newProducts.filter(
+        (product) => getEvaluationOfStars(product.reviews) >= lowestEvaluation
+      );
+    }
+    //在庫数絞り
+    newProducts = newProducts.filter((product) => product.quantity > 0);
+
     return newProducts;
   };
 

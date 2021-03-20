@@ -3,6 +3,7 @@ import {
   removeOrderFromCart,
   minusOrderQuantity,
   plusOrderQuantity,
+  settlementCartOrder,
 } from "../../apollo/actions";
 import MyContext from "../../context";
 import ProductImages from "../display-product-images/product-images.component";
@@ -20,6 +21,7 @@ import {
   PlusCircleButton,
   BinButton,
 } from "./order-preview.styles";
+import CustomButton from "../custom-button/custom-button.component";
 
 const OrderPreview = ({ order }) => {
   //context
@@ -29,6 +31,7 @@ const OrderPreview = ({ order }) => {
   const [plusQuantity] = plusOrderQuantity();
   const [minusQuantity] = minusOrderQuantity();
   const [deleteOrder] = removeOrderFromCart();
+  const [settlement, { error }] = settlementCartOrder();
 
   return (
     <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>
@@ -73,6 +76,12 @@ const OrderPreview = ({ order }) => {
         <AmountPrice>
           計:￥{(order.product.price * order.quantity).toLocaleString()}
         </AmountPrice>
+        <CustomButton
+          onClick={() => {
+            settlement({ variables: { id: order._id } });
+          }}>
+          決済
+        </CustomButton>
       </WhiteBackground>
     </OrderPreviewContainer>
   );
