@@ -13,9 +13,17 @@ const getHmBreakPoint = ({ hmBreakPoint }) => {
 export const OrderPreviewContainer = styled.div`
   ${tw`p-5 text-center bg-red-400 w-full sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6`}
   ${getHmBreakPoint}
+  &:hover {
+    button {
+      display: flex;
+    }
+    h1{
+      display: none;
+    }
+  }
 `;
 
-export const ProductName = styled.p`
+export const ProductName = styled.h1`
   ${tw`text-2xl font-bold bg-green-500 w-full mb-3 rounded-lg`}
 `;
 

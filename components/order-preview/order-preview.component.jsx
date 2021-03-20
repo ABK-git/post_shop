@@ -36,8 +36,19 @@ const OrderPreview = ({ order }) => {
   return (
     <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>
       <ProductName>{order.product.name}</ProductName>
+      <CustomButton
+        design={"order-preview"}
+        onClick={() => {
+          settlement({ variables: { id: order._id } });
+        }}>
+        決済
+      </CustomButton>
       <WhiteBackground>
-        <ProductImages images={order.product.imagePasses} />
+        <ProductImages
+          images={order.product.imagePasses}
+          product={order.product}
+          cartSize={true}
+        />
         <TextRight>
           <div>
             <LeftJutifyStart>
@@ -76,12 +87,6 @@ const OrderPreview = ({ order }) => {
         <AmountPrice>
           計:￥{(order.product.price * order.quantity).toLocaleString()}
         </AmountPrice>
-        <CustomButton
-          onClick={() => {
-            settlement({ variables: { id: order._id } });
-          }}>
-          決済
-        </CustomButton>
       </WhiteBackground>
     </OrderPreviewContainer>
   );
