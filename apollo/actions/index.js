@@ -17,6 +17,7 @@ import {
   PLUS_ORDER_QUANTITY,
   MINUS_ORDER_QUANTITY,
   DELETE_ORDER,
+  SETTLEMENT_ORDER,
 } from "../queries";
 
 //User認証
@@ -109,6 +110,19 @@ export const useCreateReview = () =>
 export const getUsersCart = () => useQuery(USERS_CART);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
+export const settlementCartOrder = () =>
+  useMutation(SETTLEMENT_ORDER, {
+    update(cache, { data: { settlement } }) {
+      const { usersCart } = cache.readQuery({ query: USERS_CART });
+      const newUsersCart = usersCart.filter(
+        (order) => order._id !== settlement._id
+      );
+      cache.writeQuery({
+        query: USERS_CART,
+        data: { usersCart: newUsersCart },
+      });
+    },
+  });
 export const removeOrderFromCart = () =>
   useMutation(DELETE_ORDER, {
     update(cache, { data: { deleteOrder } }) {
@@ -128,11 +142,9 @@ export const useCreateOrder = () =>
       let { usersCart } = cache.readQuery({
         query: USERS_CART,
       });
-
-      const addQuantity = (order) =>
-        order.product._id === createOrder.product._id;
-
-      const haveSameOrder = usersCart.findIndex(addQuantity);
+      const haveSameOrder = usersCart.findIndex(
+        (order) => order.product._id === createOrder.product._id
+      );
       if (haveSameOrder < 0) {
         if (usersCart.length === 0) {
           cache.writeQuery({
