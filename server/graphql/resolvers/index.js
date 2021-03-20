@@ -98,6 +98,9 @@ exports.orderMutations = {
     const deleteOrder = await ctx.models.Order.findAndDelete(id);
     return deleteOrder._id;
   },
+  settlement: async (root, { id }, ctx) => {
+    return ctx.models.Order.settlementCart(id,ctx);
+  },
 };
 
 //OrderのQuery

@@ -72,6 +72,7 @@ exports.createApolloServer = () => {
       plusQuantity(id: ID): Order
       minusQuantity(id: ID): Order
       deleteOrder(id: ID): ID
+      settlement(id: ID): Order
     }
   `;
   //resolver
