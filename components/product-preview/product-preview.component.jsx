@@ -7,25 +7,15 @@ import {
   OverhiddenRight,
 } from "./product-preview.styles";
 import DisplayProductImages from "../display-product-images/product-images.component";
-import { useRouter } from "next/router";
 import { getEvaluationOfStars } from "../../utils/functions";
 import DisplayStars from "../display-stars/display-stars.component";
-import ReloadAndToHome from "../reload-and-tohome";
+import Link from "next/link";
 
-const ProductPreview = ({ product }) => {
-  const router = useRouter();
-  //商品ページへの移動
-  const handleClickToProductDetails = () => {
-    router.push(`/product/${product._id}/details`);
-  };
-
-  return (
-    <ProductCell>
-      <DisplayProductImages
-        images={product.imagePasses}
-        handleClickToProductDetails={handleClickToProductDetails}
-      />
-      <ProductIntroduce onClick={handleClickToProductDetails}>
+const ProductPreview = ({ product }) => (
+  <ProductCell>
+    <DisplayProductImages images={product.imagePasses} product={product} />
+    <Link href={`/product/${product._id}/details`}>
+      <ProductIntroduce>
         <Overhidden>{product.name}</Overhidden>
         <OverhiddenLeft>
           ￥{String(product.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
@@ -39,8 +29,8 @@ const ProductPreview = ({ product }) => {
           <p>({product.reviews.length})</p>
         </OverhiddenRight>
       </ProductIntroduce>
-    </ProductCell>
-  );
-};
+    </Link>
+  </ProductCell>
+);
 
 export default ProductPreview;
