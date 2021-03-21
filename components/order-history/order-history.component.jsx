@@ -7,10 +7,17 @@ import {
   DropDownContainer,
   UlContainer,
   LiItem,
+  DatePickerContainer,
+  FilterPeriod,
 } from "./order-history.styles";
 import OrderPreview from "../order-preview/order-preview.component";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
+import {
+  getSortActive,
+  getWetherFuture,
+  getWetherPast,
+} from "../../utils/functions";
 
 const OrderHistory = ({ orderHistory }) => {
   //sortドロップダウンリスト関連
@@ -39,16 +46,49 @@ const OrderHistory = ({ orderHistory }) => {
   };
   //filterドロップリスト関連
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const date = new Date();
+  date.setDate(1);
+  const [startDate, setStartDate] = useState(date);
+  const [endDate, setEndDate] = useState(new Date());
   const changeIsOpenFilter = () => {
     setIsOpenFilter(!isOpenFilter);
+  };
+  const orderFilter = (orders) => {
+    let new_orders = orders;
+    //startDateから見てendDateが未来の場合
+    if (getSortActive(startDate, endDate)) {
+      //startDateより未来で、endDateよりも過去
+      new_orders = new_orders.filter(
+        (order) =>
+          getWetherPast(order.updatedAt, endDate) &&
+          getWetherFuture(order.updatedAt, startDate)
+      );
+    }
+    return new_orders;
   };
   return (
     <Container>
       <TitleMessage>注文履歴</TitleMessage>
       <Buttons>
-        <CustomButton design="filter-history" onClick={changeIsOpenFilter}>
-          絞り込み
-        </CustomButton>
+        <ul>
+          <DropDownContainer>
+            <CustomButton design="filter-history" onClick={changeIsOpenFilter}>
+              絞り込み
+            </CustomButton>
+            {isOpenFilter && (
+              <UlContainer>
+                <DatePickerContainer
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+                <DatePickerContainer
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                />
+              </UlContainer>
+            )}
+          </DropDownContainer>
+        </ul>
         <ul>
           <DropDownContainer>
             <CustomButton design="sort-history" onClick={changeIsOpenSort}>
@@ -70,8 +110,15 @@ const OrderHistory = ({ orderHistory }) => {
           </DropDownContainer>
         </ul>
       </Buttons>
+      {getSortActive(startDate, endDate) && (
+        <FilterPeriod>
+          購入期間：
+          {moment(startDate).format("YYYY/MM/DD")} ~{" "}
+          {moment(endDate).format("YYYY/MM/DD")}
+        </FilterPeriod>
+      )}
       <OrderPreviewContainer>
-        {ordersSort(orderHistory).map((order) => (
+        {ordersSort(orderFilter(orderHistory)).map((order) => (
           <OrderPreview key={order._id} order={order} />
         ))}
       </OrderPreviewContainer>
