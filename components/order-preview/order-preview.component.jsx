@@ -119,7 +119,7 @@ const OrderPreview = ({ order, inCart }) => {
                   +
                 </PlusCircleButton>
               </Flex>
-            )}
+            ) || <LeftJutifyStart>購入数：{order.quantity}</LeftJutifyStart>}
           </div>
         </TextRight>
         <BorderPrice />
