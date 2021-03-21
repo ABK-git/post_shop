@@ -37,6 +37,28 @@ class Order {
   findAndDelete(id) {
     return this.Model.findOneAndRemove({ _id: id });
   }
+  
+  async settlementMaximum(data, ctx) {
+    const { id, quantity } = data;
+    //orderとproduct取得
+    const order = await this.Model.findById(id);
+    const product = await ctx.models.Product.findById(order.product._id);
+    //在庫数が注文に応えられない場合
+    if (product.quantity < quantity) {
+      throw new Error(`在庫${product.quantity}です`);
+    }
+    //注文数を在庫から減らす
+    product.quantity -= quantity;
+    await product.save();
+    //注文を決済済みにする
+    return await this.Model.findOneAndUpdate(
+      { _id: id },
+      { $set: { ordered: true, quantity } },
+      { new: true }
+    )
+      .populate("user")
+      .populate({ path: "product", populate: { path: "user" } });
+  }
 
   async settlementCart(id, ctx) {
     //orderとproduct取得

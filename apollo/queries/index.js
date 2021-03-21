@@ -504,6 +504,36 @@ export const DELETE_ORDER = gql`
   }
 `;
 
+export const SETTLEMENT_MAXIMUM_ORDER = gql`
+  mutation SettlementMaximum ($id: ID!, $quantity: Int!) {
+    settlementMaximum(input: { id: $id, quantity: $quantity }) {
+      _id
+      user {
+        _id
+        username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        imagePasses
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
+      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const SETTLEMENT_ORDER = gql`
   mutation Settlement($id: ID) {
     settlement(id: $id) {
