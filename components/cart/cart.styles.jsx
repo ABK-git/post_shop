@@ -6,7 +6,7 @@ export const CartContainer = styled.div`
 `;
 
 export const TitleMessage = styled.p`
-  ${tw`font-bold text-3xl sm:text-4xl text-red-600 mb-1`}
+  ${tw`font-bold text-3xl sm:text-5xl text-red-600 mb-1`}
 `;
 
 export const OrderPreviewContainer = styled.div`

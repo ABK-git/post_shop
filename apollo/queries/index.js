@@ -420,6 +420,7 @@ export const USERS_ORDER_HISTORY = gql`
         name
         quantity
         price
+        imagePasses
         user {
           _id
           username

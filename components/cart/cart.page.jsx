@@ -22,6 +22,7 @@ const Cart = ({ usersCart }) => {
           <OrderPreview
             key={order._id}
             order={order}
+            inCart={true}
           />
         ))}
       </OrderPreviewContainer>
