@@ -111,4 +111,7 @@ exports.orderQueries = {
   usersCart: async (root, args, ctx) => {
     return ctx.models.Order.getAllByUserCart();
   },
+  usersOrderHistory: async (root, args, ctx) => {
+    return ctx.models.Order.getAllByUserOrderHistory();
+  },
 };

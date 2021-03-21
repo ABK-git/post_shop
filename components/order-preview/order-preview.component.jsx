@@ -33,8 +33,8 @@ const OrderPreview = ({ order }) => {
   const [plusQuantity] = plusOrderQuantity();
   const [minusQuantity] = minusOrderQuantity();
   const [deleteOrder] = removeOrderFromCart();
-  let [settlement, { error }] = settlementCartOrder();
-  let [settlementMaximum, { error: maximumError }] = settlementMaximumOrder();
+  const [settlement, { error }] = settlementCartOrder();
+  const [settlementMaximum, { error: maximumError }] = settlementMaximumOrder();
 
   if (error || maximumError) {
     Swal.fire({

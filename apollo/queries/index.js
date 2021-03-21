@@ -400,7 +400,34 @@ export const USERS_CART = gql`
       }
       quantity
       ordered
-      adminChecked
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const USERS_ORDER_HISTORY = gql`
+  query UsersOrderHistory {
+    usersOrderHistory {
+      _id
+      user {
+        _id
+        username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
       createdAt
       updatedAt
     }
@@ -431,7 +458,6 @@ export const CREATE_ORDER = gql`
       }
       quantity
       ordered
-      adminChecked
       createdAt
       updatedAt
     }
@@ -461,7 +487,6 @@ export const PLUS_ORDER_QUANTITY = gql`
       }
       quantity
       ordered
-      adminChecked
       createdAt
       updatedAt
     }
@@ -491,7 +516,6 @@ export const MINUS_ORDER_QUANTITY = gql`
       }
       quantity
       ordered
-      adminChecked
       createdAt
       updatedAt
     }
@@ -505,7 +529,7 @@ export const DELETE_ORDER = gql`
 `;
 
 export const SETTLEMENT_MAXIMUM_ORDER = gql`
-  mutation SettlementMaximum ($id: ID!, $quantity: Int!) {
+  mutation SettlementMaximum($id: ID!, $quantity: Int!) {
     settlementMaximum(input: { id: $id, quantity: $quantity }) {
       _id
       user {
@@ -527,7 +551,6 @@ export const SETTLEMENT_MAXIMUM_ORDER = gql`
       }
       quantity
       ordered
-      adminChecked
       createdAt
       updatedAt
     }
@@ -557,7 +580,6 @@ export const SETTLEMENT_ORDER = gql`
       }
       quantity
       ordered
-      adminChecked
       createdAt
       updatedAt
     }
