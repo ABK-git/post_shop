@@ -18,6 +18,7 @@ import {
   MINUS_ORDER_QUANTITY,
   DELETE_ORDER,
   SETTLEMENT_ORDER,
+  SETTLEMENT_MAXIMUM_ORDER,
 } from "../queries";
 
 //User認証
@@ -116,6 +117,19 @@ export const settlementCartOrder = () =>
       const { usersCart } = cache.readQuery({ query: USERS_CART });
       const newUsersCart = usersCart.filter(
         (order) => order._id !== settlement._id
+      );
+      cache.writeQuery({
+        query: USERS_CART,
+        data: { usersCart: newUsersCart },
+      });
+    },
+  });
+export const settlementMaximumOrder = () =>
+  useMutation(SETTLEMENT_MAXIMUM_ORDER, {
+    update(cache, { data: { settlementMaximum } }) {
+      const { usersCart } = cache.readQuery({ query: USERS_CART });
+      const newUsersCart = usersCart.filter(
+        (order) => order._id !== settlementMaximum._id
       );
       cache.writeQuery({
         query: USERS_CART,

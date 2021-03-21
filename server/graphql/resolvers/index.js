@@ -99,7 +99,10 @@ exports.orderMutations = {
     return deleteOrder._id;
   },
   settlement: async (root, { id }, ctx) => {
-    return ctx.models.Order.settlementCart(id,ctx);
+    return ctx.models.Order.settlementCart(id, ctx);
+  },
+  settlementMaximum: async (root, { input }, ctx) => {
+    return ctx.models.Order.settlementMaximum(input, ctx);
   },
 };
 
