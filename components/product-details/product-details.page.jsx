@@ -63,7 +63,7 @@ const ProductDetails = ({ product }) => {
 
   const [createQuestion, { error: createQuestionError }] = useCreateQuestion();
   const [createReview, { error: createReviewError }] = useCreateReview();
-  const [createOrder, { error: createOrderError , data }] = useCreateOrder();
+  const [createOrder, { error: createOrderError, data }] = useCreateOrder();
 
   /**
    * formik(Question)
@@ -126,7 +126,7 @@ const ProductDetails = ({ product }) => {
   const onChangeStars = (value) => {
     formikReview.setFieldValue("stars", value);
   };
-  
+
   //レスポンシブデザイン
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
@@ -159,9 +159,11 @@ const ProductDetails = ({ product }) => {
         </CustomButton>
       </OpenButtons>
       {createQuestionError && (
-        <GraphQLErrorMessages error={createQuestionError} />
+        <GraphQLErrorMessages>{createQuestionError}</GraphQLErrorMessages>
       )}
-      {createReviewError && <GraphQLErrorMessages error={createReviewError} />}
+      {createReviewError && (
+        <GraphQLErrorMessages>{createReviewError}</GraphQLErrorMessages>
+      )}
       {displayQuestions && (
         <DisplayList>
           {switchQuestion && <QuestionForm formik={formik} />}

@@ -102,7 +102,7 @@ const SignUp = ({ apollo }) => {
         file={file}
       />
       <SignUpForm formik={formik} />
-      {error && <GraphQLErrorMessages error={error} />}
+      {error && <GraphQLErrorMessages>{error}</GraphQLErrorMessages>}
     </SignUpContainer>
   );
 };

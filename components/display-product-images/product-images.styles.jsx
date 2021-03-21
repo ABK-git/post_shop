@@ -19,15 +19,6 @@ const invisible = css`
   ${tw`invisible`}
 `;
 
-export const ResizeImagesAndRemoveButton = styled.div`
-  ${tw`flex h-60 items-center justify-center relative`}
-
-  &:hover {
-    button {
-      display: flex;
-    }
-  }
-`;
 
 export const Flex = styled.div`
   ${tw`flex`}
@@ -46,7 +37,7 @@ export const ChevronLeftButton = styled(ChevronLeftCircle)`
 `;
 
 export const ToDetails = styled.div`
-  ${tw`cursor-pointer`}
+  ${tw`cursor-pointer z-0`}
 `;
 
 

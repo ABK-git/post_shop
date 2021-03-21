@@ -12,13 +12,17 @@ const Cart = ({ usersCart }) => {
   usersCart.forEach((order) => {
     amountCart += order.product.price * order.quantity;
   });
+
   return (
     <CartContainer>
       <TitleMessage>YOUR CART</TitleMessage>
       <AmountCart>合計:￥{amountCart.toLocaleString()}</AmountCart>
       <OrderPreviewContainer>
         {usersCart.map((order) => (
-          <OrderPreview key={order._id} order={order} />
+          <OrderPreview
+            key={order._id}
+            order={order}
+          />
         ))}
       </OrderPreviewContainer>
     </CartContainer>

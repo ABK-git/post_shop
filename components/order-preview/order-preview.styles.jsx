@@ -24,7 +24,7 @@ export const OrderPreviewContainer = styled.div`
 `;
 
 export const ProductName = styled.h1`
-  ${tw`text-2xl font-bold bg-green-500 w-full mb-3 rounded-lg`}
+  ${tw`text-2xl font-bold bg-green-500 w-full mb-3 rounded-lg truncate`}
 `;
 
 export const TextRight = styled.div`
