@@ -10,17 +10,24 @@ const getHmBreakPoint = ({ hmBreakPoint }) => {
     `;
   }
 };
+const getHover = ({ inCart }) => {
+  if (inCart) {
+    return css`
+      &:hover {
+        button {
+          display: flex;
+        }
+        h1 {
+          display: none;
+        }
+      }
+    `;
+  }
+};
 export const OrderPreviewContainer = styled.div`
   ${tw`p-5 text-center bg-red-400 w-full sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6`}
   ${getHmBreakPoint}
-  &:hover {
-    button {
-      display: flex;
-    }
-    h1{
-      display: none;
-    }
-  }
+  ${getHover}
 `;
 
 export const ProductName = styled.h1`
