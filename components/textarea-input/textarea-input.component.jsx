@@ -16,13 +16,15 @@ const TextareaInput = ({
   ...otherProps
 }) => (
   <GroupContainer>
-    {label && <TextareaInputLabel>{label}</TextareaInputLabel> }
+    {label && <TextareaInputLabel>{label}</TextareaInputLabel>}
     <TextareaInputContainer
       onChange={handleChange}
       value={value ? value : ""}
       {...otherProps}
     />
-    {errorMessage && <ErrorMessagesContainer errorMessage={errorMessage} />}
+    {errorMessage && (
+      <ErrorMessagesContainer>{errorMessage}</ErrorMessagesContainer>
+    )}
   </GroupContainer>
 );
 

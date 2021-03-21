@@ -38,7 +38,7 @@ export const MenuContainer = styled.div`
 `
 
 export const SubMenu = styled.div`
-  ${tw`relative`}
+  ${tw`relative z-50`}
 `;
 
 export const DisplayUserImageContainer = styled(DisplayUserImage)`

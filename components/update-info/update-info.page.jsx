@@ -82,7 +82,7 @@ const UpdateInfo = ({ user }) => {
     return <Spinner />;
   }
   if (data && data.updateUser) {
-    return <Redirect to="/"/>;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -94,7 +94,7 @@ const UpdateInfo = ({ user }) => {
         file={file}
         avatar={user.avatar}
       />
-      {error && <GraphQLErrorMessages error={error} />}
+      {error && <GraphQLErrorMessages>{error}</GraphQLErrorMessages>}
       <SignUpForm formik={formik} />
     </UpdateInfoContainer>
   );

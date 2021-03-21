@@ -22,6 +22,7 @@ import {
   BinButton,
 } from "./order-preview.styles";
 import CustomButton from "../custom-button/custom-button.component";
+import Swal from 'sweetalert2';
 
 const OrderPreview = ({ order }) => {
   //context
@@ -32,6 +33,35 @@ const OrderPreview = ({ order }) => {
   const [minusQuantity] = minusOrderQuantity();
   const [deleteOrder] = removeOrderFromCart();
   const [settlement, { error }] = settlementCartOrder();
+
+  if (error) {
+    Swal.fire({
+      title: `注文数${order.quantity}に対し${order.product.name}の在庫は${order.product.quantity}です。`,
+      text: `${order.product.quantity}つ購入でよろしいですか?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '注文',
+      cancelButtonText: "削除"
+    }).then(async (result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        Swal.fire(
+          `${order.product.name}を${order.quantity}つ購入しました!`,
+          `I bought ${order.quantity} ${order.product.name}`,
+          'success'
+        )
+      }else if(result.dismiss === "cancel"){
+        await deleteOrder({ variables: { id: order._id } });
+        Swal.fire(
+          '注文を削除しました!',
+          'Your order has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
 
   return (
     <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>

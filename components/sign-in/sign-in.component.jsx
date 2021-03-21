@@ -50,7 +50,7 @@ const SignIn = ({ apollo }) => {
     <SignInContainer>
       <SignInMessage>Login</SignInMessage>
       <SignInForm formik={formik} />
-      {error && <GraphQLErrorMessages error={error} />}
+      {error && <GraphQLErrorMessages>{error}</GraphQLErrorMessages>}
     </SignInContainer>
   );
 };
