@@ -25,7 +25,7 @@ import {
 import CustomButton from "../custom-button/custom-button.component";
 import Swal from "sweetalert2";
 
-const OrderPreview = ({ order }) => {
+const OrderPreview = ({ order, inCart }) => {
   //context
   const my_context = useContext(MyContext);
   const { hmBreakPoint } = my_context;
@@ -48,9 +48,9 @@ const OrderPreview = ({ order }) => {
       cancelButtonText: "削除",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const quantity = order.product.quantity
+        const quantity = order.product.quantity;
         await settlementMaximum({
-          variables: { id: order._id, quantity},
+          variables: { id: order._id, quantity },
         });
         Swal.fire(
           `${order.product.name}を${quantity}つ購入しました!`,
@@ -69,15 +69,17 @@ const OrderPreview = ({ order }) => {
   }
 
   return (
-    <OrderPreviewContainer hmBreakPoint={hmBreakPoint}>
+    <OrderPreviewContainer hmBreakPoint={hmBreakPoint} inCart={inCart}>
       <ProductName>{order.product.name}</ProductName>
-      <CustomButton
-        design={"order-preview"}
-        onClick={() => {
-          settlement({ variables: { id: order._id } });
-        }}>
-        決済
-      </CustomButton>
+      {inCart && (
+        <CustomButton
+          design={"order-preview"}
+          onClick={() => {
+            settlement({ variables: { id: order._id } });
+          }}>
+          決済
+        </CustomButton>
+      )}
       <WhiteBackground>
         <ProductImages
           images={order.product.imagePasses}
@@ -93,29 +95,31 @@ const OrderPreview = ({ order }) => {
                 "$1,"
               )}
             </LeftJutifyStart>
-            <Flex>
-              {(order.quantity === 1 && (
-                <BinButton
+            {inCart && (
+              <Flex>
+                {(order.quantity === 1 && (
+                  <BinButton
+                    onClick={() => {
+                      deleteOrder({ variables: { id: order._id } });
+                    }}
+                  />
+                )) || (
+                  <MinusCircleButton
+                    onClick={() => {
+                      minusQuantity({ variables: { id: order._id } });
+                    }}>
+                    -
+                  </MinusCircleButton>
+                )}
+                <QuantityContainer>{order.quantity}</QuantityContainer>
+                <PlusCircleButton
                   onClick={() => {
-                    deleteOrder({ variables: { id: order._id } });
-                  }}
-                />
-              )) || (
-                <MinusCircleButton
-                  onClick={() => {
-                    minusQuantity({ variables: { id: order._id } });
+                    plusQuantity({ variables: { id: order._id } });
                   }}>
-                  -
-                </MinusCircleButton>
-              )}
-              <QuantityContainer>{order.quantity}</QuantityContainer>
-              <PlusCircleButton
-                onClick={() => {
-                  plusQuantity({ variables: { id: order._id } });
-                }}>
-                +
-              </PlusCircleButton>
-            </Flex>
+                  +
+                </PlusCircleButton>
+              </Flex>
+            )}
           </div>
         </TextRight>
         <BorderPrice />

@@ -40,6 +40,18 @@ const orderPreview = css`
   hover:bg-blue-600 hover:text-red-800 mb-3 `}
 `;
 
+const filterHistory = css`
+  ${tw`border-2 border-indigo-600 bg-indigo-300 rounded text-yellow-700 p-1`}
+`;
+
+const sortHistory = css`
+  ${tw`ml-1 border-2 border-green-600 bg-green-300 rounded text-purple-700 p-1 w-full`}
+`;
+
+const sortButton = css`
+  ${tw`bg-white whitespace-no-wrap bg-green-300 relative`}
+`;
+
 const getButtonStyles = ({ design }) => {
   switch (design) {
     case "open_questions":
@@ -65,6 +77,15 @@ const getButtonStyles = ({ design }) => {
 
     case "order-preview":
       return orderPreview;
+
+    case "sort-history":
+      return sortHistory;
+
+    case "filter-history":
+      return filterHistory;
+
+    case "sort-button":
+      return sortButton;
 
     default:
       return "";
