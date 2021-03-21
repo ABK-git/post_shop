@@ -109,7 +109,6 @@ exports.orderTypes = `
     createdAt: String,
     updatedAt: String,
     ordered: Boolean,
-    adminChecked: Boolean
   }
 
   input OrderCreateInput{

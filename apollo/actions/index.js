@@ -19,6 +19,7 @@ import {
   DELETE_ORDER,
   SETTLEMENT_ORDER,
   SETTLEMENT_MAXIMUM_ORDER,
+  USERS_ORDER_HISTORY,
 } from "../queries";
 
 //User認証
@@ -109,6 +110,7 @@ export const useCreateReview = () =>
 
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
+export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY)
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
 export const settlementCartOrder = () =>

@@ -55,6 +55,7 @@ exports.createApolloServer = () => {
       order(id: ID): Order
 
       usersCart: [Order]
+      usersOrderHistory: [Order]
     }
 
     type Mutation {

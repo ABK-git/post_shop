@@ -10,7 +10,6 @@ const orderSchema = new Schema(
     },
     quantity: { type: Number, required: true, min: 1, default: 1 },
     ordered: { type: Boolean, default: false },
-    adminChecked: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
