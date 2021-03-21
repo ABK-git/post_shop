@@ -21,7 +21,9 @@ const FormInput = ({
       value={value ? value : ""}
       {...otherProps}
     />
-    {errorMessage && <ErrorMessagesContainer errorMessage={errorMessage} />}
+    {errorMessage && (
+      <ErrorMessagesContainer>{errorMessage}</ErrorMessagesContainer>
+    )}
   </GroupContainer>
 );
 
