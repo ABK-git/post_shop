@@ -24,6 +24,7 @@ import {
 } from "./order-preview.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import Swal from "sweetalert2";
+import router from "next/router";
 
 const OrderPreview = ({ order, inCart }) => {
   //context
@@ -83,7 +84,9 @@ const OrderPreview = ({ order, inCart }) => {
       <WhiteBackground>
         <ProductImages
           images={order.product.imagePasses}
-          product={order.product}
+          handleClickTo={() => {
+            router.push(`/product/${order.product._id}/details`);
+          }}
           cartSize={true}
         />
         <TextRight>
@@ -95,7 +98,7 @@ const OrderPreview = ({ order, inCart }) => {
                 "$1,"
               )}
             </LeftJutifyStart>
-            {inCart && (
+            {(inCart && (
               <Flex>
                 {(order.quantity === 1 && (
                   <BinButton
@@ -119,7 +122,7 @@ const OrderPreview = ({ order, inCart }) => {
                   +
                 </PlusCircleButton>
               </Flex>
-            ) || <LeftJutifyStart>購入数：{order.quantity}</LeftJutifyStart>}
+            )) || <LeftJutifyStart>購入数：{order.quantity}</LeftJutifyStart>}
           </div>
         </TextRight>
         <BorderPrice />
