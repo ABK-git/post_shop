@@ -9,14 +9,15 @@ import {
 import Image from "next/image";
 import router from "next/router";
 
-const ProductImages = ({ images, product, cartSize }) => {
+const ProductImages = ({
+  images,
+  product,
+  cartSize,
+  handleClickTo,
+}) => {
   //context
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
-  //商品ページへの移動
-  const handleClickToProductDetails = () => {
-    router.push(`/product/${product._id}/details`);
-  };
   const [imagesNumber, setImagesNumber] = useState(0);
   const changeImageLeft = () => {
     if (imagesNumber > 0) {
@@ -35,8 +36,8 @@ const ProductImages = ({ images, product, cartSize }) => {
         onClick={changeImageLeft}
         getVisibility={imagesNumber > 0}
       />
-      {cartSize || product ? (
-        <ToDetails onClick={handleClickToProductDetails}>
+      {cartSize || handleClickTo ? (
+        <ToDetails onClick={handleClickTo}>
           <Image
             src={
               (images && images[imagesNumber]) || "/images/products/noimage.png"

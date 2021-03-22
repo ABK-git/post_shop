@@ -21,6 +21,7 @@ import {
   SETTLEMENT_MAXIMUM_ORDER,
   USERS_ORDER_HISTORY,
   GET_PRODUCTS_BY_USER,
+  UPDATE_PRODUCT,
 } from "../queries";
 
 //User認証
@@ -62,6 +63,7 @@ export const useCreateProduct = () =>
       });
     },
   });
+export const useUpdateProduct = () => useMutation(UPDATE_PRODUCT);
 
 //Question
 export const getQuestion = (options) => useQuery(GET_QUESTION, options);
@@ -112,7 +114,7 @@ export const useCreateReview = () =>
 
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
-export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY)
+export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
 export const settlementCartOrder = () =>

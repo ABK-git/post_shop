@@ -295,6 +295,77 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
+export const UPDATE_PRODUCT = gql`
+  mutation UpdateProduct(
+    $id: ID!
+    $name: String!
+    $category: String!
+    $price: Int!
+    $imagePasses: [String]
+    $quantity: Int!
+    $introduce: String!
+  ) {
+    updateProduct(
+      input: {
+        id: $id
+        name: $name
+        category: $category
+        price: $price
+        imagePasses: $imagePasses
+        quantity: $quantity
+        introduce: $introduce
+      }
+    ) {
+      _id
+      name
+      category
+      price
+      quantity
+      reviews {
+        _id
+        title
+        content
+        stars
+        createdAt
+        user {
+          _id
+          avatar
+          username
+        }
+      }
+      questions {
+        _id
+        title
+        content
+        createdAt
+        user {
+          _id
+          avatar
+          username
+        }
+        replies {
+          _id
+          content
+          createdAt
+          user {
+            _id
+            avatar
+            username
+          }
+        }
+      }
+      introduce
+      imagePasses
+      createdAt
+      user {
+        _id
+        avatar
+        username
+      }
+    }
+  }
+`;
+
 export const CREATE_QUESTION = gql`
   mutation CreateQuestion($title: String!, $content: String!, $product: ID!) {
     createQuestion(

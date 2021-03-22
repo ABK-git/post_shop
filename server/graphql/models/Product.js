@@ -30,9 +30,16 @@ class Product {
       .populate("reviews");
   }
 
-  create(data, ctx) {
+  create(data) {
     data.user = this.user;
     return this.Model.create(data);
+  }
+
+  update(data) {
+    return this.Model.findOneAndUpdate({ _id: data.id }, { $set: data })
+      .populate("user")
+      .populate("reviews")
+      .populate({ path: "questions", populate: "replies", populate: "user" });
   }
 
   async addQuestion(ctx, question) {
