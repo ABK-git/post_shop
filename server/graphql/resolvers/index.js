@@ -23,9 +23,12 @@ exports.userQueries = {
 //Productのmutation
 exports.productMutations = {
   createProduct: async (root, { input }, ctx) => {
-    const createdProduct = await ctx.models.Product.create(input, ctx);
+    const createdProduct = await ctx.models.Product.create(input);
     ctx.models.User.addProduct(ctx, createdProduct);
     return createdProduct;
+  },
+  updateProduct: async (root, { input }, ctx) => {
+    return ctx.models.Product.update(input);
   },
 };
 
@@ -39,7 +42,7 @@ exports.productQueries = {
   },
   getByUser: (root, args, ctx) => {
     return ctx.models.Product.getByUser();
-  }
+  },
 };
 
 //QuestionのQueries
