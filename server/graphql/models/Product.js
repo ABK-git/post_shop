@@ -20,7 +20,7 @@ class Product {
   }
 
   getByUser() {
-    return this.Model.find({ user: this.user._id });
+    return this.Model.find({ user: this.user._id }).populate("reviews");
   }
 
   getAll() {

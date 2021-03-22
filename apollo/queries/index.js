@@ -208,6 +208,18 @@ export const GET_PRODUCTS_BY_USER = gql`
       price
       imagePasses
       quantity
+      reviews {
+        _id
+        title
+        content
+        stars
+        createdAt
+        user {
+          _id
+          avatar
+          username
+        }
+      }
       introduce
       createdAt
     }
