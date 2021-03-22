@@ -35,11 +35,20 @@ class Product {
     return this.Model.create(data);
   }
 
-  update(data) {
-    return this.Model.findOneAndUpdate({ _id: data.id }, { $set: data })
-      .populate("user")
-      .populate("reviews")
-      .populate({ path: "questions", populate: "replies", populate: "user" });
+  async update(data) {
+    if (data.imagePasses != undefined) {
+      const fs = require("fs");
+      const product = await this.Model.findById(data.id);
+      const { imagePasses } = product;
+      for (let i = 0; i < imagePasses.length; i++) {
+        await fs.unlinkSync(`./public${imagePasses[i]}`);
+      }
+    }
+    return this.Model.findOneAndUpdate(
+      { _id: data.id },
+      { $set: data },
+      { new: true }
+    );
   }
 
   async addQuestion(ctx, question) {

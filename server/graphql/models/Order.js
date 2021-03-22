@@ -100,6 +100,10 @@ class Order {
       .populate("user")
       .populate({ path: "product", populate: { path: "user" } });
 
+    if(product.user._id === this.user._id){
+      throw new Error("自分で出品した商品です")
+    }
+
     //findOneは見つからなかった場合null
     if (getSameProductOrder) {
       //個数を一つ追加
