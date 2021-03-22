@@ -10,7 +10,7 @@ const ExhibitHistoryPage = () => {
   const { data, loading } = getProductsByUser();
   const products = (data && data.getByUser) || {};
   if (loading) {
-    <Spinner />;
+    return <Spinner />;
   }
   return <ExhibitHistory products={products} />;
 };

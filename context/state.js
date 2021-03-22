@@ -45,7 +45,7 @@ const MyState = ({ children }) => {
   };
 
   const smBreakPoint = useMediaQuery({ minWidth: 640 });
-  const hmBreakPoint = useMediaQuery({ minWidth: 360 });
+  const hmBreakPoint = useMediaQuery({ minWidth: 320 });
 
   const { displayMenu, filterState, sortState } = state;
   return (
