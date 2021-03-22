@@ -41,7 +41,9 @@ class Product {
       const product = await this.Model.findById(data.id);
       const { imagePasses } = product;
       for (let i = 0; i < imagePasses.length; i++) {
-        await fs.unlinkSync(`./public${imagePasses[i]}`);
+        try {
+          await fs.unlinkSync(`./public${imagePasses[i]}`);
+        } catch (e) {}
       }
     }
     return this.Model.findOneAndUpdate(

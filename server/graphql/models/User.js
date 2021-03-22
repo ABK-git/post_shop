@@ -29,7 +29,7 @@ class User {
     let oldAvatar = "";
     const id = ctx.getUser();
     const user = await this.Model.findById(id).populate("products");
-    if(!user){
+    if (!user) {
       throw new Error("ログインしてください");
     }
     //古いavatarを取得
@@ -38,18 +38,14 @@ class User {
     user.username = username;
     user.email = email;
     user.password = password;
-    if(avatar){
+    if (avatar) {
       user.avatar = avatar;
     }
     //update
     await user.save();
     //古いUser画像を削除
     if (oldAvatar && avatar) {
-      fs.unlink(`./public${oldAvatar}`, (err) => {
-        if(err){
-          console.log("ファイル削除失敗")
-        }
-      });
+      fs.unlink(`./public${oldAvatar}`, () => {});
     }
     return user;
   }

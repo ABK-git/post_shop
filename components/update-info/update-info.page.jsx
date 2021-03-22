@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SignUpForm from "../sign-up-form/sign-up-form.component";
@@ -9,9 +9,13 @@ import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 import { UpdateInfoContainer, TitleMessage } from "./update-info.styles";
 import { userUpdate } from "../../apollo/actions";
+import MyContext from "../../context";
 
-const UpdateInfo = ({ user }) => {
+const UpdateInfo = () => {
   const [updateUser, { data, loading, error }] = userUpdate();
+  //context
+  const my_context = useContext(MyContext);
+  const { user } = my_context;
 
   //画像のUPLoad関連
   const [file, setFile] = useState(null);
@@ -42,8 +46,8 @@ const UpdateInfo = ({ user }) => {
   };
   //formik関連
   const initialValues = {
-    username: user.username,
-    email: user.email,
+    username: user && user.username,
+    email: user && user.email,
     password: "",
     password_confirm: "",
     avatar: "",
@@ -92,7 +96,7 @@ const UpdateInfo = ({ user }) => {
         handleChangeSetFile={handleChangeSetFile}
         handleDeleteSetFile={handleDeleteSetFile}
         file={file}
-        avatar={user.avatar}
+        avatar={user && user.avatar}
       />
       {error && <GraphQLErrorMessages>{error}</GraphQLErrorMessages>}
       <SignUpForm formik={formik} />
