@@ -5,19 +5,18 @@ import {
   ChevronLeftButton,
   ChevronRightButton,
   ToDetails,
-} from "./product-images.styles";
+} from "./product-images-history.styles";
 import Image from "next/image";
 import router from "next/router";
 
-const ProductImages = ({
-  images,
-  product,
-  cartSize,
-  handleClickTo,
-}) => {
+const ProductImagesHistory = ({ product, images, cartSize }) => {
   //context
   const my_context = useContext(MyContext);
   const { smBreakPoint } = my_context;
+  //商品ページへの移動
+  const handleClickToProductDetails = () => {
+    router.push(`/product/${product._id}/update`);
+  };
   const [imagesNumber, setImagesNumber] = useState(0);
   const changeImageLeft = () => {
     if (imagesNumber > 0) {
@@ -36,8 +35,8 @@ const ProductImages = ({
         onClick={changeImageLeft}
         getVisibility={imagesNumber > 0}
       />
-      {cartSize || handleClickTo ? (
-        <ToDetails onClick={handleClickTo}>
+      {cartSize || product ? (
+        <ToDetails onClick={handleClickToProductDetails}>
           <Image
             src={
               (images && images[imagesNumber]) || "/images/products/noimage.png"
@@ -55,7 +54,6 @@ const ProductImages = ({
           height={smBreakPoint ? 200 : 130}
         />
       )}
-
       <ChevronRightButton
         onClick={changeImageRight}
         getVisibility={images && imagesNumber < images.length - 1}
@@ -64,4 +62,4 @@ const ProductImages = ({
   );
 };
 
-export default ProductImages;
+export default ProductImagesHistory;
