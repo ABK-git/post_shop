@@ -321,47 +321,8 @@ export const UPDATE_PRODUCT = gql`
       category
       price
       quantity
-      reviews {
-        _id
-        title
-        content
-        stars
-        createdAt
-        user {
-          _id
-          avatar
-          username
-        }
-      }
-      questions {
-        _id
-        title
-        content
-        createdAt
-        user {
-          _id
-          avatar
-          username
-        }
-        replies {
-          _id
-          content
-          createdAt
-          user {
-            _id
-            avatar
-            username
-          }
-        }
-      }
       introduce
       imagePasses
-      createdAt
-      user {
-        _id
-        avatar
-        username
-      }
     }
   }
 `;

@@ -63,7 +63,17 @@ export const useCreateProduct = () =>
       });
     },
   });
-export const useUpdateProduct = () => useMutation(UPDATE_PRODUCT);
+export const useUpdateProduct = () =>
+  useMutation(UPDATE_PRODUCT, {
+    update(cache, { data: { updateProduct } }) {
+      cache.modify({
+        id: cache.identify(updateProduct),
+        fields: {
+          updateProduct
+        },
+      });
+    },
+  });
 
 //Question
 export const getQuestion = (options) => useQuery(GET_QUESTION, options);
