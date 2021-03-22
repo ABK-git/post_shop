@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const TitleMessage = styled.p`
-  ${tw`font-bold text-3xl sm:text-5xl text-red-600`}
+  ${tw`font-bold text-3xl sm:text-5xl text-orange-600`}
 `;
 
 export const PreviewContainer = styled.div`
