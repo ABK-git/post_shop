@@ -25,7 +25,7 @@ export const Flex = styled.div`
 `;
 
 export const ResizeImagesAndRemoveButton = styled.div`
-  ${tw`flex h-60 items-center justify-center relative`}
+  ${tw`flex items-center justify-center relative`}
   &:hover {
     button {
       display: flex;

@@ -66,6 +66,8 @@ exports.createApolloServer = () => {
       signOut: Boolean
 
       createProduct(input: ProductCreateInput): Product
+      updateProduct(input: ProductUpdateInput): Product
+
       createQuestion(input: QuestionCreateInput): Question
       createReply(input: ReplyCreateInput): Reply
       createReview(input: ReviewCreateInput): Review

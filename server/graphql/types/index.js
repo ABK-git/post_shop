@@ -46,6 +46,16 @@ exports.productTypes = `
     imagePasses: [String],
     introduce: String!,
   }
+
+  input ProductUpdateInput{
+    id: ID!
+    name: String!,
+    category: String!,
+    price: Int!,
+    quantity: Int!,
+    imagePasses: [String],
+    introduce: String!,
+  }
 `;
 
 exports.questionTypes = `
