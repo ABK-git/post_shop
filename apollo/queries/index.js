@@ -199,6 +199,21 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
+export const GET_PRODUCTS_BY_USER = gql`
+  query GetProductsByUser {
+    getByUser {
+      _id
+      name
+      category
+      price
+      imagePasses
+      quantity
+      introduce
+      createdAt
+    }
+  }
+`;
+
 export const CREATE_PRODUCT = gql`
   mutation CreateProduct(
     $name: String!

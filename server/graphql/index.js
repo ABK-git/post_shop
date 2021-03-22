@@ -48,6 +48,7 @@ exports.createApolloServer = () => {
 
       product(id: ID): Product
       products: [Product]
+      getByUser: [Product]
 
       question(id: ID): Question
       reply(id: ID): Reply
