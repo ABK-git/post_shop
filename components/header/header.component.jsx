@@ -116,6 +116,11 @@ const Header = ({ apollo }) => {
                     購入履歴
                   </MyLink>
                 </LiContainer>
+                <LiContainer onClick={changeIsOpen}>
+                  <MyLink href="/user/exhibit-history" design="dropdown-header">
+                    出品履歴
+                  </MyLink>
+                </LiContainer>
               </ul>
             )}
           </SubMenu>

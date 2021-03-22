@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import withApollo from "../../hoc/withApollo";
-import WithAuthenticated from "../../hoc/withAuthenticated";
 import { useDropzone } from "react-dropzone";
 import {
   ContainerDropzone,
@@ -8,7 +6,6 @@ import {
   DropzoneP,
   ExhibitContainer,
 } from "./exhibit.styles";
-import DisplayProductImages from "../display-product-images/product-images.component";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -161,4 +158,4 @@ const Exhibit = () => {
   );
 };
 
-export default withApollo(WithAuthenticated(Exhibit));
+export default Exhibit;

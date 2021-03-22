@@ -20,6 +20,7 @@ import {
   SETTLEMENT_ORDER,
   SETTLEMENT_MAXIMUM_ORDER,
   USERS_ORDER_HISTORY,
+  GET_PRODUCTS_BY_USER,
 } from "../queries";
 
 //User認証
@@ -49,6 +50,7 @@ export const userSignOut = () => useMutation(SIGN_OUT);
 //Product
 export const getProduct = (options) => useQuery(GET_PRODUCT, options);
 export const getProducts = () => useQuery(GET_PRODUCTS);
+export const getProductsByUser = () => useQuery(GET_PRODUCTS_BY_USER);
 export const getLazyProducts = () => useLazyQuery(GET_PRODUCTS);
 export const useCreateProduct = () =>
   useMutation(CREATE_PRODUCT, {

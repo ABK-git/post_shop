@@ -19,6 +19,10 @@ class Product {
     }
   }
 
+  getByUser() {
+    return this.Model.find({ user: this.user._id });
+  }
+
   getAll() {
     return this.Model.find({})
       .populate("user")
