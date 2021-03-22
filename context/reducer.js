@@ -23,6 +23,11 @@ const Reducer = (state, action) => {
         ...state,
         sortState: action.payload,
       };
+    case ContextTypes.SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

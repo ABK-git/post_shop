@@ -20,12 +20,12 @@ import Spinner from "../spinner/spinner.component";
 const Header = ({ apollo }) => {
   //graphql
   const [getUser, { data, error, loading }] = getLazyAuthUser();
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   const [signOut] = userSignOut();
   const router = useRouter();
   //context
   const my_context = useContext(MyContext);
-  const { displayMenu, changeDisplayMenu } = my_context;
+  const { displayMenu, changeDisplayMenu, user, setUser } = my_context;
 
   useEffect(() => {
     getUser();

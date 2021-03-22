@@ -16,6 +16,7 @@ const MyState = ({ children }) => {
       lowestReviewsLength: 0,
     },
     sortState: "出品日降順",
+    user: null,
   };
 
   const [state, dispatch] = useReducer(Reducer, initialState);
@@ -43,11 +44,17 @@ const MyState = ({ children }) => {
       payload: sortState,
     });
   };
+  const setUser = (user) => {
+    dispatch({
+      type: ContextTypes.SET_USER,
+      payload: user,
+    });
+  };
 
   const smBreakPoint = useMediaQuery({ minWidth: 640 });
   const hmBreakPoint = useMediaQuery({ minWidth: 320 });
 
-  const { displayMenu, filterState, sortState } = state;
+  const { displayMenu, filterState, sortState, user } = state;
   return (
     <MyContext.Provider
       value={{
@@ -60,6 +67,8 @@ const MyState = ({ children }) => {
         changeFilter,
         setFilterFromQuery,
         setSortState,
+        user,
+        setUser,
       }}>
       {children}
     </MyContext.Provider>
