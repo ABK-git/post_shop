@@ -37,6 +37,9 @@ exports.productQueries = {
   product: (root, { id }, ctx) => {
     return ctx.models.Product.getById(id);
   },
+  getByUser: (root, args, ctx) => {
+    return ctx.models.Product.getByUser();
+  }
 };
 
 //QuestionのQueries
