@@ -132,55 +132,61 @@ export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
 export const settlementCartOrder = () =>
   useMutation(SETTLEMENT_ORDER, {
     update(cache, { data: { settlement } }) {
-      const { usersCart } = cache.readQuery({ query: USERS_CART });
-      const newUsersCart = usersCart.filter(
-        (order) => order._id !== settlement._id
-      );
-      cache.writeQuery({
-        query: USERS_CART,
-        data: { usersCart: newUsersCart },
-      });
-      const { usersOrderHistory } = cache.readQuery({
-        query: USERS_ORDER_HISTORY,
-      });
-      cache.writeQuery({
-        query: USERS_ORDER_HISTORY,
-        data: { usersOrderHistory: [...usersOrderHistory, settlement] },
-      });
-      const { getAllOrdered } = cache.readQuery({
-        query: GET_ALL_ORDERED,
-      });
-      cache.writeQuery({
-        query: GET_ALL_ORDERED,
-        data: { getAllOrdered: [...getAllOrdered, settlement] },
-      });
+      try {
+        const { usersCart } = cache.readQuery({ query: USERS_CART });
+        const newUsersCart = usersCart.filter(
+          (order) => order._id !== settlement._id
+        );
+        cache.writeQuery({
+          query: USERS_CART,
+          data: { usersCart: newUsersCart },
+        });
+        const { usersOrderHistory } = cache.readQuery({
+          query: USERS_ORDER_HISTORY,
+        });
+        cache.writeQuery({
+          query: USERS_ORDER_HISTORY,
+          data: { usersOrderHistory: [...usersOrderHistory, settlement] },
+        });
+        const { getAllOrdered } = cache.readQuery({
+          query: GET_ALL_ORDERED,
+        });
+        cache.writeQuery({
+          query: GET_ALL_ORDERED,
+          data: { getAllOrdered: [...getAllOrdered, settlement] },
+        });
+      } catch (e) {}
     },
   });
 export const settlementMaximumOrder = () =>
   useMutation(SETTLEMENT_MAXIMUM_ORDER, {
     update(cache, { data: { settlementMaximum } }) {
-      const { usersCart } = cache.readQuery({ query: USERS_CART });
-      const newUsersCart = usersCart.filter(
-        (order) => order._id !== settlementMaximum._id
-      );
-      cache.writeQuery({
-        query: USERS_CART,
-        data: { usersCart: newUsersCart },
-      });
-      const { usersOrderHistory } = cache.readQuery({
-        query: USERS_ORDER_HISTORY,
-      });
-      cache.writeQuery({
-        query: USERS_ORDER_HISTORY,
-        data: { usersOrderHistory: [...usersOrderHistory, settlementMaximum] },
-      });
-      const { getAllOrdered } = cache.readQuery({
-        query: GET_ALL_ORDERED,
-      });
-      cache.writeQuery({
-        query: GET_ALL_ORDERED,
-        data: { getAllOrdered: [...getAllOrdered, settlementMaximum] },
-      });
+      try {
+        const { usersCart } = cache.readQuery({ query: USERS_CART });
+        const newUsersCart = usersCart.filter(
+          (order) => order._id !== settlementMaximum._id
+        );
+        cache.writeQuery({
+          query: USERS_CART,
+          data: { usersCart: newUsersCart },
+        });
+        const { usersOrderHistory } = cache.readQuery({
+          query: USERS_ORDER_HISTORY,
+        });
+        cache.writeQuery({
+          query: USERS_ORDER_HISTORY,
+          data: {
+            usersOrderHistory: [...usersOrderHistory, settlementMaximum],
+          },
+        });
+        const { getAllOrdered } = cache.readQuery({
+          query: GET_ALL_ORDERED,
+        });
+        cache.writeQuery({
+          query: GET_ALL_ORDERED,
+          data: { getAllOrdered: [...getAllOrdered, settlementMaximum] },
+        });
+      } catch (e) {}
     },
   });
 export const removeOrderFromCart = () =>
