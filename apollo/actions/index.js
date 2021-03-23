@@ -22,6 +22,7 @@ import {
   USERS_ORDER_HISTORY,
   GET_PRODUCTS_BY_USER,
   UPDATE_PRODUCT,
+  GET_ALL_ORDERED,
 } from "../queries";
 
 //User認証
@@ -69,7 +70,7 @@ export const useUpdateProduct = () =>
       cache.modify({
         id: cache.identify(updateProduct),
         fields: {
-          updateProduct
+          updateProduct,
         },
       });
     },
@@ -125,6 +126,7 @@ export const useCreateReview = () =>
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
 export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY);
+export const getAllOrderedByAdmin = () => useQuery(GET_ALL_ORDERED);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
 export const settlementCartOrder = () =>

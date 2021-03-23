@@ -120,4 +120,7 @@ exports.orderQueries = {
   usersOrderHistory: async (root, args, ctx) => {
     return ctx.models.Order.getAllByUserOrderHistory();
   },
+  getAllOrdered: (root, args, ctx) => {
+    return ctx.models.Order.getAllOrdered(ctx);
+  },
 };
