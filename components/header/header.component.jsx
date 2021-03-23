@@ -125,6 +125,13 @@ const Header = ({ apollo }) => {
                     出品履歴
                   </MyLink>
                 </LiContainer>
+                {user.role === "admin" && (
+                  <LiContainer onClick={changeIsOpen}>
+                    <MyLink href="/user/admin" design="dropdown-header">
+                      管理者ページ
+                    </MyLink>
+                  </LiContainer>
+                )}
               </ul>
             )}
           </SubMenu>

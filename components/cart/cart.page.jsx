@@ -15,7 +15,7 @@ const Cart = ({ usersCart }) => {
 
   return (
     <CartContainer>
-      <TitleMessage>YOUR CART</TitleMessage>
+      <TitleMessage>カート</TitleMessage>
       <AmountCart>合計:￥{amountCart.toLocaleString()}</AmountCart>
       <OrderPreviewContainer>
         {usersCart.map((order) => (
