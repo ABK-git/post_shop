@@ -12,8 +12,10 @@ const CartPage = () => {
   if (loading) {
     return <Spinner />;
   }
-
-  return <Cart usersCart={usersCart} />;
+  const filterUsersCart = usersCart.filter(
+    (order) => order.product.quantity !== 0
+  );
+  return <Cart usersCart={filterUsersCart} />;
 };
 
 export default withApollo(WithAuthenticated(CartPage, { getDataFromTree }));

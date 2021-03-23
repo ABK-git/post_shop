@@ -107,7 +107,6 @@ export const useCreateReply = () =>
       cache.writeQuery({ query: GET_QUESTION, data: { question } });
     },
   });
-
 //Review
 export const useCreateReview = () =>
   useMutation(CREATE_REVIEW, {
@@ -122,7 +121,6 @@ export const useCreateReview = () =>
       cache.writeQuery({ query: GET_PRODUCT, data: { product } });
     },
   });
-
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
 export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY);
