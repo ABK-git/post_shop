@@ -48,7 +48,6 @@ export const userSignIn = () =>
 export const getLazyAuthUser = () => useLazyQuery(GET_USER);
 export const getAuthUser = () => useQuery(GET_USER);
 export const userSignOut = () => useMutation(SIGN_OUT);
-
 //Product
 export const getProduct = (options) => useQuery(GET_PRODUCT, options);
 export const getProducts = () => useQuery(GET_PRODUCTS);
@@ -61,6 +60,11 @@ export const useCreateProduct = () =>
       cache.writeQuery({
         query: GET_PRODUCTS,
         data: { products: [createProduct, ...products] },
+      });
+      const { getByUser } = cache.readQuery({ query: GET_PRODUCTS_BY_USER });
+      cache.writeQuery({
+        query: GET_PRODUCTS_BY_USER,
+        data: { getByUser: [...getByUser, createProduct] },
       });
     },
   });
@@ -75,7 +79,6 @@ export const useUpdateProduct = () =>
       });
     },
   });
-
 //Question
 export const getQuestion = (options) => useQuery(GET_QUESTION, options);
 export const useCreateQuestion = () =>
@@ -92,7 +95,6 @@ export const useCreateQuestion = () =>
       cache.writeQuery({ query: GET_PRODUCT, data: { product } });
     },
   });
-
 //Reply
 export const useCreateReply = () =>
   useMutation(CREATE_REPLY, {
