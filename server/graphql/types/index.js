@@ -121,10 +121,6 @@ exports.orderTypes = `
     ordered: Boolean,
   }
 
-  input OrderCreateInput{
-    product: ID!
-  }
-
   input SettlementMaximumInput{
     id: ID!
     quantity: Int!

@@ -140,6 +140,20 @@ export const settlementCartOrder = () =>
         query: USERS_CART,
         data: { usersCart: newUsersCart },
       });
+      const { usersOrderHistory } = cache.readQuery({
+        query: USERS_ORDER_HISTORY,
+      });
+      cache.writeQuery({
+        query: USERS_ORDER_HISTORY,
+        data: { usersOrderHistory: [...usersOrderHistory, settlement] },
+      });
+      const { getAllOrdered } = cache.readQuery({
+        query: GET_ALL_ORDERED,
+      });
+      cache.writeQuery({
+        query: GET_ALL_ORDERED,
+        data: { getAllOrdered: [...getAllOrdered, settlement] },
+      });
     },
   });
 export const settlementMaximumOrder = () =>
@@ -152,6 +166,20 @@ export const settlementMaximumOrder = () =>
       cache.writeQuery({
         query: USERS_CART,
         data: { usersCart: newUsersCart },
+      });
+      const { usersOrderHistory } = cache.readQuery({
+        query: USERS_ORDER_HISTORY,
+      });
+      cache.writeQuery({
+        query: USERS_ORDER_HISTORY,
+        data: { usersOrderHistory: [...usersOrderHistory, settlementMaximum] },
+      });
+      const { getAllOrdered } = cache.readQuery({
+        query: GET_ALL_ORDERED,
+      });
+      cache.writeQuery({
+        query: GET_ALL_ORDERED,
+        data: { getAllOrdered: [...getAllOrdered, settlementMaximum] },
       });
     },
   });

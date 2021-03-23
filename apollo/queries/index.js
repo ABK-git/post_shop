@@ -50,16 +50,6 @@ export const UPDATE_USER = gql`
       password
       role
       avatar
-      products {
-        _id
-        name
-        category
-        price
-        quantity
-        imagePasses
-        introduce
-        createdAt
-      }
     }
   }
 `;
@@ -72,16 +62,6 @@ export const SIGN_IN = gql`
       email
       password
       role
-      products {
-        _id
-        name
-        category
-        price
-        quantity
-        imagePasses
-        introduce
-        createdAt
-      }
     }
   }
 `;
@@ -94,16 +74,6 @@ export const GET_USER = gql`
       email
       password
       role
-      products {
-        _id
-        name
-        category
-        price
-        quantity
-        imagePasses
-        introduce
-        createdAt
-      }
     }
   }
 `;
@@ -469,6 +439,12 @@ export const USERS_CART = gql`
   }
 `;
 
+export const ALREADY_IN_CART = gql`
+  query GetAlreadyInCart($id: ID) {
+    getAlreadyInCart(id: $id)
+  }
+`;
+
 export const USERS_ORDER_HISTORY = gql`
   query UsersOrderHistory {
     usersOrderHistory {
@@ -528,8 +504,8 @@ export const GET_ALL_ORDERED = gql`
 
 //OrderのMutation
 export const CREATE_ORDER = gql`
-  mutation CreateOrder($product: ID!) {
-    createOrder(input: { product: $product }) {
+  mutation CreateOrder($id: ID) {
+    createOrder(id: $id) {
       _id
       user {
         _id

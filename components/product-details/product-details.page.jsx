@@ -271,7 +271,7 @@ const ProductDetails = ({ product }) => {
         <CustomButton
           design="add_cart"
           onClick={() => {
-            createOrder({ variables: { product: product._id } });
+            createOrder({ variables: { id: product._id } });
           }}>
           カートに入れる
         </CustomButton>
