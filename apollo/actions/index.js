@@ -199,24 +199,12 @@ export const removeOrderFromCart = () =>
 export const useCreateOrder = () =>
   useMutation(CREATE_ORDER, {
     update(cache, { data: { createOrder } }) {
-      let { usersCart } = cache.readQuery({
+      const { usersCart } = cache.readQuery({
         query: USERS_CART,
       });
-      const haveSameOrder = usersCart.findIndex(
-        (order) => order.product._id === createOrder.product._id
-      );
-      if (haveSameOrder < 0) {
-        if (usersCart.length === 0) {
-          cache.writeQuery({
-            query: USERS_CART,
-            data: { usersCart: [createOrder] },
-          });
-        } else {
-          cache.writeQuery({
-            query: USERS_CART,
-            data: { usersCart: [...usersCart, createOrder] },
-          });
-        }
-      }
+      cache.writeQuery({
+        query: USERS_CART,
+        data: { usersCart: [...usersCart, createOrder] },
+      });
     },
   });

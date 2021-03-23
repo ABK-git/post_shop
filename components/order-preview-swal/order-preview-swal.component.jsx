@@ -24,7 +24,7 @@ const OrderPreviewSwal = ({ order, error }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "注文",
+      confirmButtonText: "購入",
       cancelButtonText: "削除",
     }).then(async (result) => {
       if (result.isConfirmed) {
