@@ -23,6 +23,7 @@ import {
   useCreateReview,
   getAuthUser,
   useCreateOrder,
+  plusOrderQuantity,
 } from "../../apollo/actions";
 import QuestionPreview from "../question-preview/question-preview.component";
 import ReviewForm from "../review-form/review-form.component";
@@ -34,7 +35,7 @@ import Review from "../review/review.component";
 import Spinner from "../spinner/spinner.component";
 import Pagination from "@material-ui/lab/Pagination";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, orderedId }) => {
   const { data: { user } = {}, loading, error } = getAuthUser();
 
   const [displayQuestions, setDisplayQuestions] = useState(false);
@@ -65,6 +66,7 @@ const ProductDetails = ({ product }) => {
   const [createQuestion, { error: createQuestionError }] = useCreateQuestion();
   const [createReview, { error: createReviewError }] = useCreateReview();
   const [createOrder, { error: createOrderError }] = useCreateOrder();
+  const [plusQuantity] = plusOrderQuantity();
 
   /**
    * formik(Question)
@@ -268,13 +270,23 @@ const ProductDetails = ({ product }) => {
       {user && user._id === product.user._id ? (
         <YourProduct>自分の商品です</YourProduct>
       ) : (
-        <CustomButton
-          design="add_cart"
-          onClick={() => {
-            createOrder({ variables: { id: product._id } });
-          }}>
-          カートに入れる
-        </CustomButton>
+        (orderedId !== null && (
+          <CustomButton
+            design="add_cart"
+            onClick={() => {
+              plusQuantity({ variables: { id: orderedId } });
+            }}>
+            カートに1追加
+          </CustomButton>
+        )) || (
+          <CustomButton
+            design="add_cart"
+            onClick={() => {
+              createOrder({ variables: { id: product._id } });
+            }}>
+            カートに入れる
+          </CustomButton>
+        )
       )}
     </ProductDetailsContainer>
   );

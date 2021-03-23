@@ -91,8 +91,7 @@ exports.reviewMutations = {
 //OrderのMutation
 exports.orderMutations = {
   createOrder: async (root, { id }, ctx) => {
-    const createdOrder = await ctx.models.Order.create(id);
-    return ctx.models.Order.getById(createdOrder._id);
+    return await ctx.models.Order.create(id);
   },
   plusQuantity: async (root, { id }, ctx) => {
     return await ctx.models.Order.plusQuantity(id);
