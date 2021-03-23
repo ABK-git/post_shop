@@ -10,6 +10,7 @@ import {
   Flex,
   EvaluationFont,
   PleaseLoginMessage,
+  YourProduct,
 } from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -31,7 +32,7 @@ import { getEvaluationOfStars } from "../../utils/functions";
 import MyContext from "../../context";
 import Review from "../review/review.component";
 import Spinner from "../spinner/spinner.component";
-import Pagination from "material-ui-flat-pagination";
+import Pagination from "@material-ui/lab/Pagination";
 
 const ProductDetails = ({ product }) => {
   const { data: { user } = {}, loading, error } = getAuthUser();
@@ -168,7 +169,7 @@ const ProductDetails = ({ product }) => {
       {createOrderError && (
         <GraphQLErrorMessages>{createOrderError}</GraphQLErrorMessages>
       )}
-      
+
       {displayQuestions && (
         <DisplayList>
           {switchQuestion && <QuestionForm formik={formik} />}
@@ -185,7 +186,10 @@ const ProductDetails = ({ product }) => {
               </DisplayMessage>
               {product.questions &&
                 product.questions
-                  .slice(offsetQuestion, offsetQuestion + parPage)
+                  .slice(
+                    offsetQuestion * parPage,
+                    offsetQuestion * parPage + parPage
+                  )
                   .map((question) => (
                     <QuestionPreview
                       question={question}
@@ -195,10 +199,12 @@ const ProductDetails = ({ product }) => {
                   ))}
               {product.questions.length > 5 && (
                 <Pagination
-                  limit={parPage}
-                  offset={offsetQuestion}
-                  total={product.questions.length}
-                  onClick={(e, offSet) => setOffsetQuestion(offSet)}
+                  count={Math.ceil(product.questions.length / 5)}
+                  page={offsetQuestion + 1}
+                  onChange={(e, offSet) => {
+                    setOffsetQuestion(offSet - 1);
+                  }}
+                  color="secondary"
                 />
               )}
               {(user && (
@@ -233,14 +239,19 @@ const ProductDetails = ({ product }) => {
               </DisplayMessage>
               {product.reviews &&
                 product.reviews
-                  .slice(offsetReview, offsetReview + parPage)
+                  .slice(
+                    offsetReview * parPage,
+                    offsetReview * parPage + parPage
+                  )
                   .map((review) => <Review key={review._id} review={review} />)}
               {product.reviews.length > 5 && (
                 <Pagination
-                  limit={parPage}
-                  offset={offsetReview}
-                  total={product.reviews.length}
-                  onClick={(e, offSet) => setOffsetReview(offSet)}
+                  count={Math.ceil(product.reviews.length / 5)}
+                  page={offsetReview + 1}
+                  onChange={(e, offSet) => {
+                    setOffsetReview(offSet - 1);
+                  }}
+                  color="secondary"
                 />
               )}
               {(user && (
@@ -254,13 +265,17 @@ const ProductDetails = ({ product }) => {
           )}
         </DisplayList>
       )}
-      <CustomButton
-        design="add_cart"
-        onClick={() => {
-          createOrder({ variables: { product: product._id } });
-        }}>
-        カートに入れる
-      </CustomButton>
+      {user && user._id === product.user._id ? (
+        <YourProduct>自分の商品です</YourProduct>
+      ) : (
+        <CustomButton
+          design="add_cart"
+          onClick={() => {
+            createOrder({ variables: { product: product._id } });
+          }}>
+          カートに入れる
+        </CustomButton>
+      )}
     </ProductDetailsContainer>
   );
 };

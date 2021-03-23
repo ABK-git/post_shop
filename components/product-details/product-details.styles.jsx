@@ -60,3 +60,8 @@ export const EvaluationFont = styled.p`
 export const PleaseLoginMessage = styled.p`
   ${tw`font-bold bg-blue-300 text-green-900 text-xl mt-3`}
 `;
+
+export const YourProduct = styled.p`
+  ${tw`w-1/2 font-bold bg-purple-700 mt-4 text-white rounded-md
+  hover:bg-red-700 hover:text-blue-900 text-center text-2xl`}
+`;
