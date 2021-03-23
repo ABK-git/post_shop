@@ -22,6 +22,17 @@ class Order {
       .populate({ path: "product", populate: { path: "user" } });
   }
 
+  async getAllOrdered(ctx) {
+    const user = await ctx.models.User.getAuthUser(ctx);
+    if (user && user.role === "admin") {
+      return await this.Model.find({ ordered: true })
+        .populate("user")
+        .populate({ path: "product", populate: { path: "user" } });
+    } else {
+      throw new Error("管理者でのログインが必要です");
+    }
+  }
+
   async plusQuantity(id) {
     const order = await this.Model.findById(id)
       .populate("user")

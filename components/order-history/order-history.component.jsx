@@ -19,7 +19,7 @@ import {
   getWetherPast,
 } from "../../utils/functions";
 
-const OrderHistory = ({ orderHistory }) => {
+const OrderHistory = ({ orderHistory, adminPage }) => {
   //sortドロップダウンリスト関連
   const [isOpenSort, setIsOpenSort] = useState(false);
   const sortOptions = ["購入日昇順", "購入日降順"];
@@ -68,7 +68,9 @@ const OrderHistory = ({ orderHistory }) => {
   };
   return (
     <Container>
-      <TitleMessage>注文履歴</TitleMessage>
+      {(adminPage && <TitleMessage>管理者ページ</TitleMessage>) || (
+        <TitleMessage>購入履歴</TitleMessage>
+      )}
       <Buttons>
         <ul>
           <DropDownContainer>

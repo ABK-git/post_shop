@@ -2,6 +2,7 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 import TextareaInput from "../textarea-input/textarea-input.component";
 import Pagination from "material-ui-flat-pagination";
+import SplitNewLine from "../split-new-line/split-new-line.component";
 
 export const QuestionDetailsContainer = styled.div`
   ${tw`w-full pt-5 h-screen bg-gray-500 overflow-auto`}
@@ -16,7 +17,7 @@ export const QuestionBody = styled.div`
 `;
 
 export const QuestionTitle = styled.p`
-  ${tw`font-bold text-3xl`}
+  ${tw`font-bold text-3xl truncate`} 
 `;
 
 export const QuestionUser = styled.p`
@@ -39,7 +40,7 @@ export const RepliesLength = styled.p`
   ${tw`flex justify-center text-3xl text-gray-700`}
 `;
 export const MarginLeftDiv = styled.div`
-  ${tw`ml-3`}
+  ${tw`ml-3 w-full truncate`}
 `;
 
 export const PaginationContainer = styled(Pagination)`

@@ -22,6 +22,7 @@ export const SIGN_UP = gql`
       username
       email
       password
+      role
       avatar
     }
   }
@@ -47,6 +48,7 @@ export const UPDATE_USER = gql`
       username
       email
       password
+      role
       avatar
       products {
         _id
@@ -69,6 +71,7 @@ export const SIGN_IN = gql`
       username
       email
       password
+      role
       products {
         _id
         name
@@ -90,6 +93,7 @@ export const GET_USER = gql`
       username
       email
       password
+      role
       products {
         _id
         name
@@ -468,6 +472,34 @@ export const USERS_CART = gql`
 export const USERS_ORDER_HISTORY = gql`
   query UsersOrderHistory {
     usersOrderHistory {
+      _id
+      user {
+        _id
+        username
+        avatar
+      }
+      product {
+        _id
+        name
+        quantity
+        price
+        imagePasses
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const GET_ALL_ORDERED = gql`
+  query GetAllOrdered {
+    getAllOrdered {
       _id
       user {
         _id
