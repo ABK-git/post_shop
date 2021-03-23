@@ -278,7 +278,8 @@ const ProductDetails = ({ product, orderedId }) => {
             }}>
             カートに1追加
           </CustomButton>
-        )) || (
+        )) ||
+        (user && (
           <CustomButton
             design="add_cart"
             onClick={() => {
@@ -286,7 +287,7 @@ const ProductDetails = ({ product, orderedId }) => {
             }}>
             カートに入れる
           </CustomButton>
-        )
+        ))
       )}
     </ProductDetailsContainer>
   );
