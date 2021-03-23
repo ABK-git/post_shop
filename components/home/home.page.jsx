@@ -19,10 +19,9 @@ import {
   MaxTable,
   MaxTr,
 } from "./home.styles";
-import withApollo from "../../hoc/withApollo";
 import ProductPreview from "../product-preview/product-preview.component";
 import FormInput from "../form-input/form-input.component";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import MyContext from "../../context";
 import { getEvaluationOfStars } from "../../utils/functions";
 
@@ -201,7 +200,6 @@ const HomePage = ({ productsFromPage }) => {
   const changeSelectDisplay = () => {
     setSelectDisplay(!selectDisplay);
   };
-
   return (
     <HomeContainer>
       {displaySearchCondition && (
