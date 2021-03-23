@@ -29,12 +29,6 @@ const userSchema = new Schema({
     required: true,
     default: "guest",
   },
-  products: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
-    },
-  ],
   createdAt: { type: Date, default: Date.now },
 });
 
