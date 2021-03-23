@@ -20,7 +20,6 @@ import Spinner from "../spinner/spinner.component";
 const Header = ({ apollo }) => {
   //graphql
   const [getUser, { data, error, loading }] = getLazyAuthUser();
-  //const [user, setUser] = useState(null);
   const [signOut] = userSignOut();
   const router = useRouter();
   //context
@@ -53,8 +52,13 @@ const Header = ({ apollo }) => {
     if (!data.user && user) {
       setUser(null);
     }
+    //User情報を編集した場合
     if (user && data.user && data.user.avatar != null) {
-      if (data.user.avatar !== user.avatar) {
+      if (
+        data.user.avatar !== user.avatar ||
+        data.user.email !== user.email ||
+        data.user.username !== user.username
+      ) {
         setUser(data.user);
       }
     }
