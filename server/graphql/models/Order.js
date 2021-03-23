@@ -99,27 +99,11 @@ class Order {
   }
 
   async create(id) {
-    if (!this.user) {
-      throw new Error("ログインしてください");
-    }
-    //購入ユーザのカートに同じ商品が入っているかを確認。
-    const getSameProductOrder = await this.Model.findOne({
-      user: this.user._id,
-      ordered: false,
+    const createdOrder = await this.Model.create({
       product: id,
-    })
-      .populate("user")
-      .populate({ path: "product", populate: { path: "user" } });
-
-    //findOneは見つからなかった場合null
-    if (getSameProductOrder) {
-      //個数を一つ追加
-      await getSameProductOrder.quantity++;
-      await getSameProductOrder.save();
-      return getSameProductOrder;
-    } else {
-      return this.Model.create({ product: id, user: this.user._id });
-    }
+      user: this.user._id,
+    });
+    return await this.getById(createdOrder._id)
   }
 }
 
