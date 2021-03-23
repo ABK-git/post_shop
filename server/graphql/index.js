@@ -72,7 +72,7 @@ exports.createApolloServer = () => {
       createQuestion(input: QuestionCreateInput): Question
       createReply(input: ReplyCreateInput): Reply
       createReview(input: ReviewCreateInput): Review
-      createOrder(input: OrderCreateInput): Order
+      createOrder(id: ID): Order
 
       plusQuantity(id: ID): Order
       minusQuantity(id: ID): Order

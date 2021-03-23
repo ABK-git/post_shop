@@ -98,7 +98,7 @@ class Order {
       .populate({ path: "product", populate: { path: "user" } });
   }
 
-  async create(data) {
+  async create(id) {
     if (!this.user) {
       throw new Error("ログインしてください");
     }
@@ -106,7 +106,7 @@ class Order {
     const getSameProductOrder = await this.Model.findOne({
       user: this.user._id,
       ordered: false,
-      product: data.product,
+      product: id,
     })
       .populate("user")
       .populate({ path: "product", populate: { path: "user" } });
@@ -118,8 +118,7 @@ class Order {
       await getSameProductOrder.save();
       return getSameProductOrder;
     } else {
-      data.user = this.user;
-      return this.Model.create(data);
+      return this.Model.create({ product: id, user: this.user._id });
     }
   }
 }
