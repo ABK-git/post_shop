@@ -4,6 +4,8 @@ const User = require("../database/models/user");
 const Product = require("../database/models/product");
 const Question = require("../database/models/question");
 const Review = require("../database/models/review");
+const Order = require("../database/models/order");
+const Reply = require("../database/models/reply");
 
 class FakeDb {
   async clean() {
@@ -11,6 +13,8 @@ class FakeDb {
     await Product.deleteMany({});
     await Question.deleteMany({});
     await Review.deleteMany({});
+    await Order.deleteMany({});
+    await Reply.deleteMany({});
   }
 
   async addData() {

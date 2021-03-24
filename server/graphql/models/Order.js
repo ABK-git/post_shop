@@ -11,9 +11,11 @@ class Order {
   }
 
   getAllByUserCart() {
-    return this.Model.find({ user: this.user._id, ordered: false })
-      .populate("user")
-      .populate({ path: "product", populate: { path: "user" } });
+    try {
+      return this.Model.find({ user: this.user._id, ordered: false })
+        .populate("user")
+        .populate({ path: "product", populate: { path: "user" } });
+    } catch (e) {}
   }
 
   getAllByUserOrderHistory() {
@@ -24,6 +26,7 @@ class Order {
 
   async getAllOrdered(ctx) {
     const user = await ctx.models.User.getAuthUser(ctx);
+
     if (user && user.role === "admin") {
       return await this.Model.find({ ordered: true })
         .populate("user")
@@ -70,7 +73,7 @@ class Order {
     //注文を決済済みにする
     return await this.Model.findOneAndUpdate(
       { _id: id },
-      { $set: { ordered: true, quantity } },
+      { $set: { ordered: true, quantity, orderingPrice: product.price } },
       { new: true }
     )
       .populate("user")
@@ -91,7 +94,7 @@ class Order {
     //注文を決済済みにする
     return await this.Model.findOneAndUpdate(
       { _id: id },
-      { $set: { ordered: true } },
+      { $set: { ordered: true, orderingPrice: product.price } },
       { new: true }
     )
       .populate("user")
@@ -103,7 +106,7 @@ class Order {
       product: id,
       user: this.user._id,
     });
-    return await this.getById(createdOrder._id)
+    return await this.getById(createdOrder._id);
   }
 }
 
