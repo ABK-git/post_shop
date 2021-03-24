@@ -34,8 +34,12 @@ export const LiItem = styled.li`
 
 export const DatePickerContainer = styled(DatePicker)`
   ${tw`w-full border-2 border-red-600 text-yellow-800 cursor-pointer`}
-`
+`;
 
 export const FilterPeriod = styled.p`
   ${tw`text-xl sm:text-2xl text-gray-800`}
+`;
+
+export const Flex = styled.div`
+  ${tw`flex`}
 `;
