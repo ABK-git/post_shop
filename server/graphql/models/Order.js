@@ -10,6 +10,19 @@ class Order {
       .populate("user");
   }
 
+  //個人の売却履歴
+ async getSoldHistory() {
+    const orders = await this.Model.find({
+      ordered: true,
+    })
+      .populate("user")
+      .populate({
+        path: "product",
+        populate: { path: "user", match: { _id: { $eq: this.user._id } } },
+      });
+    return orders;
+  }
+
   getAllByUserCart() {
     try {
       return this.Model.find({ user: this.user._id, ordered: false })
