@@ -8,6 +8,7 @@ const orderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Product",
     },
+    orderingPrice: { type: Number, min: 0 },
     quantity: { type: Number, required: true, min: 1, default: 1 },
     ordered: { type: Boolean, default: false },
   },

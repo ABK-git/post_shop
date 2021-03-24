@@ -439,12 +439,6 @@ export const USERS_CART = gql`
   }
 `;
 
-export const ALREADY_IN_CART = gql`
-  query GetAlreadyInCart($id: ID) {
-    getAlreadyInCart(id: $id)
-  }
-`;
-
 export const USERS_ORDER_HISTORY = gql`
   query UsersOrderHistory {
     usersOrderHistory {
@@ -468,6 +462,7 @@ export const USERS_ORDER_HISTORY = gql`
       }
       quantity
       ordered
+      orderingPrice
       createdAt
       updatedAt
     }
@@ -496,6 +491,7 @@ export const GET_ALL_ORDERED = gql`
       }
       quantity
       ordered
+      orderingPrice
       createdAt
       updatedAt
     }
@@ -619,6 +615,7 @@ export const SETTLEMENT_MAXIMUM_ORDER = gql`
       }
       quantity
       ordered
+      orderingPrice
       createdAt
       updatedAt
     }
@@ -648,6 +645,7 @@ export const SETTLEMENT_ORDER = gql`
       }
       quantity
       ordered
+      orderingPrice
       createdAt
       updatedAt
     }

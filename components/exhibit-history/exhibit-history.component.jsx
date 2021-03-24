@@ -22,7 +22,7 @@ import ProductHistoryPreview from "../product-history-preview/product-history-pr
 const ExhibitHistory = ({ products }) => {
   //sortドロップダウンリスト関連
   const [isOpenSort, setIsOpenSort] = useState(false);
-  const sortOptions = ["購入日昇順", "購入日降順"];
+  const sortOptions = ["出品日昇順", "出品日降順"];
   const [chooseOption, setChooseOption] = useState(sortOptions[0]);
   const changeIsOpenSort = () => {
     setIsOpenSort(!isOpenSort);
@@ -30,13 +30,13 @@ const ExhibitHistory = ({ products }) => {
   const productsSort = (products) => {
     let new_products = products;
     switch (chooseOption) {
-      case "購入日昇順":
+      case "出品日昇順":
         new_products = new_products.sort((a, b) =>
           moment.unix(a.createdAt).diff(moment.unix(b.createdAt), "millisecond")
         );
         break;
 
-      case "購入日降順":
+      case "出品日降順":
         new_products = new_products.sort((a, b) =>
           moment.unix(b.createdAt).diff(moment.unix(a.createdAt), "millisecond")
         );
@@ -112,7 +112,7 @@ const ExhibitHistory = ({ products }) => {
       </Buttons>
       {getSortActive(startDate, endDate) && (
         <FilterPeriod>
-          購入期間：
+          出品期間：
           {moment(startDate).format("YYYY/MM/DD")} ~{" "}
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
