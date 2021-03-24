@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import SignUpForm from "../sign-up-form/sign-up-form.component";
 import withApollo from "../../hoc/withApollo";
 import { userSignUp, userSignIn } from "../../apollo/actions";
-import Redirect from "../redirect";
+import router from "next/router";
 import WithUnAuthenticated from "../../hoc/withUnAuthenticated";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import Spinner from "../spinner/spinner.component";
