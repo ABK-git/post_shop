@@ -71,12 +71,14 @@ export const useCreateProduct = () =>
 export const useUpdateProduct = () =>
   useMutation(UPDATE_PRODUCT, {
     update(cache, { data: { updateProduct } }) {
-      cache.modify({
-        id: cache.identify(updateProduct),
-        fields: {
-          updateProduct,
-        },
-      });
+      try {
+        cache.modify({
+          id: cache.identify(updateProduct),
+          fields: {
+            updateProduct,
+          },
+        });
+      } catch (e) {}
     },
   });
 //Question

@@ -9,6 +9,7 @@ import {
   LiItem,
   DatePickerContainer,
   FilterPeriod,
+  Flex,
 } from "./order-history.styles";
 import OrderPreview from "../order-preview/order-preview.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -66,6 +67,18 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
     }
     return new_orders;
   };
+  //取引総額を求める
+  const getAmountPrice = (orders) => {
+    let amountPrice = 0;
+    for (let i = 0; i < orders.length; i++) {
+      const { orderingPrice, quantity } = orders[i];
+      amountPrice += orderingPrice * quantity;
+    }
+    return (
+      "￥" + String(amountPrice).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    );
+  };
+
   return (
     <Container>
       {(adminPage && <TitleMessage>管理者ページ</TitleMessage>) || (
@@ -119,6 +132,15 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
       )}
+      <Flex>
+        {getSortActive(startDate, endDate) && (
+          <FilterPeriod>上記期間の取引総額：</FilterPeriod>
+        )}
+        <FilterPeriod>
+          {(getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
+            getAmountPrice(ordersSort(orderFilter(orderHistory))))}
+        </FilterPeriod>
+      </Flex>
       <OrderPreviewContainer>
         {ordersSort(orderFilter(orderHistory)).map((order) => (
           <OrderPreview key={order._id} order={order} />

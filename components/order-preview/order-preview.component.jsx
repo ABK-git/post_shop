@@ -60,10 +60,15 @@ const OrderPreview = ({ order, inCart }) => {
           <div>
             <LeftJutifyStart>
               単価:￥
-              {String(order.product.price).replace(
-                /(\d)(?=(\d\d\d)+(?!\d))/g,
-                "$1,"
-              )}
+              {(order.orderingPrice &&
+                String(order.orderingPrice).replace(
+                  /(\d)(?=(\d\d\d)+(?!\d))/g,
+                  "$1,"
+                )) ||
+                String(order.product.price).replace(
+                  /(\d)(?=(\d\d\d)+(?!\d))/g,
+                  "$1,"
+                )}
             </LeftJutifyStart>
             {(inCart && (
               <Flex>
@@ -94,7 +99,10 @@ const OrderPreview = ({ order, inCart }) => {
         </TextRight>
         <BorderPrice />
         <AmountPrice>
-          計:￥{(order.product.price * order.quantity).toLocaleString()}
+          計:￥
+          {(order.orderingPrice &&
+            (order.orderingPrice * order.quantity).toLocaleString()) ||
+            (order.product.price * order.quantity).toLocaleString()}
         </AmountPrice>
       </WhiteBackground>
     </OrderPreviewContainer>
