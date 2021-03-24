@@ -5,7 +5,6 @@ exports.userTypes = `
     username: String
     email: String
     password: String
-    products: [Product]
     role: String
   }
 
@@ -115,6 +114,7 @@ exports.orderTypes = `
     _id: ID,
     user: User,
     product: Product,
+    orderingPrice: Int,
     quantity: Int,
     createdAt: String,
     updatedAt: String,
