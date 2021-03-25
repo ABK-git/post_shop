@@ -13,14 +13,16 @@ import {
   RepliesLength,
   MarginLeftDiv,
   PaginationContainer,
+  PleaseLoginMessage,
 } from "./question-details.styles";
 import SplitNewLine from "../split-new-line/split-new-line.component";
-import { useCreateReply } from "../../apollo/actions";
+import { useCreateReply, getAuthUser } from "../../apollo/actions";
 import Spinner from "../spinner/spinner.component";
 import DisplayUserImage from "../display-user-image/display-user-image.component";
 import Reply from "../reply/reply.component";
 
 const QuestionDetails = ({ question }) => {
+  const { data: { user } = {}, loading: userLoading } = getAuthUser();
   //Pagination
   const [offset, setOffset] = useState(0);
   const parPage = 5;
@@ -36,7 +38,7 @@ const QuestionDetails = ({ question }) => {
     setContent("");
   };
 
-  if (loading) {
+  if (loading || userLoading) {
     <Spinner />;
   }
 
@@ -77,18 +79,26 @@ const QuestionDetails = ({ question }) => {
         />
       )}
       <ReplyContainer>
-        <ReplyTextareaInput
-          name="reply"
-          placeholder="返信を追加"
-          maxLength="1000"
-          rows="3"
-          value={content}
-          handleChange={handleChange}
-        />
-        {content && (
-          <CustomButton design="reply_to_question" onClick={handleSubmit}>
-            公開
-          </CustomButton>
+        {(user && (
+          <div>
+            <ReplyTextareaInput
+              name="reply"
+              placeholder="返信を追加"
+              maxLength="1000"
+              rows="3"
+              value={content}
+              handleChange={handleChange}
+            />
+            {content && (
+              <CustomButton design="reply_to_question" onClick={handleSubmit}>
+                公開
+              </CustomButton>
+            )}
+          </div>
+        )) || (
+          <PleaseLoginMessage>
+            返信をするにはログインが必要です
+          </PleaseLoginMessage>
         )}
       </ReplyContainer>
     </QuestionDetailsContainer>
