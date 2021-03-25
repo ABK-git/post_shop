@@ -10,7 +10,6 @@ import {
   Flex,
   EvaluationFont,
   PleaseLoginMessage,
-  YourProduct,
 } from "./product-details.styles";
 import DisplayCategories from "../display-categories/display-categories.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -34,6 +33,7 @@ import MyContext from "../../context";
 import Review from "../review/review.component";
 import Spinner from "../spinner/spinner.component";
 import Pagination from "@material-ui/lab/Pagination";
+import router from "next/router";
 
 const ProductDetails = ({ product, orderedId }) => {
   const { data: { user } = {}, loading, error } = getAuthUser();
@@ -268,7 +268,13 @@ const ProductDetails = ({ product, orderedId }) => {
         </DisplayList>
       )}
       {user && user._id === product.user._id ? (
-        <YourProduct>自分の商品です</YourProduct>
+        <CustomButton
+          design="add_cart"
+          onClick={() => {
+            router.push(`/product/${product._id}/update`);
+          }}>
+          編集画面へ
+        </CustomButton>
       ) : (
         (orderedId !== null && (
           <CustomButton

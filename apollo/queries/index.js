@@ -468,6 +468,32 @@ export const USERS_ORDER_HISTORY = gql`
     }
   }
 `;
+
+export const GET_SOLD_HISTORY = gql`
+  query GetSoldHistory {
+    getSoldHistory {
+      _id
+      product {
+        _id
+        name
+        imagePasses
+        quantity
+        price
+        user {
+          _id
+          username
+          avatar
+        }
+      }
+      quantity
+      ordered
+      orderingPrice
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const GET_ALL_ORDERED = gql`
   query GetAllOrdered {
     getAllOrdered {

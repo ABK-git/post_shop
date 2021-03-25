@@ -11,16 +11,17 @@ class Order {
   }
 
   //個人の売却履歴
- async getSoldHistory() {
-    const orders = await this.Model.find({
-      ordered: true,
-    })
-      .populate("user")
-      .populate({
-        path: "product",
-        populate: { path: "user", match: { _id: { $eq: this.user._id } } },
-      });
-    return orders;
+  getSoldHistory() {
+    try {
+      return this.Model.find({
+        ordered: true,
+      })
+        .populate("user")
+        .populate({
+          path: "product",
+          populate: { path: "user", match: { _id: { $eq: this.user._id } } },
+        });
+    } catch (e) {}
   }
 
   getAllByUserCart() {
