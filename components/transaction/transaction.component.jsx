@@ -10,8 +10,7 @@ import {
   DatePickerContainer,
   FilterPeriod,
   Flex,
-} from "./order-history.styles";
-import OrderPreview from "../order-preview/order-preview.component";
+} from "./transaction.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
 import {
@@ -19,11 +18,12 @@ import {
   getWetherFuture,
   getWetherPast,
 } from "../../utils/functions";
+import TransactionPreview from "../transaction-preview/transaction-preview.component";
 
-const OrderHistory = ({ orderHistory, adminPage }) => {
+const Transaction = ({ orderHistory }) => {
   //sortドロップダウンリスト関連
   const [isOpenSort, setIsOpenSort] = useState(false);
-  const sortOptions = ["購入日昇順", "購入日降順"];
+  const sortOptions = ["取引日昇順", "取引日降順"];
   const [chooseOption, setChooseOption] = useState(sortOptions[0]);
   const changeIsOpenSort = () => {
     setIsOpenSort(!isOpenSort);
@@ -31,13 +31,13 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
   const ordersSort = (orders) => {
     let new_orders = orders;
     switch (chooseOption) {
-      case "購入日昇順":
+      case "取引日昇順":
         new_orders = new_orders.sort((a, b) =>
           moment.unix(a.updatedAt).diff(moment.unix(b.updatedAt), "millisecond")
         );
         break;
 
-      case "購入日降順":
+      case "取引日降順":
         new_orders = new_orders.sort((a, b) =>
           moment.unix(b.updatedAt).diff(moment.unix(a.updatedAt), "millisecond")
         );
@@ -81,9 +81,7 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
 
   return (
     <Container>
-      {(adminPage && <TitleMessage>管理者ページ</TitleMessage>) || (
-        <TitleMessage>購入履歴</TitleMessage>
-      )}
+      <TitleMessage>取引履歴</TitleMessage>
       <Buttons>
         <ul>
           <DropDownContainer>
@@ -127,7 +125,7 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
       </Buttons>
       {getSortActive(startDate, endDate) && (
         <FilterPeriod>
-          購入期間：
+          取引期間：
           {moment(startDate).format("YYYY/MM/DD")} ~{" "}
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
@@ -143,11 +141,11 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
       </Flex>
       <OrderPreviewContainer>
         {ordersSort(orderFilter(orderHistory)).map((order) => (
-          <OrderPreview key={order._id} order={order} />
+          <TransactionPreview key={order._id} order={order} />
         ))}
       </OrderPreviewContainer>
     </Container>
   );
 };
 
-export default OrderHistory;
+export default Transaction;

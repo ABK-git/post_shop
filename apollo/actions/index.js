@@ -23,6 +23,7 @@ import {
   GET_PRODUCTS_BY_USER,
   UPDATE_PRODUCT,
   GET_ALL_ORDERED,
+  GET_SOLD_HISTORY,
 } from "../queries";
 
 //User認証
@@ -64,7 +65,7 @@ export const useCreateProduct = () =>
       const { getByUser } = cache.readQuery({ query: GET_PRODUCTS_BY_USER });
       cache.writeQuery({
         query: GET_PRODUCTS_BY_USER,
-        data: { getByUser: [...getByUser, createProduct] },
+        data: { getByUser: [createProduct, ...getByUser] },
       });
     },
   });
@@ -128,6 +129,7 @@ export const useCreateReview = () =>
 //Order
 export const getUsersCart = () => useQuery(USERS_CART);
 export const getUsersOrderHistory = () => useQuery(USERS_ORDER_HISTORY);
+export const getUsersSoldHistory = () => useQuery(GET_SOLD_HISTORY);
 export const getAllOrderedByAdmin = () => useQuery(GET_ALL_ORDERED);
 export const plusOrderQuantity = () => useMutation(PLUS_ORDER_QUANTITY);
 export const minusOrderQuantity = () => useMutation(MINUS_ORDER_QUANTITY);
@@ -150,13 +152,15 @@ export const settlementCartOrder = () =>
           query: USERS_ORDER_HISTORY,
           data: { usersOrderHistory: [...usersOrderHistory, settlement] },
         });
-        const { getAllOrdered } = cache.readQuery({
-          query: GET_ALL_ORDERED,
-        });
-        cache.writeQuery({
-          query: GET_ALL_ORDERED,
-          data: { getAllOrdered: [...getAllOrdered, settlement] },
-        });
+
+        //リアルタイム更新を実装しているわけではないので管理者ページの更新は不要
+        // const { getAllOrdered } = cache.readQuery({
+        //   query: GET_ALL_ORDERED,
+        // });
+        // cache.writeQuery({
+        //   query: GET_ALL_ORDERED,
+        //   data: { getAllOrdered: [...getAllOrdered, settlement] },
+        // });
       } catch (e) {}
     },
   });
@@ -181,13 +185,14 @@ export const settlementMaximumOrder = () =>
             usersOrderHistory: [...usersOrderHistory, settlementMaximum],
           },
         });
-        const { getAllOrdered } = cache.readQuery({
-          query: GET_ALL_ORDERED,
-        });
-        cache.writeQuery({
-          query: GET_ALL_ORDERED,
-          data: { getAllOrdered: [...getAllOrdered, settlementMaximum] },
-        });
+        //リアルタイム更新を実装しているわけではないので管理者ページの更新は不要
+        // const { getAllOrdered } = cache.readQuery({
+        //   query: GET_ALL_ORDERED,
+        // });
+        // cache.writeQuery({
+        //   query: GET_ALL_ORDERED,
+        //   data: { getAllOrdered: [...getAllOrdered, settlementMaximum] },
+        // });
       } catch (e) {}
     },
   });

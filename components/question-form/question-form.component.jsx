@@ -19,7 +19,7 @@ const QuestionForm = ({ formik }) => (
         errorMessage={formik.errors.title}
         required
       />
-      <ExhibitQuestionFormLabel>詳細(オプション)</ExhibitQuestionFormLabel>
+      <ExhibitQuestionFormLabel>詳細</ExhibitQuestionFormLabel>
       <ExhibitContentContainer
         name="content"
         maxLength="1000"

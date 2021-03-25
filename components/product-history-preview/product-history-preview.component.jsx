@@ -17,6 +17,10 @@ const ProductHistoryPreview = ({ product }) => {
   const my_context = useContext(MyContext);
   const { hmBreakPoint } = my_context;
 
+  const handleClickTo = () => {
+    router.push(`/product/${product._id}/update`);
+  };
+
   return (
     <Container hmBreakPoint={hmBreakPoint}>
       <Link href={`/product/${product._id}/update`}>
@@ -24,11 +28,9 @@ const ProductHistoryPreview = ({ product }) => {
       </Link>
       <DisplayProductImages
         images={product.imagePasses}
-        handleClickTo={() => {
-          router.push(`/product/${product._id}/update`);
-        }}
+        handleClickTo={handleClickTo}
       />
-      <ProductIntroduce>
+      <ProductIntroduce onClick={handleClickTo}>
         <OverhiddenRight>
           単価：￥
           {String(product.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
