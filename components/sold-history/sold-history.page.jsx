@@ -10,8 +10,7 @@ import {
   DatePickerContainer,
   FilterPeriod,
   Flex,
-} from "./order-history.styles";
-import OrderPreview from "../order-preview/order-preview.component";
+} from "./sold-history.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
 import {
@@ -19,11 +18,12 @@ import {
   getWetherFuture,
   getWetherPast,
 } from "../../utils/functions";
+import SoldPreview from "../sold-preview/sold-preview.component";
 
-const OrderHistory = ({ orderHistory, adminPage }) => {
+const SoldHistory = ({ soldHistory }) => {
   //sortドロップダウンリスト関連
   const [isOpenSort, setIsOpenSort] = useState(false);
-  const sortOptions = ["購入日昇順", "購入日降順"];
+  const sortOptions = ["売却日昇順", "売却日降順"];
   const [chooseOption, setChooseOption] = useState(sortOptions[0]);
   const changeIsOpenSort = () => {
     setIsOpenSort(!isOpenSort);
@@ -31,13 +31,13 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
   const ordersSort = (orders) => {
     let new_orders = orders;
     switch (chooseOption) {
-      case "購入日昇順":
+      case "売却日昇順":
         new_orders = new_orders.sort((a, b) =>
           moment.unix(a.updatedAt).diff(moment.unix(b.updatedAt), "millisecond")
         );
         break;
 
-      case "購入日降順":
+      case "売却日降順":
         new_orders = new_orders.sort((a, b) =>
           moment.unix(b.updatedAt).diff(moment.unix(a.updatedAt), "millisecond")
         );
@@ -81,9 +81,7 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
 
   return (
     <Container>
-      {(adminPage && <TitleMessage>管理者ページ</TitleMessage>) || (
-        <TitleMessage>購入履歴</TitleMessage>
-      )}
+      <TitleMessage>売却履歴</TitleMessage>
       <Buttons>
         <ul>
           <DropDownContainer>
@@ -127,27 +125,27 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
       </Buttons>
       {getSortActive(startDate, endDate) && (
         <FilterPeriod>
-          購入期間：
+          売却期間：
           {moment(startDate).format("YYYY/MM/DD")} ~{" "}
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
       )}
       <Flex>
         {(getSortActive(startDate, endDate) && (
-          <FilterPeriod>上記期間の取引総額：</FilterPeriod>
-        )) || <FilterPeriod>取引総額</FilterPeriod>}
+          <FilterPeriod>上記期間の売却総額：</FilterPeriod>
+        )) || <FilterPeriod>売却総額</FilterPeriod>}
         <FilterPeriod>
-          {getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
-            getAmountPrice(ordersSort(orderFilter(orderHistory)))}
+          {getAmountPrice(ordersSort(orderFilter(soldHistory))) !== "￥0" &&
+            getAmountPrice(ordersSort(orderFilter(soldHistory)))}
         </FilterPeriod>
       </Flex>
       <OrderPreviewContainer>
-        {ordersSort(orderFilter(orderHistory)).map((order) => (
-          <OrderPreview key={order._id} order={order} />
+        {ordersSort(orderFilter(soldHistory)).map((order) => (
+          <SoldPreview key={order._id} order={order} />
         ))}
       </OrderPreviewContainer>
     </Container>
   );
 };
 
-export default OrderHistory;
+export default SoldHistory;
