@@ -23,7 +23,7 @@ import TransactionPreview from "../transaction-preview/transaction-preview.compo
 const Transaction = ({ orderHistory }) => {
   //sortドロップダウンリスト関連
   const [isOpenSort, setIsOpenSort] = useState(false);
-  const sortOptions = ["売却日昇順", "売却日降順"];
+  const sortOptions = ["取引日昇順", "取引日降順"];
   const [chooseOption, setChooseOption] = useState(sortOptions[0]);
   const changeIsOpenSort = () => {
     setIsOpenSort(!isOpenSort);
