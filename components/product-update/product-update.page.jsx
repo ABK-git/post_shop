@@ -121,7 +121,7 @@ const ProductUpdate = ({ product }) => {
     await updateProduct({
       variables: values,
     });
-    router.push("/user/exhibit-history");
+    router.push("/");
   };
   const formik = useFormik({
     initialValues,

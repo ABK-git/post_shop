@@ -5,7 +5,8 @@ import { ApolloProvider } from "@apollo/react-hooks";
 export default withApollo(
   ({ initialState }) => {
     return new ApolloClient({
-      uri: "http://localhost:3000/graphql",
+      //uri: "http://localhost:3000/graphql",
+      uri: process.env.BASE_URL,
       cache: new InMemoryCache().restore(initialState || {}),
       resolvers: {
         Product: {
