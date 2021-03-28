@@ -3,7 +3,7 @@ import nextConnect from "next-connect";
 
 const upload = multer({
   storage: multer.diskStorage({
-    destination: "./public/images/user",
+    destination: "./tmp/images/user",
     filename: (req, file, cb) => cb(null, Date.now() + file.originalname),
   }),
 });
