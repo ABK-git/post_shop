@@ -6,7 +6,6 @@ mongoose.models = {};
 const User = require("../../database/models/user");
 
 exports.init = (passport) => {
-
   passport.serializeUser((user, done) => {
     done(null, user.id);
   })

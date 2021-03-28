@@ -11,6 +11,7 @@ module.exports = {
   env: {
     BASE_URL: dev
       ? "http://localhost:3000/graphql"
-      : "https://post-shop1.herokuapp.com/graphql",
+      //: "https://post-shop1.herokuapp.com/graphql",
+      : process.env.VERCEL_URL+"/graphql"
   },
 };
