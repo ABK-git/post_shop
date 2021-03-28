@@ -50,9 +50,9 @@ const Header = ({ apollo }) => {
     if (data.user && !user) {
       setUser(data.user);
     }
-    // else if (!data.user && user) {
-    //   setUser(null);
-    // }
+    else if (!data.user && user) {
+      setUser(null);
+    }
     //User情報を編集した場合
     if (user && data.user && data.user.avatar != null) {
       if (
