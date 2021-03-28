@@ -19,6 +19,7 @@ import {
   getWetherFuture,
   getWetherPast,
 } from "../../utils/functions";
+import "react-datepicker/dist/react-datepicker";
 
 const OrderHistory = ({ orderHistory, adminPage }) => {
   //sortドロップダウンリスト関連
