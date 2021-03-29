@@ -13,7 +13,7 @@ import MyContext from "../../context";
 import {
   CLOUDINARY_UPLOAD_IMAGE_URL,
   CLOUDINARY_UPLOAD_PRESET,
-} from "../../.cloudinary";
+} from "../../cloudinary";
 
 const UpdateInfo = () => {
   const [updateUser, { data, loading, error }] = userUpdate();

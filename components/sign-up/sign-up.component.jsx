@@ -12,9 +12,9 @@ import Spinner from "../spinner/spinner.component";
 import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 import {
-  CLOUDINARY_UPLOAD_PRESET,
   CLOUDINARY_UPLOAD_IMAGE_URL,
-} from "../../.cloudinary";
+  CLOUDINARY_UPLOAD_PRESET,
+} from "../../cloudinary";
 
 const SignUp = ({ apollo }) => {
   const [signUp, { data, loading, error }] = userSignUp();
