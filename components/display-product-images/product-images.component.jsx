@@ -7,11 +7,9 @@ import {
   ToDetails,
 } from "./product-images.styles";
 import Image from "next/image";
-import router from "next/router";
 
 const ProductImages = ({
   images,
-  product,
   cartSize,
   handleClickTo,
 }) => {

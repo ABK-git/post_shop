@@ -10,6 +10,10 @@ import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.
 import { UpdateInfoContainer, TitleMessage } from "./update-info.styles";
 import { userUpdate } from "../../apollo/actions";
 import MyContext from "../../context";
+import {
+  CLOUDINARY_UPLOAD_IMAGE_URL,
+  CLOUDINARY_UPLOAD_PRESET,
+} from "../../.cloudinary";
 
 const UpdateInfo = () => {
   const [updateUser, { data, loading, error }] = userUpdate();
@@ -19,9 +23,10 @@ const UpdateInfo = () => {
 
   //画像のUPLoad関連
   const [file, setFile] = useState(null);
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
+  //multerがデプロイ環境で使えないのでコメントアウト
+  // const config = {
+  //   headers: { "content-type": "multipart/form-data" },
+  // };
   const handleChangeSetFile = (event) => {
     let file = event.target.files[0];
     setFile(file);
@@ -32,16 +37,23 @@ const UpdateInfo = () => {
   const avatarUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    const avatar = await axios
-      .post("/api/user-image-upload", formData, config)
-      .then(({ data: res }) => {
-        return res.avatar.replaceAll("\\", "/").replace("public", "");
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+    const avatar = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+      .then((res) => {
+        //multerがデプロイ環境で使えないのでコメントアウト
+        //return res.avatar.replaceAll("\\", "/").replace("public", "");
+        return res.json();
       })
       .catch(() => {
         return null;
       });
     if (avatar) {
-      formik.values.avatar = avatar;
+      formik.values.avatar = avatar.secure_url;
     }
   };
   //formik関連

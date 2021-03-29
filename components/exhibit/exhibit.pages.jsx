@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   ContainerDropzone,
@@ -14,6 +14,10 @@ import { useCreateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
+import {
+  CLOUDINARY_UPLOAD_PRESET,
+  CLOUDINARY_UPLOAD_IMAGE_URL,
+} from "../../.cloudinary";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -58,29 +62,43 @@ const Exhibit = () => {
   };
 
   //画像のUPLoad構成
-  const config = {
-    headers: { "content-type": "multipart/form-data" }
-  };
+  // const config = {
+  //   headers: { "content-type": "multipart/form-data" }
+  // };
 
   //ファイル登録
   const registerProductImages = async () => {
     if (images.length != 0) {
-      const formData = new FormData();
+      const imagePasses = [];
       for (let i = 0; i < images.length; i++) {
-        formData.append("files", images[i]);
+        const formData = new FormData();
+        formData.append("file", images[i]);
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+        const getImagePass = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+          .then((res) => res.json())
+          .catch(() => null);
+        if (getImagePass) {
+          imagePasses.push(getImagePass.secure_url);
+        }
       }
-      const registerFiles = await axios
-        .post("/api/product-images-upload", formData, config)
-        .then(({ data: res }) => {
-          return res.data;
-        })
-        .catch(() => {
-          return null;
-        });
-      const getImagesPass = Object.values(registerFiles).map((registerFile) => {
-        return registerFile.path.replaceAll("\\", "/").replace("public", "");
-      });
-      formik.values.imagePasses = getImagesPass;
+      //multerがデプロイ環境で使えないのでコメントアウト
+      // const registerFiles = await axios
+      //   .post("/api/product-images-upload", formData, config)
+      //   .then(({ data: res }) => {
+      //     return res.data;
+      //   })
+      //   .catch(() => {
+      //     return null;
+      //   });
+      // const getImagesPass = Object.values(registerFiles).map((registerFile) => {
+      //   return registerFile.path.replaceAll("\\", "/").replace("public", "");
+      // });
+      console.log(imagePasses);
+      formik.values.imagePasses = imagePasses;
     }
   };
 
@@ -153,7 +171,7 @@ const Exhibit = () => {
         />
       )}
       <ExhibitForm formik={formik} />
-      {error && <GraphQLErrorMessages error={"商品登録に失敗しました"}/>}
+      {error && <GraphQLErrorMessages error={"商品登録に失敗しました"} />}
     </ExhibitContainer>
   );
 };

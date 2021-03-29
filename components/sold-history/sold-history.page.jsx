@@ -131,15 +131,17 @@ const SoldHistory = ({ soldHistory }) => {
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
       )}
-      <Flex>
-        {(getSortActive(startDate, endDate) && (
-          <FilterPeriod>上記期間の売却総額：</FilterPeriod>
-        )) || <FilterPeriod>売却総額</FilterPeriod>}
-        <FilterPeriod>
-          {getAmountPrice(ordersSort(orderFilter(soldHistory))) !== "￥0" &&
-            getAmountPrice(ordersSort(orderFilter(soldHistory)))}
-        </FilterPeriod>
-      </Flex>
+      {getAmountPrice(soldHistory) !== "￥0" && (
+        <Flex>
+          {(getSortActive(startDate, endDate) && (
+            <FilterPeriod>上記期間の売却総額：</FilterPeriod>
+          )) || <FilterPeriod>売却総額</FilterPeriod>}
+          <FilterPeriod>
+            {getAmountPrice(ordersSort(orderFilter(soldHistory))) !== "￥0" &&
+              getAmountPrice(ordersSort(orderFilter(soldHistory)))}
+          </FilterPeriod>
+        </Flex>
+      )}
       <OrderPreviewContainer>
         {ordersSort(orderFilter(soldHistory)).map((order) => (
           <SoldPreview key={order._id} order={order} />

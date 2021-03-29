@@ -14,6 +14,10 @@ import { useUpdateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 import ProductImages from "../display-product-images/product-images.component";
+import {
+  CLOUDINARY_UPLOAD_PRESET,
+  CLOUDINARY_UPLOAD_IMAGE_URL,
+} from "../../.cloudinary";
 
 const ProductUpdate = ({ product }) => {
   const [images, setImages] = useState([]);
@@ -58,29 +62,41 @@ const ProductUpdate = ({ product }) => {
   };
 
   //画像のUPLoad構成
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
+  // const config = {
+  //   headers: { "content-type": "multipart/form-data" },
+  // };
 
   //ファイル登録
   const registerProductImages = async () => {
     if (images.length != 0) {
-      const formData = new FormData();
+      const imagePasses = [];
       for (let i = 0; i < images.length; i++) {
-        formData.append("files", images[i]);
+        const formData = new FormData();
+        formData.append("file", images[i]);
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+        const getImagePass = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+          .then((res) => res.json())
+          .catch(() => null);
+        if (getImagePass) {
+          imagePasses.push(getImagePass.secure_url);
+        }
       }
-      const registerFiles = await axios
-        .post("/api/product-images-upload", formData, config)
-        .then(({ data: res }) => {
-          return res.data;
-        })
-        .catch(() => {
-          return null;
-        });
-      const getImagesPass = Object.values(registerFiles).map((registerFile) => {
-        return registerFile.path.replaceAll("\\", "/").replace("public", "");
-      });
-      formik.values.imagePasses = getImagesPass;
+      // const registerFiles = await axios
+      //   .post("/api/product-images-upload", formData, config)
+      //   .then(({ data: res }) => {
+      //     return res.data;
+      //   })
+      //   .catch(() => {
+      //     return null;
+      //   });
+      // const getImagesPass = Object.values(registerFiles).map((registerFile) => {
+      //   return registerFile.path.replaceAll("\\", "/").replace("public", "");
+      // });
+      formik.values.imagePasses = imagePasses;
     }
   };
 

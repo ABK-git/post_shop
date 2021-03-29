@@ -11,6 +11,10 @@ import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message
 import Spinner from "../spinner/spinner.component";
 import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
+import {
+  CLOUDINARY_UPLOAD_PRESET,
+  CLOUDINARY_UPLOAD_IMAGE_URL,
+} from "../../.cloudinary";
 
 const SignUp = ({ apollo }) => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -33,16 +37,30 @@ const SignUp = ({ apollo }) => {
   const avatarUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    const avatar = await axios
-      .post("/api/user-image-upload", formData, config)
-      .then(({ data: res }) => {
-        return res.avatar.replaceAll("\\", "/").replace("public", "");
+    //multerがデプロイ環境で使えないのでコメントアウト
+    // const avatar = await axios
+    //   .post("/api/user-image-upload", formData, config)
+    //   .then(({ data: res }) => {
+    //     return res.avatar.replaceAll("\\", "/").replace("public", "");
+    //   })
+    //   .catch(() => {
+    //     return null;
+    //   });
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+    const avatar = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+      .then((res) => {
+        return res.json();
       })
       .catch(() => {
         return null;
       });
+    console.log(avatar);
     if (avatar) {
-      formik.values.avatar = avatar;
+      formik.values.avatar = avatar.secure_url;
     }
   };
   //formik関連
