@@ -69,7 +69,7 @@ const Header = ({ apollo }) => {
     <HeaderContainer>
       <HeaderOptionsLeft>
         <MyLink href="/" design="header-left">
-          POST_SHOP
+          SHOP
         </MyLink>
       </HeaderOptionsLeft>
       {user ? (
