@@ -11,10 +11,6 @@ import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message
 import Spinner from "../spinner/spinner.component";
 import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
-import {
-  CLOUDINARY_UPLOAD_IMAGE_URL,
-  CLOUDINARY_UPLOAD_PRESET,
-} from "../../cloudinary";
 
 const SignUp = ({ apollo }) => {
   const [signUp, { data, loading, error }] = userSignUp();
@@ -46,12 +42,12 @@ const SignUp = ({ apollo }) => {
     //   .catch(() => {
     //     return null;
     //   });
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("upload_preset", process.env.UPLOAD_PRESET);
     const options = {
       method: "POST",
       body: formData,
     };
-    const avatar = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+    const avatar = await fetch(process.env.UPLOAD_IMAGE_URL, options)
       .then((res) => {
         return res.json();
       })

@@ -14,10 +14,6 @@ import { useUpdateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 import ProductImages from "../display-product-images/product-images.component";
-import {
-  CLOUDINARY_UPLOAD_IMAGE_URL,
-  CLOUDINARY_UPLOAD_PRESET,
-} from "../../cloudinary";
 
 const ProductUpdate = ({ product }) => {
   const [images, setImages] = useState([]);
@@ -73,12 +69,15 @@ const ProductUpdate = ({ product }) => {
       for (let i = 0; i < images.length; i++) {
         const formData = new FormData();
         formData.append("file", images[i]);
-        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("upload_preset", process.env.UPLOAD_PRESET);
         const options = {
           method: "POST",
           body: formData,
         };
-        const getImagePass = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+        const getImagePass = await fetch(
+          process.env.UPLOAD_IMAGE_URL,
+          options
+        )
           .then((res) => res.json())
           .catch(() => null);
         if (getImagePass) {

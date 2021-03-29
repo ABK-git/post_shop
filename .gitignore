@@ -40,3 +40,4 @@ yarn-error.log*
 .babelrc
 package.json
 yarn.lock
+cloudinary
