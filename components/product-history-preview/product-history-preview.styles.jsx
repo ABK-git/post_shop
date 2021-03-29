@@ -20,7 +20,7 @@ export const ProductName = styled.h1`
 `;
 
 export const ProductIntroduce = styled.div`
-  ${tw`mx-auto bg-white `}
+  ${tw`mx-auto bg-white mt-2`}
 `;
 
 export const OverhiddenRight = styled.div`

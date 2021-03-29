@@ -19,6 +19,7 @@ import {
   getWetherPast,
 } from "../../utils/functions";
 import TransactionPreview from "../transaction-preview/transaction-preview.component";
+import "react-datepicker/dist/react-datepicker";
 
 const Transaction = ({ orderHistory }) => {
   //sortドロップダウンリスト関連
@@ -130,15 +131,17 @@ const Transaction = ({ orderHistory }) => {
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
       )}
-      <Flex>
-        {(getSortActive(startDate, endDate) && (
-          <FilterPeriod>上記期間の取引総額：</FilterPeriod>
-        )) || <FilterPeriod>取引総額</FilterPeriod>}
-        <FilterPeriod>
-          {getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
-            getAmountPrice(ordersSort(orderFilter(orderHistory)))}
-        </FilterPeriod>
-      </Flex>
+      {getAmountPrice(orderHistory) !== "￥0" && (
+        <Flex>
+          {(getSortActive(startDate, endDate) && (
+            <FilterPeriod>上記期間の取引総額：</FilterPeriod>
+          )) || <FilterPeriod>取引総額</FilterPeriod>}
+          <FilterPeriod>
+            {getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
+              getAmountPrice(ordersSort(orderFilter(orderHistory)))}
+          </FilterPeriod>
+        </Flex>
+      )}
       <OrderPreviewContainer>
         {ordersSort(orderFilter(orderHistory)).map((order) => (
           <TransactionPreview key={order._id} order={order} />

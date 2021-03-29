@@ -32,6 +32,7 @@ const Header = ({ apollo }) => {
 
   const handleLogout = () => {
     signOut().then(() => {
+      setUser(null);
       apollo.resetStore().then(() => router.push("/"));
     });
   };
@@ -49,7 +50,7 @@ const Header = ({ apollo }) => {
     if (data.user && !user) {
       setUser(data.user);
     }
-    if (!data.user && user) {
+    else if (!data.user && user) {
       setUser(null);
     }
     //User情報を編集した場合

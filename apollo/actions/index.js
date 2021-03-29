@@ -57,16 +57,18 @@ export const getLazyProducts = () => useLazyQuery(GET_PRODUCTS);
 export const useCreateProduct = () =>
   useMutation(CREATE_PRODUCT, {
     update(cache, { data: { createProduct } }) {
-      const { products } = cache.readQuery({ query: GET_PRODUCTS });
-      cache.writeQuery({
-        query: GET_PRODUCTS,
-        data: { products: [createProduct, ...products] },
-      });
-      const { getByUser } = cache.readQuery({ query: GET_PRODUCTS_BY_USER });
-      cache.writeQuery({
-        query: GET_PRODUCTS_BY_USER,
-        data: { getByUser: [createProduct, ...getByUser] },
-      });
+      try {
+        const { products } = cache.readQuery({ query: GET_PRODUCTS });
+        cache.writeQuery({
+          query: GET_PRODUCTS,
+          data: { products: [createProduct, ...products] },
+        });
+        const { getByUser } = cache.readQuery({ query: GET_PRODUCTS_BY_USER });
+        cache.writeQuery({
+          query: GET_PRODUCTS_BY_USER,
+          data: { getByUser: [createProduct, ...getByUser] },
+        });
+      } catch (e) {}
     },
   });
 export const useUpdateProduct = () =>

@@ -19,6 +19,7 @@ import {
   getWetherFuture,
   getWetherPast,
 } from "../../utils/functions";
+import "react-datepicker/dist/react-datepicker";
 
 const OrderHistory = ({ orderHistory, adminPage }) => {
   //sortドロップダウンリスト関連
@@ -132,15 +133,19 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
           {moment(endDate).format("YYYY/MM/DD")}
         </FilterPeriod>
       )}
-      <Flex>
-        {(getSortActive(startDate, endDate) && (
-          <FilterPeriod>上記期間の取引総額：</FilterPeriod>
-        )) || <FilterPeriod>取引総額</FilterPeriod>}
-        <FilterPeriod>
-          {getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
-            getAmountPrice(ordersSort(orderFilter(orderHistory)))}
-        </FilterPeriod>
-      </Flex>
+      {getAmountPrice(orderHistory) !== "￥0" && (
+        <Flex>
+          {getSortActive(startDate, endDate) ? (
+            <FilterPeriod>上記期間の取引総額：</FilterPeriod>
+          ) : (
+            <FilterPeriod>取引総額</FilterPeriod>
+          )}
+          <FilterPeriod>
+            {getAmountPrice(ordersSort(orderFilter(orderHistory))) !== "￥0" &&
+              getAmountPrice(ordersSort(orderFilter(orderHistory)))}
+          </FilterPeriod>
+        </Flex>
+      )}
       <OrderPreviewContainer>
         {ordersSort(orderFilter(orderHistory)).map((order) => (
           <OrderPreview key={order._id} order={order} />
