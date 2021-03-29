@@ -43,10 +43,10 @@ class User {
     }
     //update
     await user.save();
-    //古いUser画像を削除
-    if (oldAvatar && avatar) {
-      fs.unlink(`./public${oldAvatar}`, () => {});
-    }
+    //古いUser画像を削除(Herokuでmulterが効かないせいで急遽Cloudinaryを導入したので不要になった)
+    // if (oldAvatar && avatar) {
+    //   fs.unlink(`./public${oldAvatar}`, () => {});
+    // }
     return user;
   }
   async signIn(signInData, ctx) {
