@@ -9,6 +9,7 @@ import {
   LiItem,
   DatePickerContainer,
   FilterPeriod,
+  Relative,
 } from "./exhibit-history.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
@@ -77,14 +78,16 @@ const ExhibitHistory = ({ products }) => {
             </CustomButton>
             {isOpenFilter && (
               <UlContainer>
-                <DatePickerContainer
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-                <DatePickerContainer
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                />
+                <Relative>
+                  <DatePickerContainer
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                  <DatePickerContainer
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                  />
+                </Relative>
               </UlContainer>
             )}
           </DropDownContainer>

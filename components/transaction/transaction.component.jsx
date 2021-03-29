@@ -10,6 +10,7 @@ import {
   DatePickerContainer,
   FilterPeriod,
   Flex,
+  Relative,
 } from "./transaction.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import moment from "moment";
@@ -91,14 +92,16 @@ const Transaction = ({ orderHistory }) => {
             </CustomButton>
             {isOpenFilter && (
               <UlContainer>
-                <DatePickerContainer
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-                <DatePickerContainer
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                />
+                <Relative>
+                  <DatePickerContainer
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                  <DatePickerContainer
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                  />
+                </Relative>
               </UlContainer>
             )}
           </DropDownContainer>
