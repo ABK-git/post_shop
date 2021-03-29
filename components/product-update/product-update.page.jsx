@@ -15,9 +15,9 @@ import { useRouter } from "next/router";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 import ProductImages from "../display-product-images/product-images.component";
 import {
-  CLOUDINARY_UPLOAD_PRESET,
   CLOUDINARY_UPLOAD_IMAGE_URL,
-} from "../../.cloudinary";
+  CLOUDINARY_UPLOAD_PRESET,
+} from "../../cloudinary";
 
 const ProductUpdate = ({ product }) => {
   const [images, setImages] = useState([]);

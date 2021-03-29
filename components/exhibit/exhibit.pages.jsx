@@ -15,9 +15,9 @@ import { useRouter } from "next/router";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 import {
-  CLOUDINARY_UPLOAD_PRESET,
   CLOUDINARY_UPLOAD_IMAGE_URL,
-} from "../../.cloudinary";
+  CLOUDINARY_UPLOAD_PRESET,
+} from "../../cloudinary";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
