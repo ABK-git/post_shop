@@ -23,7 +23,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap"
             rel="stylesheet"
           />
-
+          {/*react-datepickerのCDN*/}
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker.min.js"
@@ -44,7 +44,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker-cssmodules.min.css"
           />
-
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker-min.module.css"
@@ -65,7 +64,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker.min.css"
           />
-
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker.module.css"
