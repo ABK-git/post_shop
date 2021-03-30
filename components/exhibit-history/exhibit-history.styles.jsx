@@ -2,7 +2,6 @@ import styled from "styled-components";
 import tw from "tailwind.macro";
 
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 export const Container = styled.div`
   ${tw`h-screen w-full py-5 flex flex-col items-center bg-gray-500 overflow-auto`}

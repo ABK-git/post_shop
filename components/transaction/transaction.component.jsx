@@ -20,7 +20,6 @@ import {
   getWetherPast,
 } from "../../utils/functions";
 import TransactionPreview from "../transaction-preview/transaction-preview.component";
-import "react-datepicker/dist/react-datepicker";
 
 const Transaction = ({ orderHistory }) => {
   //sortドロップダウンリスト関連
