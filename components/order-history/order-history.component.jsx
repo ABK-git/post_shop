@@ -10,6 +10,7 @@ import {
   DatePickerContainer,
   FilterPeriod,
   Flex,
+  Relative,
 } from "./order-history.styles";
 import OrderPreview from "../order-preview/order-preview.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -93,14 +94,16 @@ const OrderHistory = ({ orderHistory, adminPage }) => {
             </CustomButton>
             {isOpenFilter && (
               <UlContainer>
-                <DatePickerContainer
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-                <DatePickerContainer
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                />
+                <Relative>
+                  <DatePickerContainer
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                  <DatePickerContainer
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                  />
+                </Relative>
               </UlContainer>
             )}
           </DropDownContainer>

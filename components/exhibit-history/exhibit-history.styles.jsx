@@ -39,3 +39,7 @@ export const DatePickerContainer = styled(DatePicker)`
 export const FilterPeriod = styled.p`
   ${tw`text-xl sm:text-2xl text-gray-800`}
 `;
+
+export const Relative = styled.div`
+  ${tw`relative`}
+`;

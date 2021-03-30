@@ -2,6 +2,8 @@
 
 /server/config/dev.js
 
+/cloudinary/dev.js
+
 # dependencies
 /node_modules
 /.pnp
@@ -38,4 +40,4 @@ yarn-error.log*
 .babelrc
 package.json
 yarn.lock
-.cloudinary.js
+cloudinary

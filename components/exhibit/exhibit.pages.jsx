@@ -14,10 +14,7 @@ import { useCreateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
-import {
-  CLOUDINARY_UPLOAD_PRESET,
-  CLOUDINARY_UPLOAD_IMAGE_URL,
-} from "../../.cloudinary";
+import Spinner from "../spinner/spinner.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -73,12 +70,12 @@ const Exhibit = () => {
       for (let i = 0; i < images.length; i++) {
         const formData = new FormData();
         formData.append("file", images[i]);
-        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("upload_preset", process.env.UPLOAD_PRESET);
         const options = {
           method: "POST",
           body: formData,
         };
-        const getImagePass = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+        const getImagePass = await fetch(process.env.UPLOAD_IMAGE_URL, options)
           .then((res) => res.json())
           .catch(() => null);
         if (getImagePass) {
@@ -97,7 +94,6 @@ const Exhibit = () => {
       // const getImagesPass = Object.values(registerFiles).map((registerFile) => {
       //   return registerFile.path.replaceAll("\\", "/").replace("public", "");
       // });
-      console.log(imagePasses);
       formik.values.imagePasses = imagePasses;
     }
   };
@@ -135,9 +131,12 @@ const Exhibit = () => {
       .max(1000, "商品の説明文は1000文字以内にまとめてください"),
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (values) => {
+    setLoading(true);
     await registerProductImages();
     await createProduct({ variables: values });
+    setLoading(false);
     router.push("/");
   };
   const formik = useFormik({
@@ -145,6 +144,10 @@ const Exhibit = () => {
     validationSchema,
     onSubmit,
   });
+
+  if(loading){
+    return <Spinner/>
+  }
 
   return (
     <ExhibitContainer>

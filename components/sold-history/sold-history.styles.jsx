@@ -43,3 +43,7 @@ export const FilterPeriod = styled.p`
 export const Flex = styled.div`
   ${tw`flex`}
 `;
+
+export const Relative = styled.div`
+  ${tw`relative`}
+`;

@@ -10,10 +10,6 @@ import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.
 import { UpdateInfoContainer, TitleMessage } from "./update-info.styles";
 import { userUpdate } from "../../apollo/actions";
 import MyContext from "../../context";
-import {
-  CLOUDINARY_UPLOAD_IMAGE_URL,
-  CLOUDINARY_UPLOAD_PRESET,
-} from "../../.cloudinary";
 
 const UpdateInfo = () => {
   const [updateUser, { data, loading, error }] = userUpdate();
@@ -37,13 +33,13 @@ const UpdateInfo = () => {
   const avatarUpload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    formData.append("upload_preset", process.env.UPLOAD_PRESET);
 
     const options = {
       method: "POST",
       body: formData,
     };
-    const avatar = await fetch(CLOUDINARY_UPLOAD_IMAGE_URL, options)
+    const avatar = await fetch(process.env.UPLOAD_IMAGE_URL, options)
       .then((res) => {
         //multerがデプロイ環境で使えないのでコメントアウト
         //return res.avatar.replaceAll("\\", "/").replace("public", "");
@@ -84,7 +80,6 @@ const UpdateInfo = () => {
 
   const onSubmit = async (values) => {
     await avatarUpload();
-    console.log(values);
     updateUser({ variables: values });
   };
 
