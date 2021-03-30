@@ -1,6 +1,6 @@
 const withPlugins = require("next-compose-plugins");
 const withImages = require("next-images");
-const cloudinary = require("./cloudinary");
+const cloudinary = require("./.cloudinary");
 
 require("dotenv").config();
 //localか本番環境か否か(localでtrue)
