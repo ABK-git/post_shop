@@ -14,12 +14,8 @@ const nextConfig = {
     BASE_URL: dev
       ? "http://localhost:3000/graphql"
       : "https://post-shop1.herokuapp.com/graphql",
-    UPLOAD_IMAGE_URL: dev
-      ? cloudinary.CLOUDINARY_UPLOAD_IMAGE_URL
-      : process.env.CLOUDINARY_UPLOAD_IMAGE_URL,
-    UPLOAD_PRESET: dev
-      ? cloudinary.CLOUDINARY_UPLOAD_PRESET
-      : process.env.CLOUDINARY_UPLOAD_PRESET,
+    UPLOAD_IMAGE_URL: cloudinary.CLOUDINARY_UPLOAD_IMAGE_URL,
+    UPLOAD_PRESET: cloudinary.CLOUDINARY_UPLOAD_PRESET,
   },
 };
 

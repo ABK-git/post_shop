@@ -26,5 +26,3 @@ exports.init = (server, db) => {
   server.use(passport.initialize());
   server.use(passport.session());
 };
-
-// .post-shop1.herokuapp.com/
