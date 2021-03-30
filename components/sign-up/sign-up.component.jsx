@@ -13,16 +13,17 @@ import axios from "axios";
 import PrepareUserImage from "../prepare-register-user-image/prepare-user-image.component";
 
 const SignUp = ({ apollo }) => {
-  const [signUp, { data, loading, error }] = userSignUp();
+  const [signUp, { data, error }] = userSignUp();
   const [createdUser, setCreatedUser] = useState([]);
   const [signIn, { loading: signInLoading }] = userSignIn();
   const [alreadySignIn, setAlreadySignIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   //画像のUPLoad関連
   const [file, setFile] = useState(null);
-  const config = {
-    headers: { "content-type": "multipart/form-data" },
-  };
+  // const config = {
+  //   headers: { "content-type": "multipart/form-data" },
+  // };
   const handleChangeSetFile = (event) => {
     let file = event.target.files[0];
     setFile(file);
@@ -54,7 +55,6 @@ const SignUp = ({ apollo }) => {
       .catch(() => {
         return null;
       });
-    console.log(avatar);
     if (avatar) {
       formik.values.avatar = avatar.secure_url;
     }
@@ -86,9 +86,11 @@ const SignUp = ({ apollo }) => {
   });
 
   const onSubmit = async (values) => {
+    setLoading(true);
     await avatarUpload();
     setCreatedUser(values);
     signUp({ variables: values });
+    setLoading(false);
   };
 
   const formik = useFormik({

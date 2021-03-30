@@ -23,6 +23,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap"
             rel="stylesheet"
           />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker.min.js"
+          />
         </Head>
         <body>
           <Main />

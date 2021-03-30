@@ -80,7 +80,6 @@ const UpdateInfo = () => {
 
   const onSubmit = async (values) => {
     await avatarUpload();
-    console.log(values);
     updateUser({ variables: values });
   };
 

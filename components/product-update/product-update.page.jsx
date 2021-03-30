@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   ContainerDropzone,
@@ -14,6 +14,7 @@ import { useUpdateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
 import ProductImages from "../display-product-images/product-images.component";
+import Spinner from "../../components/spinner/spinner.component";
 
 const ProductUpdate = ({ product }) => {
   const [images, setImages] = useState([]);
@@ -74,10 +75,7 @@ const ProductUpdate = ({ product }) => {
           method: "POST",
           body: formData,
         };
-        const getImagePass = await fetch(
-          process.env.UPLOAD_IMAGE_URL,
-          options
-        )
+        const getImagePass = await fetch(process.env.UPLOAD_IMAGE_URL, options)
           .then((res) => res.json())
           .catch(() => null);
         if (getImagePass) {
@@ -130,12 +128,15 @@ const ProductUpdate = ({ product }) => {
       .max(1000, "商品の説明文は1000文字以内にまとめてください"),
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (values) => {
+    setLoading(true);
     values.id = product._id;
     await registerProductImages();
     await updateProduct({
       variables: values,
     });
+    setLoading(false);
     router.push("/");
   };
   const formik = useFormik({
@@ -143,6 +144,10 @@ const ProductUpdate = ({ product }) => {
     validationSchema,
     onSubmit,
   });
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <Container>
