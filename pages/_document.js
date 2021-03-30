@@ -25,7 +25,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker.min.js"
+            href="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/3.6.0/react-datepicker-cssmodules.min.css"
           />
         </Head>
         <body>
