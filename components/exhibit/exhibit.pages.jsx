@@ -14,6 +14,7 @@ import { useCreateProduct } from "../../apollo/actions";
 import { useRouter } from "next/router";
 import GraphQLErrorMessages from "../graphql-error-message/graphql-error-message.component";
 import PrepareProductImages from "../prepare-register-product-images/prepare-product-images.component";
+import Spinner from "../spinner/spinner.component";
 
 const Exhibit = () => {
   const [images, setImages] = useState([]);
@@ -93,7 +94,6 @@ const Exhibit = () => {
       // const getImagesPass = Object.values(registerFiles).map((registerFile) => {
       //   return registerFile.path.replaceAll("\\", "/").replace("public", "");
       // });
-      console.log(imagePasses);
       formik.values.imagePasses = imagePasses;
     }
   };
@@ -131,9 +131,12 @@ const Exhibit = () => {
       .max(1000, "商品の説明文は1000文字以内にまとめてください"),
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (values) => {
+    setLoading(true);
     await registerProductImages();
     await createProduct({ variables: values });
+    setLoading(false);
     router.push("/");
   };
   const formik = useFormik({
@@ -141,6 +144,10 @@ const Exhibit = () => {
     validationSchema,
     onSubmit,
   });
+
+  if(loading){
+    return <Spinner/>
+  }
 
   return (
     <ExhibitContainer>
