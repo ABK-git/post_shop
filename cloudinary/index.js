@@ -1,3 +1,4 @@
+//本番環境ではprodを返し、localではdevを返す
 if(process.env.NODE_ENV === 'production'){
   module.exports = require("./prod");
 }else{
