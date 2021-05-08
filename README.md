@@ -1,5 +1,4 @@
-■URL         
-https://post-shop1.herokuapp.com/
+
 
 ■選定技術
 --------------------------
